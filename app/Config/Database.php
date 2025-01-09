@@ -50,6 +50,25 @@ class Database extends Config
         ],
     ];
 
+    public array $remoteDB = [
+        'DSN'          => '',
+        'hostname'     => '193.176.181.137',
+        'username'     => 'algo_configurator',
+        'password'     => 'Gvweg5vg,frr',
+        'database'     => 'ram',           // Название удалённой БД
+        'DBDriver'     => 'MySQLi',
+        'DBPrefix'     => '',
+        'pConnect'     => false,
+        'DBDebug'      => true,
+        'charset'      => 'utf8mb4',
+        'DBCollat'     => 'utf8mb4_general_ci',
+        'swapPre'      => '',
+        'encrypt'      => false,
+        'compress'     => false,
+        'strictOn'     => false,
+        'failover'     => [],
+        'port'         => 3306,
+    ];
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
