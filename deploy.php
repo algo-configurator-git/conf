@@ -12,14 +12,15 @@ set('branch', 'main');
 set('shared_files', ['.env']);
 set('shared_dirs', ['writable/uploads']);
 set('writable_dirs', ['writable', 'writable/uploads']);
+set('exclude', ['deploy.php', '.git', '.gitignore']);
 
 // Задаём хосты
 host('production')
-->setHostname('178.159.44.61')
-->setRemoteUser('root')
-->setPort(2200)
-->setIdentityFile('~/.ssh/id_rsa')
-->set('deploy_path', '/var/www/constructor');
+    ->setHostname('178.159.44.61')
+    ->setRemoteUser('root')
+    ->setPort(2200)
+    ->setIdentityFile('/Users/vhkmit/.ssh/id_rsa')
+    ->set('deploy_path', '/var/www/constructor');
 
 // Добавляем свои задачи
 task('deploy:clear_cache', function () {

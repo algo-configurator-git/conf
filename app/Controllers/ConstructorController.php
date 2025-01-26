@@ -8,7 +8,7 @@ class ConstructorController extends BaseController
 {
     public function index()
     {
-        return view('main_constructor');
+        return view('main');
     }
 
     public function test()
