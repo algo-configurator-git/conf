@@ -24,51 +24,9 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    public array $default;
 
-    public array $remoteDB = [
-        'DSN'          => '',
-        'hostname'     => '193.176.181.137',
-        'username'     => 'algo_configurator',
-        'password'     => 'Gvweg5vg,frr',
-        'database'     => 'ram',           // Название удалённой БД
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-    ];
+    public array $remote;
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
@@ -208,6 +166,53 @@ class Database extends Config
 
     public function __construct()
     {
+        $this->default = [
+            'DSN'          => '',
+            'hostname'     => env('DB_DEFAULT_HOSTNAME'),
+            'username'     => env('DB_DEFAULT_USERNAME'),
+            'password'     => env('DB_DEFAULT_PASSWORD'),
+            'database'     => env('DB_DEFAULT_DATABASE'),
+            'DBDriver'     => env('DB_DEFAULT_DBDRIVER'),
+            'DBPrefix'     => '',
+            'pConnect'     => false,
+            'DBDebug'      => true,
+            'charset'      => 'utf8mb4',
+            'DBCollat'     => 'utf8mb4_general_ci',
+            'swapPre'      => '',
+            'encrypt'      => false,
+            'compress'     => false,
+            'strictOn'     => false,
+            'failover'     => [],
+            'port'         => env('DB_DEFAULT_PORT'),
+            'numberNative' => false,
+            'dateFormat'   => [
+                'date'     => 'Y-m-d',
+                'datetime' => 'Y-m-d H:i:s',
+                'time'     => 'H:i:s',    
+            ],
+        ];
+
+        $this->remote = [
+            'DSN'          => '',
+            'hostname'     => env('DB_REMOTE_HOSTNAME'),
+            'username'     => env('DB_REMOTE_USERNAME'),
+            'password'     => env('DB_REMOTE_PASSWORD'),
+            'database'     => env('DB_REMOTE_DATABASE'),
+            'DBDriver'     => env('DB_REMOTE_DBDRIVER'),
+            'DBPrefix'     => '',
+            'pConnect'     => false,
+            'DBDebug'      => true,
+            'charset'      => 'utf8mb4',
+            'DBCollat'     => 'utf8mb4_general_ci',
+            'swapPre'      => '',
+            'encrypt'      => false,
+            'compress'     => false,
+            'strictOn'     => false,
+            'failover'     => [],
+            'port'         => env('DB_REMOTE_PORT'),
+        ];
+
+
         parent::__construct();
 
         // Ensure that we always set the database group to 'tests' if
