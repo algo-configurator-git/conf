@@ -31,7 +31,7 @@ class View extends BaseView
      * in order for them to be available for use within the Parser.
      *
      * Examples:
-     *  { title|esc(js) }
+     *  { title|esc(scripts) }
      *  { created_on|date(Y-m-d)|esc(attr) }
      *
      * @var         array<string, string>

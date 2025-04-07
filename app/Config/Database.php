@@ -84,7 +84,7 @@ class Database extends Config
             'compress'     => false,
             'strictOn'     => false,
             'failover'     => [],
-            'port'         => env('DB_DEFAULT_PORT'),
+            'port'         => (int)env('DB_DEFAULT_PORT'),
             'numberNative' => false,
             'dateFormat'   => [
                 'date'     => 'Y-m-d',
@@ -110,7 +110,7 @@ class Database extends Config
             'compress'     => false,
             'strictOn'     => false,
             'failover'     => [],
-            'port'         => env('DB_REMOTE_PORT'),
+            'port'         => (int)env('DB_REMOTE_PORT'),
         ];
 
 
