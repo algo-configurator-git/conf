@@ -76,9 +76,9 @@ class Collection extends Model
 
     public static function testConnection()
     {
-        $remoteDB = Database::connect('remoteDB');
+        $remote = Database::connect('remote');
 
-        $query = $remoteDB->query("SELECT * FROM products LIMIT 100");
+        $query = $remote->query("SELECT * FROM products LIMIT 100");
 
         $data = $query->getResultArray();
 

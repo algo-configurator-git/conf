@@ -2,6 +2,14 @@
 
 namespace Config;
 
+use App\Repositories\AssemblyItemsRepository;
+use App\Repositories\AssemblyRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\ReviewRepository;
+use App\Services\AssemblyItemsService;
+use App\Services\AssemblyService;
+use App\Services\ProductService;
+use App\Services\ReviewService;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -29,4 +37,42 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+    public static function reviewService()
+    {
+        return new ReviewService();
+    }
+    public static function reviewRepository()
+    {
+        return new ReviewRepository();
+    }
+
+    public static function assemblyService()
+    {
+        return new AssemblyService();
+    }
+
+    public static function assemblyRepository()
+    {
+        return new AssemblyRepository();
+    }
+
+    public static function productService()
+    {
+        return new ProductService();
+    }
+
+    public static function productRepository()
+    {
+        return new ProductRepository();
+    }
+
+    public static function assemblyItemsService()
+    {
+        return new AssemblyItemsService();
+    }
+
+    public static function assemblyItemsRepository()
+    {
+        return new AssemblyItemsRepository();
+    }
 }
