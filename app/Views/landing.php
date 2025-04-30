@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('css/style-landing.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('css/style-adaptive.css') ?>">
-    <script src="<?= base_url('scripts/script.js') ?>"></script>
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <link rel="stylesheet" href="./assets/style/style-landing.css">
+    <link rel="stylesheet" href="./assets/style/style-adaptive.css">
+    <script src="./assets/script/script.js"></script>
 </head>
 
 <body>
@@ -25,45 +25,44 @@
         <h1 class="headline-h1">Конфигуратор ПК</h1>
         <span class="subtitle">Создайте свою сборку комплектующих ПК с учетом совместимости</span>
         <div class="configs">
-            <a href="<?= base_url('/configurator') ?>" class="config-card-main">
+            <a href="#" class="config-card-main">
                 <div class="config-button-shadow">
                     <div class="config-button">Начать сборку</div>
                 </div>
             </a>
             <div class="configs-list">
-                <a href="<?= base_url('catalog/office') ?>" class="config-card office">Для офиса</a>
-                <a href="<?= base_url('catalog/gamer') ?>" class="config-card game">Для игр</a>
-                <a href="<?= base_url('catalog/developer') ?>" class="config-card dev">Разработчику</a>
-                <a href="<?= base_url('catalog/designer') ?>" class="config-card design">Дизайнеру</a>
+                <a href="#" class="config-card office">Для офиса</a>
+                <a href="#" class="config-card game">Для игр</a>
+                <a href="#" class="config-card dev">Разработчику</a>
+                <a href="#" class="config-card design">Дизайнеру</a>
             </div>
         </div>
     </section>
     <section class="popular-cards-config">
-        <h2 class="headline-h2">Популярные сборки</h2>
+        <h2 class="hedline-h2">Популярные сборки</h2>
         <div class="slider-arrow prev-btn hidden">
-            <img src="<?= base_url('assets/images/buttons/Button - prev.svg') ?>" alt="prev"/>
+            <img src="./assets/images/buttons/Button - prev.svg" />
         </div>
         <div class="slider-arrow next-btn">
-            <img src="<?= base_url('assets/images/buttons/Button - Next.svg') ?>" alt="next"/>
+            <img src="./assets/images/buttons/Button - Next.svg" />
         </div>
         <div class="popular-list">
-            <?php foreach($assemblies as $assembly): ?>
             <div class="popular-card">
                 <div class="card-img">
                     <div class="card-img-main">
-                        <img src="<?= $assembly['items']['case'][0]['image'] ?? '' ?>" alt="" />
+                        <img src="./assets/images/card-1.png" alt="" />
                     </div>
                     <div class="card-img-sec">
                         <div class="card-img-sec-main">
-                            <img src="<?= $assembly['items']['cpu'][0]['image'] ?? '' ?>" alt="" />
+                            <img src="./assets/images/card-2.png" alt="" />
                         </div>
                         <div class="card-img-btn-cont">
                             <div class="card-img-btn">
-                                <img src="<?= $assembly['items']['gpu'][0]['image'] ?? '' ?>" alt="" />
+                                <img src="./assets/images/card-3.png" alt="" />
                             </div>
                             <div class="card-img-btn">
                                 <a href="/">
-                                    <img src="<?= base_url('assets/images/icons/svg.svg') ?>" alt="" />
+                                    <img src="./assets/images/icons/svg.svg" alt="" />
                                     <span>Еще</span>
                                 </a>
                             </div>
@@ -71,17 +70,15 @@
                     </div>
                 </div>
                 <div class="card-descr">
-                    <h3 class="card-title"><?= $assembly["name"] ?></h3>
+                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
                     <div class="card-tags-cont">
                         <div class="card-tag">lorem ipsum</div>
                         <div class="card-tag">lorem ipsum</div>
                         <div class="card-tag">lorem ipsum</div>
                     </div>
                     <div class="cont-price">
-                        <p class="new-price"><?= number_format($assembly["total_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_price"], 2, '.', '') % 1 ?> руб</span></p>
-                        <?php if($assembly["total_discount_price"] > $assembly["total_price"]): ?>
-                            <p class="old-price"><?= number_format($assembly["total_discount_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_discount_price"], 2, '.', '') % 1 ?> руб</span></p>
-                        <?php endif; ?>
+                        <p class="new-price">6100<span>.26 руб</span></p>
+                        <p class="old-price">7015<span>.30 руб</span></p>
                     </div>
                     <div class="button-cont">
                         <button class="primary-btn">В корзину</button>
@@ -89,11 +86,166 @@
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <div class="popular-card">
+                <div class="card-img">
+                    <div class="card-img-main">
+                        <img src="./assets/images/card-1.png" alt="" />
+                    </div>
+                    <div class="card-img-sec">
+                        <div class="card-img-sec-main">
+                            <img src="./assets/images/card-2.png" alt="" />
+                        </div>
+                        <div class="card-img-btn-cont">
+                            <div class="card-img-btn">
+                                <img src="./assets/images/card-3.png" alt="" />
+                            </div>
+                            <div class="card-img-btn">
+                                <a href="/">
+                                    <img src="./assets/images/icons/svg.svg" alt="" />
+                                    <span>Еще</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-descr">
+                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
+                    <div class="card-tags-cont">
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                    </div>
+                    <div class="cont-price">
+                        <p class="new-price">6100<span>.26 руб</span></p>
+                        <p class="old-price">7015<span>.30 руб</span></p>
+                    </div>
+                    <div class="button-cont">
+                        <button class="primary-btn">В корзину</button>
+                        <button class="secondary-btn">В конфигуратор</button>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-card">
+                <div class="card-img">
+                    <div class="card-img-main">
+                        <img src="./assets/images/card-1.png" alt="" />
+                    </div>
+                    <div class="card-img-sec">
+                        <div class="card-img-sec-main">
+                            <img src="./assets/images/card-2.png" alt="" />
+                        </div>
+                        <div class="card-img-btn-cont">
+                            <div class="card-img-btn">
+                                <img src="./assets/images/card-3.png" alt="" />
+                            </div>
+                            <div class="card-img-btn">
+                                <a href="/">
+                                    <img src="./assets/images/icons/svg.svg" alt="" />
+                                    <span>Еще</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-descr">
+                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
+                    <div class="card-tags-cont">
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                    </div>
+                    <div class="cont-price">
+                        <p class="new-price">6100<span>.26 руб</span></p>
+                        <p class="old-price">7015<span>.30 руб</span></p>
+                    </div>
+                    <div class="button-cont">
+                        <button class="primary-btn">В корзину</button>
+                        <button class="secondary-btn">В конфигуратор</button>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-card">
+                <div class="card-img">
+                    <div class="card-img-main">
+                        <img src="./assets/images/card-1.png" alt="" />
+                    </div>
+                    <div class="card-img-sec">
+                        <div class="card-img-sec-main">
+                            <img src="./assets/images/card-2.png" alt="" />
+                        </div>
+                        <div class="card-img-btn-cont">
+                            <div class="card-img-btn">
+                                <img src="./assets/images/card-3.png" alt="" />
+                            </div>
+                            <div class="card-img-btn">
+                                <a href="/">
+                                    <img src="./assets/images/icons/svg.svg" alt="" />
+                                    <span>Еще</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-descr">
+                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
+                    <div class="card-tags-cont">
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                    </div>
+                    <div class="cont-price">
+                        <p class="new-price">6100<span>.26 руб</span></p>
+                        <p class="old-price">7015<span>.30 руб</span></p>
+                    </div>
+                    <div class="button-cont">
+                        <button class="primary-btn">В корзину</button>
+                        <button class="secondary-btn">В конфигуратор</button>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-card">
+                <div class="card-img">
+                    <div class="card-img-main">
+                        <img src="./assets/images/card-1.png" alt="" />
+                    </div>
+                    <div class="card-img-sec">
+                        <div class="card-img-sec-main">
+                            <img src="./assets/images/card-2.png" alt="" />
+                        </div>
+                        <div class="card-img-btn-cont">
+                            <div class="card-img-btn">
+                                <img src="./assets/images/card-3.png" alt="" />
+                            </div>
+                            <div class="card-img-btn">
+                                <a href="/">
+                                    <img src="./assets/images/icons/svg.svg" alt="" />
+                                    <span>Еще</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-descr">
+                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
+                    <div class="card-tags-cont">
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                        <div class="card-tag">lorem ipsum</div>
+                    </div>
+                    <div class="cont-price">
+                        <p class="new-price">6100<span>.26 руб</span></p>
+                        <p class="old-price">7015<span>.30 руб</span></p>
+                    </div>
+                    <div class="button-cont">
+                        <button class="primary-btn">В корзину</button>
+                        <button class="secondary-btn">В конфигуратор</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="primary-btn" onclick="location.href='<?= base_url('catalog/all') ?>'">Перейти в каталог</button>
+        <button class="primary-btn">Перейти в каталог</button>
     </section>
-    <section class="free-consultation">
+    <section class="free-consultatoin">
         <div class="banners" id="banner1">
             <div class="main-content-banner">
                 <h3 class="headline-h3-banner">Подберём три <br />конфигурации</h3>
@@ -110,21 +262,21 @@
                 <div class="contacts-us-cont">
                     <div class="contacts">
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/mts.png') ?>" alt="mts" />
+                            <img src="./assets/images/logo-company/mts.png" />
                             <p>+375 29 <span>778-60-60</span></p>
                         </div>
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/a1.png') ?>" alt="a1" />
+                            <img src="./assets/images/logo-company/a1.png" />
                             <p>+375 44 <span>778-60-60</span></p>
                         </div>
                     </div>
                     <div class="cont-btn">
                         <a href="/" class="telegram-btn">
-                            <img src="<?= base_url('assets/images/buttons/tg.svg') ?>" alt="tg">
+                            <img src="./assets/images/buttons/tg.svg" alt="">
                             Telegram
                         </a>
                         <a href="/" class="whatsapp-btn">
-                            <img src="<?= base_url('assets/images/buttons/whatsapp.svg') ?>" alt="whatsapp">
+                            <img src="./assets/images/buttons/whatsapp.svg" alt="">
                             WhatsApp
                         </a>
                     </div>
@@ -148,21 +300,21 @@
                 <div class="contacts-us-cont">
                     <div class="contacts">
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/mts.png') ?>" alt="mts"/>
+                            <img src="./assets/images/mts.png" />
                             <p>+375 29 <span>778-60-60</span></p>
                         </div>
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/a1.png') ?>" alt="a1"/>
+                            <img src="./assets/images/a1.png" />
                             <p>+375 44 <span>778-60-60</span></p>
                         </div>
                     </div>
                     <div class="cont-btn">
                         <a href="/" class="telegram-btn">
-                            <img src="<?= base_url('assets/images/buttons/tg.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/tg.svg" alt="">
                             Telegram
                         </a>
                         <a href="/" class="whatsapp-btn">
-                            <img src="<?= base_url('assets/images/buttons/whatsapp.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/whatsapp.svg" alt="">
                             WhatsApp
                         </a>
                     </div>
@@ -186,21 +338,21 @@
                 <div class="contacts-us-cont">
                     <div class="contacts">
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/mts.png') ?>" alt="mts"/>
+                            <img src="./assets/images/mts.png" />
                             <p>+375 29 <span>778-60-60</span></p>
                         </div>
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/a1.png') ?>" alt="a1"/>
+                            <img src="./assets/images/a1.png" />
                             <p>+375 44 <span>778-60-60</span></p>
                         </div>
                     </div>
                     <div class="cont-btn">
                         <a href="/" class="telegram-btn">
-                            <img src="<?= base_url('assets/images/buttons/tg.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/tg.svg" alt="">
                             Telegram
                         </a>
                         <a href="/" class="whatsapp-btn">
-                            <img src="<?= base_url('assets/images/buttons/whatsapp.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/whatsapp.svg" alt="">
                             WhatsApp
                         </a>
                     </div>
@@ -224,21 +376,21 @@
                 <div class="contacts-us-cont">
                     <div class="contacts">
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/mts.png') ?>" alt="mts"/>
+                            <img src="./assets/images/mts.png" />
                             <p>+375 29 <span>778-60-60</span></p>
                         </div>
                         <div class="robot-phone">
-                            <img src="<?= base_url('assets/images/logo-company/a1.png') ?>" alt="a1"/>
+                            <img src="./assets/images/a1.png" />
                             <p>+375 44 <span>778-60-60</span></p>
                         </div>
                     </div>
                     <div class="cont-btn">
                         <a href="/" class="telegram-btn">
-                            <img src="<?= base_url('assets/images/buttons/tg.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/tg.svg" alt="">
                             Telegram
                         </a>
                         <a href="/" class="whatsapp-btn">
-                            <img src="<?= base_url('assets/images/buttons/whatsapp.svg') ?>" alt="">
+                            <img src="./assets/images/buttons/whatsapp.svg" alt="">
                             WhatsApp
                         </a>
                     </div>
@@ -249,54 +401,113 @@
     </section>
     <section class="review">
         <div class="review-headline">
-            <h2 class="headline-h2">Отзывы наших клиентов</h2>
-            <a href="<?= base_url('reviews') ?>" class="all-review">Смотреть все отзывы</a>
+            <h2 class="hedline-h2">Отзывы наших клиентов</h2>
+            <a href="/" class="all-review">Смотреть все отзывы</a>
         </div>
         <div class="slider-arrow prev-btn hidden">
-            <img src="<?= base_url('assets/images/buttons/Button - prev.svg') ?>" alt="prev"/>
+            <img src="./assets/images/buttons/Button - prev.svg" />
         </div>
         <div class="slider-arrow next-btn">
-            <img src="<?= base_url('assets/images/buttons/Button - Next.svg') ?>" alt="next"/>
+            <img src="./assets/images/buttons/Button - Next.svg" />
         </div>
         <div class="review-list">
-            <?php foreach ($reviews as $review) : ?>
-                <div class="review-item">
-                    <div class="top-review">
-                        <span class="name-review"><?= esc($review['name']) ?></span>
-                        <span class="date-review"><?= esc($review['created_at']) ?></span>
-                    </div>
-                    <div class="rating-review">
-                        <?php $rating = (int) esc($review['rating']); ?>
-                        <?php for ($i = 0; $i < 5; $i++) : ?>
-                            <?php
-                            if ($i < $rating) {
-                                echo ('<img src="' . base_url('assets/images/stars/star-bg.svg') . '" alt="star">');
-                            } else {
-                                echo ('<img src="' . base_url('assets/images/stars/star-no-bg.svg') . '" alt="star">');
-                            }
-                            ?>
-                        <?php endfor; ?>
-                    </div>
-                    <p class="info-review"><?= esc($review['message']) ?></p>
+            <div class="review-item">
+                <div class="top-review">
+                    <span class="name-review">Александр</span>
+                    <span class="date-review">26 Апреля 2024</span>
                 </div>
-            <?php endforeach; ?>
+                <div class="rating-review">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                </div>
+                <p class="info-review">Я недавно купил кастомный ПК в Tech Haven, и я не мог быть более доволен! Качество
+                    сборки на высшем уровне, а производительность невероятная. Он без усилий справляется со всеми моими игровыми
+                    и графическими задачами. Настоятельно рекомендую обратить на них внимание!</p>
+            </div>
+            <div class="review-item">
+                <div class="top-review">
+                    <span class="name-review">Елизавета</span>
+                    <span class="date-review">18 Февраля 2024</span>
+                </div>
+                <div class="rating-review">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                </div>
+                <p class="info-review">Только что получил свой новый игровой ПК от Byte Builders, и вау, какая разница!
+                    Графика потрясающая, и он работает без сбоев. Команда была очень полезной, помогая мне с выбором.
+                    Определенно отличный опыт!</p>
+            </div>
+            <div class="review-item">
+                <div class="top-review">
+                    <span class="name-review">Михаил</span>
+                    <span class="date-review">09 Июля 2023</span>
+                </div>
+                <div class="rating-review">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-no-bg.svg" alt="">
+                </div>
+                <p class="info-review">Я заказал рабочий ПК от Pixel Pros, и он пришел быстро. Настройка была легкой, а
+                    производительность именно такой, как мне нужна для моих проектов по видеомонтажу. Их обслуживание клиентов
+                    также было фантастическим. Большой палец вверх!</p>
+            </div>
+            <div class="review-item">
+                <div class="top-review">
+                    <span class="name-review">София</span>
+                    <span class="date-review">03 Ноября 2024</span>
+                </div>
+                <div class="rating-review">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-no-bg.svg" alt="">
+                </div>
+                <p class="info-review">Мой опыт с Custom PC Depot был потрясающим! Я заказал высокопроизводительную машину для
+                    игр, и она превзошла все мои ожидания. Внимание к деталям в сборке впечатляет, и она запускает все мои игры
+                    на максимальных настройках без проблем.</p>
+            </div>
+            <div class="review-item">
+                <div class="top-review">
+                    <span class="name-review">Александр</span>
+                    <span class="date-review">26 Апреля 2024</span>
+                </div>
+                <div class="rating-review">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                    <img src="./assets/images/stars/star-bg.svg" alt="">
+                </div>
+                <p class="info-review">Я недавно купил кастомный ПК в Tech Haven, и я не мог быть более доволен! Качество
+                    сборки на высшем уровне, а производительность невероятная. Он без усилий справляется со всеми моими игровыми
+                    и графическими задачами. Настоятельно рекомендую обратить на них внимание!</p>
+            </div>
         </div>
         <button class="primary-btn review-modal-open">Добавить отзыв
-            <img src="<?= base_url('assets/images/buttons/plus-review.svg') ?>" alt="">
+            <img src="./assets/images/buttons/plus-review.svg" alt="">
         </button>
     </section>
 
 
     <section class="faq">
-        <h2 class="headline-h2">Часто задаваемые вопросы</h2>
+        <h2 class="hedline-h2">Часто задаваемые вопросы</h2>
         <div class="faq-cont">
             <div class="faq-column">
                 <div class="faq-item">
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up" src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up" src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm  " src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq">
@@ -307,8 +518,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер два lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up" src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq">
@@ -319,11 +530,11 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up" src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
-                    <p class="answer-faq">
+                    <p class="answer-faq  ">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     </p>
                 </div>
@@ -331,8 +542,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up" src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -345,8 +556,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер два lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up" src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq">
@@ -357,8 +568,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -369,8 +580,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -381,8 +592,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -395,8 +606,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер два lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq ">
@@ -407,8 +618,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -419,8 +630,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -431,8 +642,8 @@
                     <div class="name-item-faq">
                         <span>Вопрос номер один lorem ipsum</span>
                         <div class="btn-arr-faq">
-                            <img class="arrow-up  " src="<?= base_url('assets/images/icons/arrow-up.svg') ?>" alt="">
-                            <img class="arrow-down" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" alt="">
+                            <img class="arrow-up  " src="./assets/images/icons/arrow-up.svg" alt="">
+                            <img class="arrow-dowm" src="./assets/images/icons/arrow-down.svg" alt="">
                         </div>
                     </div>
                     <p class="answer-faq  ">
@@ -442,27 +653,27 @@
             </div>
         </div>
         <button class="primary-btn open-form">Задать вопрос
-            <img src="<?= base_url('assets/images/icons/plus.svg') ?>" alt="">
+            <img src="./assets/images/icons/plus.svg" alt="">
         </button>
     </section>
 
     <section class="our-brands">
-        <h2 class="headline-h2">Наши бренды</h2>
+        <h2 class="hedline-h2">Наши бренды</h2>
         <div class="brand-cont">
             <div class="item-brand">
-                <img src="<?= base_url('assets/images/logo-company/intel.svg') ?>" alt="">
+                <img src="./assets/images/logo-company/intel.svg" alt="">
             </div>
             <div class=" item-brand">
-                <img src="<?= base_url('assets/images/logo-company/ryzen 1.svg') ?>" alt="">
+                <img src="./assets/images/logo-company/ryzen 1.svg" alt="">
             </div>
             <div class="item-brand">
-                <img src="<?= base_url('assets/images/logo-company/logitech-2-1 1.svg') ?>" alt="">
+                <img src="./assets/images/logo-company/logitech-2-1 1.svg" alt="">
             </div>
             <div class="item-brand">
-                <img src="<?= base_url('assets/images/logo-company/asus-logo 1.svg') ?>" alt="">
+                <img src="./assets/images/logo-company/asus-logo 1.svg" alt="">
             </div>
             <div class="item-brand">
-                <img src="<?= base_url('assets/images/logo-company/kingston-technology 1.svg') ?>" alt="">
+                <img src="./assets/images/logo-company/kingston-technology 1.svg" alt="">
             </div>
         </div>
     </section>
@@ -494,16 +705,16 @@
                     <button type="submit" class="submit-button" disabled>Отправить</button>
                 </div>
             </div>
-            <div class="thanks-screen">
-                <h2 class="headline-h2">Спасибо!</h2>
+            <div class="thaks-screen">
+                <h2 class="hedline-h2">Спасибо!</h2>
                 <p class="subtitle-thanks">Сообщение отправлено</p>
-                <img src="<?= base_url('assets/images/thn1.png') ?>" alt="Сообщение отправлено">
+                <img src="./assets/images/thn1.png" alt="Сообщение отправлено">
             </div>
             <div class="error-screen">
-                <h2 class="headline-h2">Ошибка!</h2>
+                <h2 class="hedline-h2">Ошибка!</h2>
                 <p class="subtitle-thanks">Что-то пошло не так.
                     Пожалуйста, повторите попытку позже.</p>
-                <img src="<?= base_url('assets/images/error.png') ?>" alt="Сообщение отправлено">
+                <img src="./assets/images/error.png" alt="Сообщение отправлено">
             </div>
         </form>
         <div class="close-modal"></div>
@@ -512,7 +723,7 @@
 
 <div class="review-cont-modal">
     <div class="modal contact-form">
-        <form action="<?= base_url('reviews/create') ?>" method="post" novalidate>
+        <form action="#" method="post" novalidate>
             <h2 class="name-review " style="margin-bottom: 20px;">Оставьте отзыв</h2>
             <div class="cont-input">
                 <div class="form-group">
@@ -546,15 +757,15 @@
                         Качество конфигураций
                     </label>
                     <label class="category-option">
-                        <input type="radio" name="category" value="Работа сборщика">
+                        <input type="radio" name="category" value="Работа сборщика" required>
                         Работа сборщика
                     </label>
                     <label class="category-option">
-                        <input type="radio" name="category" value="Оценка сборки">
+                        <input type="radio" name="category" value="Оценка сборки" required>
                         Оценка сборки
                     </label>
                     <label class="category-option">
-                        <input type="radio" name="category" value="Консультация">
+                        <input type="radio" name="category" value="Консультация" required>
                         Консультация
                     </label>
                 </div>
@@ -577,18 +788,18 @@
                         <span class="star" data-value="5"></span>
                     </div>
                 </div>
-                <button type="submit" class="submit-button">Отправить</button>
+                <button type="submit" class="submit-button" disabled>Отправить</button>
             </div>
-            <div class="thanks-screen">
-                <h2 class="headline-h2">Спасибо!</h2>
+            <div class="thaks-screen">
+                <h2 class="hedline-h2">Спасибо!</h2>
                 <p class="subtitle-thanks">Сообщение отправлено</p>
-                <img src="<?= base_url('assets/images/thn2.png') ?>" alt="Сообщение отправлено">
+                <img src="./assets/images/thn2.png" alt="Сообщение отправлено">
             </div>
             <div class="error-screen">
-                <h2 class="headline-h2">Ошибка!</h2>
+                <h2 class="hedline-h2">Ошибка!</h2>
                 <p class="subtitle-thanks">Что-то пошло не так.
                     Пожалуйста, повторите попытку позже.</p>
-                <img src="<?= base_url('assets/images/error.png') ?>" alt="Сообщение отправлено">
+                <img src="./assets/images/error.png" alt="Сообщение отправлено">
             </div>
         </form>
         <div class="close-modal"></div>
@@ -597,3 +808,4 @@
 </body>
 
 </html>
+ч

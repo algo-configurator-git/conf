@@ -9,16 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('css/style-add-reviews.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('css/style-adaptive.css') ?>" />
-    <script src="<?= base_url('scripts/script.js') ?>"></script>
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <link rel="stylesheet" href="./assets/style/style-add-reviews.css">
+    <link rel="stylesheet" href="./assets/style/style-adaptive.css">
+    <script src="./assets/script/script.js"></script>
 </head>
 
 <body>
 <div class="container">
     <div class="breadcrumb">
-        <a href="<?= base_url('/') ?>" class="breadcrumb-item">Конфигуратор ПК</a>
+        <a href="#" class="breadcrumb-item">Конфигуратор ПК</a>
         <span class="breadcrumb-item">Отзывы</span>
     </div>
     <section class="reviews-cont">
