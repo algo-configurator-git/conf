@@ -3,22 +3,21 @@
 document.addEventListener("DOMContentLoaded", function() {
   const toggleOptions = document.querySelectorAll(".toggle-option");
   const toggleBtn = document.querySelector(".toggle-btn");
-  
 
+  // Создаем и добавляем подсветку
   const toggleHighlight = document.createElement("div");
   toggleHighlight.classList.add("toggle-highlight");
   toggleBtn.appendChild(toggleHighlight);
-  
-  
+
+  // Функция обновления позиции подсветки
   function updateHighlight(activeBtn) {
     const btnRect = activeBtn.getBoundingClientRect();
     const parentRect = toggleBtn.getBoundingClientRect();
-    const offsetX = btnRect.left - parentRect.left;
-    
     toggleHighlight.style.width = `${btnRect.width}px`;
-    toggleHighlight.style.transform = `translateX(${offsetX}px)`;
+    toggleHighlight.style.transform = `translateX(${btnRect.left - parentRect.left}px)`;
   }
 
+  // Функция для обновления отображаемого контента
   function updateContent(activeBtn) {
     const componentListContent = document.getElementById("component-list-content");
     const selectedContent = document.getElementById("selected-content");
@@ -32,322 +31,611 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-
-  function handleToggleInteraction(btn) {
-    toggleOptions.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    updateHighlight(btn);
-    updateContent(btn);
-  }
-
-
-  const initialActiveBtn = document.querySelector(".toggle-option.active");
-  if (initialActiveBtn) {
-    updateHighlight(initialActiveBtn);
-    updateContent(initialActiveBtn);
-  }
-
-
   toggleOptions.forEach((btn) => {
-    btn.addEventListener("click", () => handleToggleInteraction(btn));
-    btn.addEventListener("touchstart", (e) => {
-      e.preventDefault(); 
-      handleToggleInteraction(btn);
-    }, { passive: false });
-  });
-
-  
-  window.addEventListener("resize", () => {
-    const activeBtn = document.querySelector(".toggle-option.active");
-    if (activeBtn) {
-      updateHighlight(activeBtn);
+    if (btn.classList.contains("active")) {
+      updateHighlight(btn);
+      updateContent(btn);
     }
+
+    btn.addEventListener("click", () => {
+      toggleOptions.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      updateHighlight(btn);
+      updateContent(btn);
+    });
   });
 });
 
-  // Modals for pc parts
-  
-  document.addEventListener("DOMContentLoaded", function () {
-      
-    function getCheckboxContent(data) {
-      let options = makeCheckboxOptions(data.values)
-  
-      return `<div class="filter-section dropdown">
-                  <div class="filter-title dropdown-header">
-                      <h3>${data.title}</h3>
-                      <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
-                  </div>
-                  <div class="dropdown-content">
-                      <div class="options">
-                          ${options.join('\n')}
-                        </div>
-                  </div>
-              </div>`;
+// Modals for pc parts
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal-catalog");
+  const modalTitle = document.getElementById("modal-title");
+  const filtersContainer = document.getElementById("filter-container");
+  const searchInput = document.querySelector('.modal-header .filter-search input[type="text"]');
+  const toggleSale = document.getElementById("toggle");
+  const sortDropdown = document.querySelector(".categories-dropdown");
+  const productContainerList = document.getElementById("list-view");
+  const productContainerGrid = document.getElementById("grid-view");
+  const closeBtn = document.querySelector(".close-modal-btn");
+  const addPartButtons = document.querySelectorAll("[data-modal]");
+  const categoryButtons = document.querySelectorAll(".categories button");
+
+  let currentType = "";
+  let currentView = "list";
+  let currentCategory = "";
+
+  const filterMap = {
+    cooler: {
+      title: "Кулер",
+      items: [
+        {
+          type: 'slider',
+          title: 'Цена',
+          values: {
+            step: 0.01,
+            min: 239.57,
+            max: 20000,
+            currentMin: 239.57,
+            currentMax: 16325.36
+          }
+        },
+        {
+          type: 'SearchCheckbox',
+          title: 'Производитель',
+          values: [
+            { name: 'Cooler Master', qnt: 234 },
+            { name: 'Noctua', qnt: 234 }
+          ]
+        },
+        {
+          type: 'checkbox',
+          title: 'Система охлаждения',
+          values: [
+            { name: 'Воздушное', qnt: 234 },
+            { name: 'Жидкостное', qnt: 234 }
+          ]
+        },
+        {
+          type: 'checkbox',
+          title: 'Количество вентиляторов',
+          values: [
+            { name: '1', qnt: 234 },
+            { name: '2', qnt: 234 },
+            { name: 'Отсутствует', qnt: 234 }
+          ]
+        },
+        {
+          type: 'slider',
+          title: 'Уровень шума вентилятора, дБ',
+          values: {
+            step: 0.01,
+            min: 0,
+            max: 86,
+            currentMin: 0,
+            currentMax: 86
+          }
+        },
+        {
+          type: 'SearchCheckbox',
+          title: 'Socket',
+          values: [
+            { name: 'AM4', qnt: 234 },
+            { name: 'LGA1155', qnt: 234 },
+            { name: 'LGA1200', qnt: 234 },
+            { name: 'LGA1155 v2', qnt: 234 },
+            { name: 'LGA1156', qnt: 234 }
+          ]
+        },
+        {
+          type: 'checkbox',
+          title: 'Материал радиатора',
+          values: [
+            { name: 'Медь', qnt: 234 },
+            { name: 'Алюминий', qnt: 234 }
+          ]
+        },
+        {
+          type: 'checkbox',
+          title: 'Регулятор оборотов',
+          values: [
+            { name: 'PWM', qnt: 234 },
+            { name: 'Внутренний', qnt: 234 },
+            { name: 'Нет', qnt: 234 }
+          ]
+        },
+        {
+          type: 'slider',
+          title: 'Высота кулера, мм',
+          values: {
+            step: 0.01,
+            min: 0,
+            max: 86,
+            currentMin: 0,
+            currentMax: 86
+          }
+        },
+        {
+          type: 'checkbox',
+          title: 'LED-подсветка',
+          values: [
+            { name: 'ARGB', qnt: 234 },
+            { name: 'FRGB', qnt: 234 },
+            { name: 'RGB', qnt: 234 },
+            { name: 'Нет', qnt: 234 }
+          ]
+        }
+      ]
+    },
+    cpu: {
+      title: "Процессор",
+      items: [
+        {
+          type: 'slider',
+          title: 'Цена',
+          values: {
+            step: 0.01,
+            min: 0,
+            max: 5656,
+          }
+        },
+        {
+          type: 'checkbox',
+          title: 'Производитель',
+          values: [
+            { name: 'ARGB', qnt: 234 },
+            { name: 'FRGB', qnt: 234 },
+            { name: 'RGB', qnt: 234 },
+            { name: 'Нет', qnt: 234 }
+          ]
+        },
+        {
+          type: 'SearchCheckbox',
+          title: 'Система охлаждения',
+          values: [
+            { name: 'Cooler Master', qnt: 234 },
+            { name: 'Нет', qnt: 234 }
+          ]
+        }
+      ]
+    },
+
+    videocard: {
+      title: "Видеокарта",
+    },
+
+    motherboard: {
+      title: "Материнская плата",
+    },
+
+    powerunit: {
+      title: "Блок питания",
+    },
+
+    ram: {
+      title: "Оперативная память",
+    },
+
+    ssd: {
+      title: "SSD",
+    },
+
+    hdd: {
+      title: "Жёсткий диск",
+    },
+
+    case: {
+      title: "Корпус",
     }
 
-    function makeCheckboxOptions(values) {
-      let options = [];
-      values.forEach((item) => {
-        let row = `<label><input type="checkbox"> ${item.name} <span>(${item.qnt})</span></label>`;
-        options.push(row);
-      })
-      return options;
-    }
-  
-    function getSliderContent(data) {
-      return `<div class="filter-section price dropdown">
-                  <div class="filter-title dropdown-header">
-                      <h3>${data.title}</h3>
-                      <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
-                  </div>
-                  <div class="dropdown-content">
-                      <div class="filter-price-input">
-                          <input type="number" class="input-min" step="${data.values.step}" value="${data.values.min}">
-                          <input type="number" class="input-max" step="${data.values.step}" value="${data.values.step}">
-                      </div>
-                      <div class="price-slider">
-                          <div class="progress"></div>
-                      </div>
-                      <div class="range-input">
-                          <input type="range" class="range-min" min="${data.values.min}" max="${data.values.max}" value="${data.values.min}" step="${data.values.step}">
-                          <input type="range" class="range-max" min="${data.values.min}" max="${data.values.max}" value="${data.values.max}" step="${data.values.step}">
-                      </div>
-                  </div>
-              </div>`;
-    }
-  
-    function getSearchCheckboxContent(data) {
-      let options = makeCheckboxOptions(data.values)
-  
-      return `<div class="filter-section dropdown">
-                  <div class="filter-title dropdown-header">
-                      <h3>${data.title}</h3>
-                      <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
-                  </div>
-                  <div class="dropdown-content">
-                      <div class="filter-search inner-search">
-                          <input type="text" class="search" placeholder="Поиск" />
-                          <img src="./assets/images/icons/search.svg" class="search-icon" />
-                      </div>
-                      <div class="options">
-                          ${options.join('\n')}
-                      </div>
-                  </div>
-              </div>`;
-    }
-  
-    const filterMap = {
-      cooler: {
-        title: "Кулер",
-        items: [
-          {
-            type: 'slider',
-            title: 'Цена',
-            values: {
-              step: 0.01,
-              min: 239.57,
-              max: 20000,
-              currentMin: 239.57,
-              currentMax: 16325.36
-            }
-          },
-          {
-            type: 'SearchCheckbox',
-            title: 'Производитель',
-            values: [
-              { name: 'Cooler Master', qnt: 234 },
-              { name: 'Noctua', qnt: 234 }
-            ]
-          },
-          {
-            type: 'checkbox',
-            title: 'Система охлаждения',
-            values: [
-              { name: 'Воздушное', qnt: 234 },
-              { name: 'Жидкостное', qnt: 234 }
-            ]
-          },
-          {
-            type: 'checkbox',
-            title: 'Количество вентиляторов',
-            values: [
-              { name: '1', qnt: 234 },
-              { name: '2', qnt: 234 },
-              { name: 'Отсутствует', qnt: 234 }
-            ]
-          },
-          {
-            type: 'slider',
-            title: 'Уровень шума вентилятора, дБ',
-            values: {
-              step: 0.01,
-              min: 0,
-              max: 86,
-              currentMin: 0,
-              currentMax: 86
-            }
-          },
-          {
-            type: 'SearchCheckbox',
-            title: 'Socket',
-            values: [
-              { name: 'AM4', qnt: 234 },
-              { name: 'LGA1155', qnt: 234 },
-              { name: 'LGA1200', qnt: 234 },
-              { name: 'LGA1155 v2', qnt: 234 },
-              { name: 'LGA1156', qnt: 234 }
-            ]
-          },
-          {
-            type: 'checkbox',
-            title: 'Материал радиатора',
-            values: [
-              { name: 'Медь', qnt: 234 },
-              { name: 'Алюминий', qnt: 234 }
-            ]
-          },
-          {
-            type: 'checkbox',
-            title: 'Регулятор оборотов',
-            values: [
-              { name: 'PWM', qnt: 234 },
-              { name: 'Внутренний', qnt: 234 },
-              { name: 'Нет', qnt: 234 }
-            ]
-          },
-          {
-            type: 'slider',
-            title: 'Высота кулера, мм',
-            values: {
-              step: 0.01,
-              min: 0,
-              max: 86,
-              currentMin: 0,
-              currentMax: 86
-            }
-          },
-          {
-            type: 'checkbox',
-            title: 'LED-подсветка',
-            values: [
-              { name: 'ARGB', qnt: 234 },
-              { name: 'FRGB', qnt: 234 },
-              { name: 'RGB', qnt: 234 },
-              { name: 'Нет', qnt: 234 }
-            ]
-          }
-        ]
-      },
-      cpu: {
-        title: "Процессор",
-        items: [
-          {
-            type: 'slider',
-            title: 'Цена',
-            values: {
-              step: 0.01,
-              min: 0,
-              max: 5656,
-            }
-          },
-          {
-            type: 'checkbox',
-            title: 'Производитель',
-            values: [
-              { name: 'ARGB', qnt: 234 },
-              { name: 'FRGB', qnt: 234 },
-              { name: 'RGB', qnt: 234 },
-              { name: 'Нет', qnt: 234 }
-            ]
-          },
-          {
-            type: 'SearchCheckbox',
-            title: 'Система охлаждения',
-            values: [
-              { name: 'Cooler Master', qnt: 234 },
-              { name: 'Нет', qnt: 234 }
-            ]
-          }
-        ]
-      }
-    };
-  
-  
-    function openModal(category) {
-      const data = filterMap[category];
-      if (!data) return;
-    
+  };
+
+  function getCheckboxContent(data) {
+    let options = data.values.map(
+        (item) => `<label><input type="checkbox"> ${item.name} <span>(${item.qnt})</span></label>`
+    );
+    return `
+        <div class="filter-section dropdown">
+          <div class="filter-title dropdown-header">
+            <h3>${data.title}</h3>
+            <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+          </div>
+          <div class="dropdown-content">
+            <div class="options">
+              ${options.join("\n")}
+            </div>
+          </div>
+        </div>`;
+  }
+
+  function getSliderContent(data) {
+    return `
+        <div class="filter-section price dropdown">
+          <div class="filter-title dropdown-header">
+            <h3>${data.title}</h3>
+            <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+          </div>
+          <div class="dropdown-content">
+            <div class="filter-price-input">
+              <input type="number" class="input-min" step="${data.values.step}" value="${data.values.currentMin || data.values.min}">
+              <input type="number" class="input-max" step="${data.values.step}" value="${data.values.currentMax || data.values.max}">
+            </div>
+            <div class="price-slider">
+              <div class="progress"></div>
+            </div>
+            <div class="range-input">
+              <input type="range" class="range-min" min="${data.values.min}" max="${data.values.max}" value="${data.values.currentMin || data.values.min}" step="${data.values.step}">
+              <input type="range" class="range-max" min="${data.values.min}" max="${data.values.max}" value="${data.values.currentMax || data.values.max}" step="${data.values.step}">
+            </div>
+          </div>
+        </div>`;
+  }
+
+  function getSearchCheckboxContent(data) {
+    let options = data.values.map(
+        (item) => `<label><input type="checkbox"> ${item.name} <span>(${item.qnt})</span></label>`
+    );
+    return `
+        <div class="filter-section dropdown">
+          <div class="filter-title dropdown-header">
+            <h3>${data.title}</h3>
+            <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+          </div>
+          <div class="dropdown-content">
+            <div class="filter-search inner-search">
+              <input type="text" class="search" placeholder="Поиск" />
+              <img src="./assets/images/icons/search.svg" class="search-icon" />
+            </div>
+            <div class="options">
+              ${options.join("\n")}
+            </div>
+          </div>
+        </div>`;
+  }
+
+  addPartButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentType = button.dataset.modal;
+      const data = filterMap[currentType] || { title: currentType.toUpperCase() };
+      modalTitle.textContent = data.title;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+
       let html = [];
-    
-      html.push(`
-        <div class="filter-header">
-          <h2>Фильтр</h2>
-          <span>0</span>
-          <button id="close-filter" class="close-filter">×</button>
+      if (data.items) {
+        data.items.forEach((filter) => {
+          switch (filter.type) {
+            case "slider":
+              html.push(getSliderContent(filter));
+              break;
+            case "checkbox":
+              html.push(getCheckboxContent(filter));
+              break;
+            case "SearchCheckbox":
+              html.push(getSearchCheckboxContent(filter));
+              break;
+          }
+        });
+      }
+      filtersContainer.innerHTML = `
+          ${html.join("\n")}
+          <div class="filter-buttons">
+            <button class="clear-btn">Очистить</button>
+            <button class="show-btn">Показать <span>0</span></button>
+          </div>
+        `;
+
+      logCurrentFilters();
+    });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+    clearAllFilters();
+  });
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+      clearAllFilters();
+    }
+  });
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      categoryButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+      currentCategory = button.textContent;
+      logCurrentFilters();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".show-btn")) logCurrentFilters();
+    if (event.target.closest(".clear-btn")) {
+      clearAllFilters();
+      logCurrentFilters();
+    }
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => logCurrentFilters());
+  }
+
+  if (filtersContainer) {
+    filtersContainer.addEventListener("change", (e) => {
+      if (
+          e.target.matches('input[type="checkbox"]') ||
+          e.target.matches('input[type="range"]') ||
+          e.target.matches('input[type="number"]')
+      ) {
+        logCurrentFilters();
+      }
+    });
+  }
+
+  if (toggleSale) {
+    toggleSale.addEventListener("change", () => logCurrentFilters());
+  }
+
+  if (sortDropdown) {
+    sortDropdown.addEventListener("change", () => logCurrentFilters());
+  }
+
+
+  [productContainerList, productContainerGrid].forEach((container) => {
+    container.addEventListener("click", (event) => {
+      if (event.target.closest(".buy-btn")) {
+        const productCard = event.target.closest(".product-card");
+        const productCode = productCard.querySelector(".product-code").textContent.split(": ")[1];
+        addProductToComparison(productCode);
+      }
+    });
+  });
+
+  function logCurrentFilters() {
+    const filters = getSelectedFilters();
+    const search = searchInput?.value.trim() || "";
+    const saleOnly = toggleSale?.checked || false;
+    const sort = sortDropdown?.value || "";
+    const category = currentCategory || "";
+
+    const payload = { search, filters, saleOnly, sort, category };
+
+    console.clear();
+    console.log("Отправляемые данные на бэк:", payload);
+    sendFilters(payload, currentType);
+  }
+
+  function sendFilters(payload, type) {
+    if (!type) {
+      console.error("Type of product is not defined");
+      return;
+    }
+    const queryParams = new URLSearchParams({
+      name: payload.search || "",
+      saleOnly: payload.saleOnly || false,
+      sort: payload.sort || "",
+      category: payload.category || "",
+      ...Object.entries(payload.filters).reduce((acc, [key, value]) => {
+        acc[key] = Array.isArray(value) ? value.join(",") : JSON.stringify(value);
+        return acc;
+      }, {}),
+    });
+
+    const url = `/config/products/${type}?${queryParams.toString()}`;
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Ошибка при загрузке продуктов для ${type}: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Данные от API:", data);
+          if (!data || !Array.isArray(data.products)) {
+            console.error("Invalid products dta:", data);
+            renderProducts([]);
+            return;
+          }
+          const adaptedProducts = data.products.map(product => ({
+            code: product.sku,
+            title: product.name,
+            price: product.price,
+            image: product.image || './assets/images/placeholder.png',
+            installment: product.installment || 'N/A',
+            tags: product.tags || [],
+            oldPrice: product.oldPrice || null
+          }));
+          renderProducts(adaptedProducts);
+        })
+        .catch((error) => {
+          console.error("Ошибка при запросе к API:", error);
+          renderProducts([]);
+        });
+  }
+
+  function addProductToComparison(productId) {
+    fetch(`/config/products/${productId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Ошибка при добавлении продукта");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Продукт добавлен в сборку:", data);
+          modal.style.display = "none";
+          document.body.style.overflow = "";
+        })
+        .catch((error) => {
+          console.error("Ошибка при добавлении:", error);
+        });
+  }
+
+  function renderProducts(products) {
+    const productContainer = currentView === "list" ? productContainerList : productContainerGrid;
+    const otherContainer = currentView === "list" ? productContainerGrid : productContainerList;
+    productContainer.innerHTML = "";
+    otherContainer.innerHTML = "";
+
+    if (!Array.isArray(products)) {
+      console.error("Invalid requred data tupe:", products);
+      productContainer.innerHTML = `<div class="products-container-no-match">Ошибка: некорректные данные продуктов</div>`;
+      return;
+    }
+
+    if (products.length === 0) {
+      productContainer.innerHTML = `<div class="products-container-no-match">Ничего не найдено</div>`;
+      return;
+    }
+
+    products.forEach((product) => {
+      const card = document.createElement("div");
+      card.className = `product-card ${currentView}-style ${currentView === "list" ? "desktop-only" : ""}`;
+      card.innerHTML = `
+      <div class="product-card-img ${currentView}-style">
+        <div class="card-img-main-product ${currentView}-style">
+          <img src="${product.image || './assets/images/placeholder.png'}" alt="${product.title || 'Без названия'}">
         </div>
-        <div class="filter">
-          <div class="filter-search">
-            <input type="text" placeholder="Поиск по фильтру" />
-            <img src="./assets/images/icons/search.svg" class="search-icon" />
+      </div>
+      <div class="info">
+        ${
+          currentView === "grid"
+              ? `<div class="product-title-rate">
+                <h3 class="product-title ${currentView}-style">${product.title || 'Без названия'}</h3>
+              </div>`
+              : `<h3 class="product-title ${currentView}-style">${product.title || 'Без названия'}</h3>`
+      }
+        <div class="${currentView === "grid" ? "info-details" : "more-data"}">
+          <div class="product-code ${currentView}-style">Код товара: ${product.code || 'N/A'}</div>
+          <div class="details" id="details-btn">
+            <a href="#">
+              <span class="full-text">Смотреть подробнее</span>
+              <span class="short-text">Подробнее</span>
+              <img src="./assets/images/icons/view-detaitls.svg">
+            </a>
           </div>
         </div>
-      `);
-    
-      data.items.forEach(filter => {
-        switch (filter.type) {
-          case 'slider':
-            html.push(getSliderContent(filter));
-            break;
-          case 'checkbox':
-            html.push(getCheckboxContent(filter));
-            break;
-          case 'SearchCheckbox':
-            html.push(getSearchCheckboxContent(filter));
-            break;
-        }
-      });
-    
-      html.push(`
-        <div class="filter-buttons">
-          <button class="clear-btn">Очистить</button>
-          <button class="show-btn">Показать <span>212</span></button>
+        <div class="product-characterictic-tags">
+          ${product.tags?.map((tag) => `<span>${tag}</span>`).join("") || ""}
         </div>
-      `);
-    
-      document.getElementById("modal-title").textContent = data.title;
-      document.getElementById("filter-container").innerHTML = html.join('\n');
-    
-      document.getElementById("modal-catalog").style.display = "flex";
-      document.body.style.overflow = 'hidden'; 
+        ${
+          currentView === "grid"
+              ? `
+              <div class="product-price">
+                <div class="cont-price ${currentView}-style">
+                  <p class="new-price ${currentView}-style">${product.price || 'N/A'}</p>
+                  ${product.oldPrice ? `<p class="old-price ${currentView}-style">${product.oldPrice}</p>` : ""}
+                </div>
+                <div class="payment-option green ${currentView}-style desktop-only">от <span>${product.installment || 'N/A'}</span> руб/мес</div>
+              </div>
+              <div class="button-cont">
+                <button class="buy-btn">Добавить</button>
+              </div>`
+              : ""
+      }
+      </div>
+      ${
+          currentView === "list"
+              ? `
+            <div class="cashflow-options ${currentView}-style">
+              <div class="buy-options">
+                <div class="cont-price ${currentView}-style">
+                  <p class="new-price">${product.price || 'N/A'}</p>
+                  ${product.oldPrice ? `<p class="old-price ${currentView}-style">${product.oldPrice}</p>` : ""}
+                </div>
+                <div class="payment-options">
+                  <div class="payment-option green">от <span>${product.installment || 'N/A'}</span> руб/мес</div>
+                  <div class="payment-desc">картой рассрочки <br> или в кредит</div>
+                </div>
+              </div>
+              <div class="buttons-for-deal">
+                <button class="buy-btn">Добавить</button>
+              </div>
+            </div>`
+              : ""
+      }
+    `;
+      productContainer.appendChild(card);
+    });
+  }
+
+
+  function clearAllFilters() {
+    const allCheckboxes = filtersContainer?.querySelectorAll('input[type="checkbox"]');
+    allCheckboxes?.forEach((cb) => (cb.checked = false));
+
+    const sliders = filtersContainer?.querySelectorAll(".filter-section.price");
+    sliders?.forEach((slider) => {
+      const minInput = slider.querySelector(".input-min");
+      const maxInput = slider.querySelector(".input-max");
+      const rangeMin = slider.querySelector(".range-min");
+      const rangeMax = slider.querySelector(".range-max");
+
+      const min = parseFloat(rangeMin?.getAttribute("min")) || 0;
+      const max = parseFloat(rangeMax?.getAttribute("max")) || 100;
+
+      if (minInput) minInput.value = min;
+      if (maxInput) maxInput.value = max;
+      if (rangeMin) rangeMin.value = min;
+      if (rangeMax) rangeMax.value = max;
+    });
+
+    if (searchInput) searchInput.value = "";
+    if (toggleSale) toggleSale.checked = false;
+    if (sortDropdown && sortDropdown.options.length > 0) {
+      sortDropdown.selectedIndex = 0;
     }
+    categoryButtons.forEach((btn) => btn.classList.remove("active"));
+    currentCategory = "";
+  }
 
-    document.querySelectorAll("[data-modal]").forEach(button => {
-      button.addEventListener("click", () => openModal(button.dataset.modal));
+  function getSelectedFilters() {
+    const filters = {};
+    if (!filtersContainer) return filters;
+
+    const allCheckboxes = filtersContainer.querySelectorAll('input[type="checkbox"]:checked');
+    allCheckboxes.forEach((checkbox) => {
+      const group = checkbox.closest(".filter-section");
+      const title = group?.querySelector("h3")?.textContent.trim();
+      const labelText = checkbox.parentNode?.textContent || checkbox.value;
+      const value = labelText.trim().split("(")[0].trim();
+
+      if (title && value) {
+        if (!filters[title]) filters[title] = [];
+        filters[title].push(value);
+      }
     });
-    
-    
-    
-    document.querySelector(".close-modal-btn").addEventListener("click", () => {
-      document.getElementById("modal-catalog").style.display = "none";
-      document.body.style.overflow = ''; 
+
+    const sliders = filtersContainer.querySelectorAll(".filter-section.price");
+    sliders.forEach((slider) => {
+      const title = slider.querySelector("h3")?.textContent.trim();
+      const minInput = slider.querySelector(".input-min");
+      const maxInput = slider.querySelector(".input-max");
+
+      if (title && minInput && maxInput) {
+        const min = parseFloat(minInput.value);
+        const max = parseFloat(maxInput.value);
+        if (!isNaN(min) && !isNaN(max)) {
+          filters[title] = { min, max };
+        }
+      }
     });
 
-    document.querySelector(".back-to-congigurator").addEventListener("click", () => {
-      document.getElementById("modal-catalog").style.display = "none";
-      document.body.style.overflow = ''; 
-    });
+    return filters;
+  }
+});
 
 
-        
-    document.getElementById("modal-catalog").addEventListener("click", (event) => {
-          if (event.target === event.currentTarget) {
-              event.currentTarget.style.display = "none";
-              document.body.style.overflow = '';
-          }
-        })
- })
- 
-  
 // Open parts variants
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -461,10 +749,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="btn-label">удалить</span>
                               `;
 
-      actionBtnContainer.appendChild(addButton); 
+      actionBtnContainer.appendChild(addButton);
       actionBtnContainer.appendChild(removeButton);
 
-      component.appendChild(actionBtnContainer); 
+      component.appendChild(actionBtnContainer);
 
       setTimeout(updateScrollButtons, 0);
 
@@ -491,36 +779,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// popup product info 
+// popup product info
 
 document.addEventListener('DOMContentLoaded', function() {
   const modalOverlay = document.getElementById('modal-about-item');
-  const detailsBtns = document.querySelectorAll('.details-btn');
+  const detailsBtn = document.getElementById('details-btn');
   const closeModalBtn = modalOverlay.querySelector('.close-modal-btn');
-  const body = document.body;
+  const body = document.getElementsByTagName('body');
 
   function openModal(e) {
-    if (e) e.preventDefault(); 
+    if (e) e.preventDefault();
     modalOverlay.style.display = 'flex';
     setTimeout(() => {
       modalOverlay.classList.add('active');
     }, 10);
     body.style.overflow = 'hidden';
-    
   }
 
   function closeModal() {
     modalOverlay.classList.remove('active');
     setTimeout(() => {
       modalOverlay.style.display = 'none';
-      body.style.overflow = ''; 
+      body.style.overflow = '';
     }, 300);
   }
 
-  detailsBtns.forEach(btn => {
-    btn.addEventListener('click', openModal);
-  });
-  
+  detailsBtn.addEventListener('click', openModal);
   closeModalBtn.addEventListener('click', closeModal);
 
   modalOverlay.addEventListener('click', function(e) {
@@ -528,7 +812,7 @@ document.addEventListener('DOMContentLoaded', function() {
       closeModal();
     }
   });
-  
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && modalOverlay.style.display === 'flex') {
       closeModal();
@@ -536,28 +820,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// 
+//
 
-document.addEventListener('DOMContentLoaded', function () {
-
-  const firstPreview = document.querySelector('.modal-preview-img-wrapper');
-  firstPreview.classList.add('active');
-  document.getElementById('mainImg').querySelector('img').src = firstPreview.querySelector('img').src;
-});
-
-function changeImage(element) {
-  const mainImg = document.getElementById('mainImg').querySelector('img');
-  const newSrc = element.querySelector('img').src;
-  mainImg.src = newSrc;
-
-  document.querySelectorAll('.modal-preview-img-wrapper').forEach((img) => img.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', function(element) {
+  document.getElementById('mainImg').src = element.src;
+  document.querySelectorAll('.modal-preview-img-wrapper').forEach(img => img.classList.remove('active'));
   element.classList.add('active');
-}
+})
 
 //
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('back-to-catalog-block').addEventListener('click', function() {
-    document.getElementById('modal-catalog').style.display = 'block';
+    document.getElementById('modal-cooler-catalog').style.display = 'block';
     document.getElementById('modal-about-item').style.display = "none";
   });
 })
@@ -571,33 +845,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const changeChoiceContainer = document.getElementById('change-choice');
   const deleteButton = document.querySelector('.btn-delete-modal-item');
 
-  
+
   if (buyButton) {
     buyButton.addEventListener('click', function() {
       this.style.display = 'none';
-      
+
       if (changeChoiceContainer) {
         changeChoiceContainer.style.display = 'flex';
       }
     });
   }
-  
+
   if (deleteButton) {
     deleteButton.addEventListener('click', function() {
       if (buyButton) {
         buyButton.style.display = 'block';
       }
-      
+
       if (changeChoiceContainer) {
         changeChoiceContainer.style.display = 'none';
       }
     });
   }
-  
+
   const minusBtn = document.querySelector('.minus');
   const plusBtn = document.querySelector('.plus');
   const qtyInput = document.querySelector('.qty-input');
-  
+
   if (minusBtn && qtyInput) {
     minusBtn.addEventListener('click', function() {
       let value = parseInt(qtyInput.value);
@@ -606,7 +880,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   if (plusBtn && qtyInput) {
     plusBtn.addEventListener('click', function() {
       let value = parseInt(qtyInput.value);
@@ -627,7 +901,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const stickyHeaderWrapper = document.createElement("div");
   const stickyHeader = document.createElement("div");
   stickyHeader.className = "sticky-header";
-  stickyHeader.classList.add("desktop-only")
 
   const clonedTitle = modalTitle.cloneNode(true);
   const clonedPrice = modalPrice.cloneNode(true);
@@ -671,8 +944,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //
 document.addEventListener("DOMContentLoaded", function() {
-  const chooseBtn = document.getElementById('choose-more'); 
-  const modalShop = document.getElementById('modal-catalog');
+  const chooseBtn = document.getElementById('choose-more');
+  const modalShop = document.getElementById('modal-cooler-catalog');
   const closeModalBtn = modalShop.querySelector('.close-modal-btn');
   const changeBtn = document.getElementById('change-btn')
   const body = document.getElementsByTagName('body')
@@ -692,6 +965,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
       modalShop.style.display = 'none';
       body.style.overflow = '';
+
     }, 300);
   }
 
@@ -711,5 +985,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
-
-

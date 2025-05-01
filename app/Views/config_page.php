@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="./assets/style/style.css" />
     <link rel="stylesheet" href="./assets/style/style-config_page.css">
     <link rel="stylesheet" href="./assets/style/style-adaptive.css">
-    <link rel="stylesheet" href="./assets/style/style-config_page-adaptive.css">
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/config_page.js"></script>
 </head>
@@ -45,7 +44,7 @@
                             <button class="toggle-option" data-value="selected">Выбранные</button>
                         </div>
                     </div>
-                    <button class="help-btn open-form desktop-only">Помочь со сборкой</button>
+                    <button class="help-btn open-form">Помочь со сборкой</button>
                 </div>
 
                 <div class="content-container">
@@ -121,65 +120,6 @@
                                 <div class="component-list-container">
                                     <div class="component-list"></div>
                                 </div>
-
-
-                                <div class="component-list-container MOBILE_CONT">
-                                    <div class="component-list">
-                                        <div class="component-choosen_mobile">
-                                            <div class="component-choosen_mobile-info">
-                                                <div class="choosen-info">
-                                                    <span>Материнская плата</span>
-                                                    <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-                                                </div>
-                                                <div class="new-price">1256.<span>7 руб</span></div>
-                                            </div>
-                                            <div class="component-choosen_mobile-details">
-                                                <div class="choosen-img">
-                                                    <img src="./assets/images/card-4.png" alt="cpu-img" />
-                                                </div>
-                                                <div class="component-choosen-part info-choosen">
-                                                    <div>ASUS Prime B760M-K D4</div>
-                                                    <div>Код товара: 934841</div>
-                                                    <div class="component-choosen-part categories-tags">
-                                                        <span> 4xDDR5</span>
-                                                        <span>Intel B760</span>
-                                                    </div>
-                                                </div>
-                                                <div class="component-choosen-part choosen-btns">
-                                                    <button class="component-list-btn-delete">
-                                                        <img src="./assets/images/icons/delete.svg">
-                                                        <span>удалить</span>
-                                                    </button>
-                                                    <button class="component-list-btn-change" id="change-btn">
-                                                        <img src="./assets/images/icons/change.svg">
-                                                        <span>заменить</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="interaction-btns_mobile">
-                                            <div class="action-btn-container">
-                                                <button class="action-btn add-btn">
-                                                    <img src="./assets/images/icons/add.svg" alt="add">
-                                                    <span class="btn-label">add</span>
-                                                </button>
-                                                <button class="action-btn remove-btn">
-                                                    <img src="./assets/images/icons/delete.svg" alt="remove">
-                                                    <span class="btn-label">delete</span>
-                                                </button>
-                                            </div>
-                                            <div class="scroll-btn-container">
-                                                <button class="scroll-btn">
-                                                    <img src="./assets/images/icons/arrow-right.svg" alt="right">
-                                                </button>
-                                                <button class="scroll-btn disabled">
-                                                    <img src="./assets/images/icons/arrow-left.svg" alt="left">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="component">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/videocard_img.svg" alt="videocard_img" />
@@ -253,10 +193,11 @@
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/monitor.svg" alt="cpu-img" />
+                                        <img src="./assets/images/icons/config_page/cpu_img.svg" alt="cpu-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Монитор</span>
+                                        <span class="component-name">Процессор</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
@@ -265,10 +206,11 @@
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/keyboard.svg" alt="cooler-img" />
+                                        <img src="./assets/images/icons/config_page/cooler_img.svg" alt="cooler-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Клавиатура</span>
+                                        <span class="component-name">Кулер</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
@@ -280,10 +222,11 @@
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/mouse.svg" alt="motherboard-img" />
+                                        <img src="./assets/images/icons/config_page/motherboard__img.svg" alt="motherboard-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Мышь</span>
+                                        <span class="component-name">Материнская плата</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
@@ -295,10 +238,11 @@
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/mouse_pad.svg" alt="ram-img" />
+                                        <img src="./assets/images/icons/config_page/ram_img.svg" alt="ram-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Коврик для мыши</span>
+                                        <span class="component-name">Оперативная память</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
@@ -307,78 +251,6 @@
                                 </div>
                                 <div class="component-list-container">
                                     <div class="component-list"></div>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/music_speakers.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Колонки</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/earphones.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Наушники</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/gaming_chair.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Игровое кресло</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/surge_protector.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Сетевой фильтр</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/web_cam.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Веб-камера</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <div class="component">
-                                    <div class="component-part component-img">
-                                        <img src="./assets/images/icons/config_page/printer.svg" alt="ram-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Принтеры и МФУ</span>
-                                    </div>
-                                    <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
                                 </div>
                                 <button class="component-hide-btn">Скрыть всё</button>
                             </div>
@@ -387,50 +259,45 @@
                                     <h3>Дополнительно</h3>
                                 </div>
                                 <div class="component">
-                                    <div class="component-part component-img additional">
-                                        <img src="./assets/images/icons/config_page/assembly.svg" alt="cpu-img" />
+                                    <div class="component-part component-img">
+                                        <img src="./assets/images/icons/config_page/cpu_img.svg" alt="cpu-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Сборка специалистом</span>
+                                        <span class="component-name">Процессор</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
+                                    <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
                                 <div class="component">
-                                    <div class="component-part component-img additional">
-                                        <img src="./assets/images/icons/config_page/windows_trial.svg" alt="cooler-img" />
+                                    <div class="component-part component-img">
+                                        <img src="./assets/images/icons/config_page/cooler_img.svg" alt="cooler-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Установка Windows 11 ознакомительный</span>
+                                        <span class="component-name">Кулер</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
+                                    <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
                                 <div class="component">
-                                    <div class="component-part component-img additional">
-                                        <img src="./assets/images/icons/config_page/windows_lisence.svg" alt="motherboard-img" />
+                                    <div class="component-part component-img">
+                                        <img src="./assets/images/icons/config_page/motherboard__img.svg" alt="motherboard-img" />
                                     </div>
                                     <div class="component-part component-info">
-                                        <span class="component-name">Установка Windows 11 лицензия</span>
+                                        <span class="component-name">Материнская плата</span>
+                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
+                                    <div class="component-part component-product-count">353 товара</div>
                                     <button class="component-part primary-btn select-button">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
-                                    <div class="component-part component-img additional">
-                                        <img src="./assets/images/icons/config_page/ms_office.svg" alt="motherboard-img" />
-                                    </div>
-                                    <div class="component-part component-info">
-                                        <span class="component-name">Установка Office лицензия</span>
-                                    </div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="">
-                                    </button>
-                                </div>
-                                <button class="component-hide-btn desktop-only">Скрыть всё</button>
+                                <button class="component-hide-btn">Скрыть всё</button>
                             </div>
                         </div>
                     </div>
@@ -477,42 +344,8 @@
                                             <span>удалить</span>
                                         </button>
                                     </div>
+
                                 </div>
-
-                                <div class="component-choosen_mobile">
-                                    <div class="component-choosen_mobile-info">
-                                        <div class="choosen-info">
-                                            <span>Материнская плата</span>
-                                            <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-                                        </div>
-                                        <div class="new-price">1256.<span>7 руб</span></div>
-                                    </div>
-
-                                    <div class="component-choosen_mobile-details">
-                                        <div class="choosen-img">
-                                            <img src="./assets/images/card-4.png" alt="cpu-img" />
-                                        </div>
-                                        <div class="component-choosen-part info-choosen">
-                                            <div>ASUS Prime B760M-K D4</div>
-                                            <div>Код товара: 934841</div>
-                                            <div class="component-choosen-part categories-tags">
-                                                <span> 4xDDR5</span>
-                                                <span>Intel B760</span>
-                                            </div>
-                                        </div>
-                                        <div class="component-choosen-part choosen-btns">
-                                            <button class="component-list-btn-delete">
-                                                <img src="./assets/images/icons/delete.svg">
-                                                <span>удалить</span>
-                                            </button>
-                                            <button class="component-list-btn-change" id="change-btn">
-                                                <img src="./assets/images/icons/change.svg">
-                                                <span>заменить</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="component-choosen">
                                     <div class="component-choosen-part info-choosen">
                                         <div class="choosen-img">
@@ -549,9 +382,7 @@
                                 </div>
                                 <div class="component-choose-item">
                                     <div>Выбрать ещё</div>
-                                    <button class="component-part primary-btn select-button" id="choose-more">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="" />
-                                    </button>
+                                    <button class="component-part primary-btn select-button" id="choose-more">Выбрать</button>
                                 </div>
                             </div>
 
@@ -561,9 +392,7 @@
                                 </div>
                                 <div class="component-choose-item">
                                     <div>Ничего не выбрано</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="" />
-                                    </button>
+                                    <button class="component-part primary-btn select-button">Выбрать</button>
                                 </div>
 
 
@@ -576,9 +405,7 @@
                                 </div>
                                 <div class="component-choose-item">
                                     <div>Ничего не выбрано</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
-                                        <img src="./assets/images/buttons/plus-review.svg" alt="" />
-                                    </button>
+                                    <button class="component-part primary-btn select-button">Выбрать</button>
                                 </div>
 
 
@@ -590,13 +417,12 @@
                 </div>
             </div>
 
+
+
             <div class="configurator-illustative-block">
-                <div class="mobile-hints">
-                    <button class="help-btn open-form mobile-only">Помочь со сборкой</button>
-                    <div class="hint-text">
-                        <span>Нажмите +, чтобы выбрать комплектующую</span>
-                        <img src="./assets/images/icons/config_page/question.svg" />
-                    </div>
+                <div class="hint-text">
+                    <span>Нажмите +, чтобы выбрать комплектующую</span>
+                    <img src="./assets/images/icons/config_page/question.svg" />
                 </div>
                 <div class="illustative-block">
                     <div class="base-img">
@@ -672,7 +498,7 @@
                         </div>
                     </div>
 
-                    <div class="illustative-block_btns desktop-only">
+                    <div class="illustative-block_btns">
                         <button class="clear-btn">Очистить</button>
                         <button class="in-cart-btn">
                             <span class="price">14256.<span class="price-cents">7 руб</span></span>
@@ -697,10 +523,10 @@
         </section>
 
         <section class="categories-page">
+            <button class="primary-btn review-btn review-modal-open">Оставить отзыв
+                <img src="./assets/images/buttons/plus-review.svg" alt="">
+            </button>
             <div class="categories page">
-                <button class="primary-btn review-btn review-modal-open">Оставить отзыв
-                    <img src="./assets/images/buttons/plus-review.svg" alt="">
-                </button>
                 <button>Для дома</button>
                 <button>Для офиса</button>
                 <button>Для игр</button>
@@ -708,13 +534,6 @@
                 <button>Дизайнеру</button>
             </div>
         </section>
-
-        <div class="illustative-block_btns mobile-only">
-            <button class="clear-btn">Очистить</button>
-            <button class="in-cart-btn">
-                <span class="price">14256.<span class="price-cents">7 руб</span></span>
-                <span class="cart-text">В корзину</span></button>
-        </div>
 
         <section class="popular-cards-config">
             <h2 class="hedline-h2">Популярные сборки</h2>
@@ -1051,7 +870,7 @@
                 <div class="thaks-screen">
                     <h2 class="hedline-h2">Спасибо!</h2>
                     <p class="subtitle-thanks">Сообщение отправлено</p>
-                    <img src="./assets/images/thn2.png" alt="Сообщение отправлено">
+                    <img src="./assets/images/th2.png" alt="Сообщение отправлено">
                 </div>
                 <div class="error-screen">
                     <h2 class="hedline-h2">Ошибка!</h2>
@@ -1064,14 +883,8 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="modal-cooler-catalog">
+    <div class="modal-overlay" id="modal-catalog">
         <div class="modal-frame">
-            <div class="mobile-only back-to-congigurator">
-                <div>
-                    <img src="./assets/images/icons/breadcrambs.svg" />
-                </div>
-                <div>назад к сборке</div>
-            </div>
             <div class="modal-header">
                 <h2 class="modal-title" id="modal-title">Заголовок</h2>
                 <div class="filter">
@@ -1080,11 +893,11 @@
                         <input type="text" placeholder="Найти товар" />
                     </div>
                 </div>
-                <button class="close-modal-btn desktop-only">&times;</button>
+                <button class="close-modal-btn">&times;</button>
             </div>
             <div class="modal-content">
 
-                <aside id="modal-cooler-catalog" id="filter-aside" class="filter-panel">
+                <aside>
                     <div class="filter-container" id="filter-container">
                         <div class="filter-buttons">
                             <button class="clear-btn">Очистить</button>
@@ -1092,20 +905,27 @@
                         </div>
                     </div>
                 </aside>
-                <div class="main-content desktop-only">
+                <div class="main-content">
                     <div class="search-row-opts">
                         <label class="toggle-container">
                             <span>Акции</span>
                             <input type="checkbox" id="toggle">
                             <div class="toggle"></div>
                         </label>
+                        <select class="categories-dropdown">
+                            <option>По популярности</option>
+                            <option>По новизне</option>
+                            <option>По цене</option>
+                        </select>
+
                         <div class="categories">
                             <button class="active">DeepCool</button>
                             <button>ExeGate</button>
                             <button>ID-CCOLING</button>
                             <button>Zalman</button>
                         </div>
-                        <div class="view-switcher" data-switcher-id="view2">
+
+                        <div class="view-switcher">
                             <span>Вид:</span>
                             <button class="view-btn active" data-view="list">
                                 <span></span>
@@ -1119,12 +939,13 @@
                   </span>
                             </button>
                         </div>
+
                     </div>
 
-                    <div class="products-container list-view" data-view-type="list" data-switcher-id="view2">
+                    <div class="products-container list-view" id="list-view">
                         <div class="products-container-no-match">К сожалению, по вашему запросу <br />
                             не найдено ни одного товара</div>
-                        <div class="product-card list-style">
+                        <div class="product-card list-style desktop-only">
                             <div class="product-card-img list-style">
                                 <div class="card-img-main-product list-style">
                                     <img src="assets/images/card-3.png" alt="Компьютер">
@@ -1136,7 +957,7 @@
                                     MLY-D24M-A23PZ-RW</h3>
                                 <div class="more-data">
                                     <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details details-btn">
+                                    <div class="details" id="details-btn">
                                         <a href="">
                                             <span class="full-text">Смотреть подробнее</span>
                                             <span class="short-text">Подробнее</span>
@@ -1167,7 +988,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-card list-style">
+                        <div class="product-card list-style desktop-only">
                             <div class="product-card-img list-style">
                                 <div class="card-img-main-product list-style">
                                     <img src="assets/images/card-3.png" alt="Компьютер">
@@ -1179,7 +1000,7 @@
                                     MLY-D24M-A23PZ-RW</h3>
                                 <div class="more-data">
                                     <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details details-btn">
+                                    <div class="details" id="details-btn">
                                         <a href="">
                                             <span class="full-text">Смотреть подробнее</span>
                                             <span class="short-text">Подробнее</span>
@@ -1210,7 +1031,7 @@
                         </div>
                     </div>
 
-                    <div class="products-container grid-view hidden" data-switcher-id="view2" data-view-type="grid">
+                    <div class="products-container grid-view hidden" id="grid-view">
                         <div class="products-container-no-match">К сожалению, по вашему запросу <br />
                             не найдено ни одного товара</div>
                         <div class="product-card grid-style">
@@ -1263,7 +1084,7 @@
                                 <a href="#" class="page-link" data-page="3">4</a>
                                 <a href="#" class="page-link" data-page="">...</a>
                                 <a href="#" class="page-link" data-page="">867</a>
-                                <img src="./assets/images/icons/pagination-arrow.svg" />
+                                <img src="./assets/images/icons/pagination-arrow.png" />
                                 <p id="page-numbers"> </p>
                             </div>
                             <button class="show-more-btn">Показать ещё</button>
@@ -1276,268 +1097,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="item-shop_mobile mobile-only">
-                <div class="main-content">
-                    <div class="mobile-interaction-rows">
-
-                        <div class="mobile-modal-help mobile-only">
-                            <button class="help-btn open-form">Посоветуйте сборку</button>
-                            <select class="categories-dropdown">
-                                <option>Для дома</option>
-                                <option>Для офиса</option>
-                                <option>Для игр</option>
-                                <option>Разработчику</option>
-                                <option>Дизайнеру</option>
-                            </select>
-                        </div>
-                        <div class="second-line">
-
-
-                            <button class="filter-toggle" data-modal="cooler">Фильтр</button>
-
-                            <div class="popularity-dropdown">
-                                <select name="" id="">
-                                    <option value="">По популярности</option>
-                                    <option value="">По новизне</option>
-                                    <option value="">По цене</option>
-                                </select> <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
-                            </div>
-
-                            <div class="view-switcher mobile-switcher" data-switcher-id="view2">
-                                <span>Вид:</span>
-                                <button class="view-btn active" data-type="list">
-                                    <span></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-container list-view" data-view-type="list" data-switcher-id="view2">
-                        <div class="products-container-no-match">К сожалению, по вашему запросу <br />
-                            не найдено ни одного товара</div>
-                        <div class="product-card list-style mobile-only">
-                            <div>
-                                <div class="card-img-main-product list-style">
-                                    <img src="assets/images/card-3.png" alt="Компьютер">
-                                </div>
-                                <div class="mobile-item-shop_info">
-                                    <div class="product-title-rate">
-                                        <h3 class="product-title list-style">Игровой компьютер серии Prologic [2006326]</h3>
-                                        <div class="rating">
-                                            <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-                                            <div class="reviews-statistic-rating-small">4.3</div>
-                                        </div>
-                                    </div>
-                                    <div class="product-characterictic-tags">
-                                        <span>Intel Core i5</span>
-                                        <span>Nvidia GTX 1650</span>
-                                        <span>Intel B760</span>
-                                        <span>3200 МГц,</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mobile-card-part">
-                                <div class="cont-price list-style">
-                                    <p class="new-price">1256<span>.7 руб</span></p>
-                                    <p class="old-price list-style">7015<span>.30 руб</span></p>
-                                </div>
-                                <div class="mobile-card-info">
-                                    <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details details-btn">
-                                        <a href="">
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="cart-actions_mobile">
-                                <button class="btn-cart" id="buy-item">Добавить</button>
-                                <button class="btn-change" id="change-item">Заменить</button>
-                            </div>
-                        </div>
-                        <div class="product-card list-style mobile-only">
-                            <div>
-                                <div class="card-img-main-product list-style">
-                                    <img src="assets/images/card-3.png" alt="Компьютер">
-                                </div>
-                                <div class="mobile-item-shop_info">
-                                    <div class="product-title-rate">
-                                        <h3 class="product-title list-style">Игровой компьютер серии Prologic [2006326]</h3>
-                                        <div class="rating">
-                                            <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-                                            <div class="reviews-statistic-rating-small">4.3</div>
-                                        </div>
-                                    </div>
-                                    <div class="product-characterictic-tags">
-                                        <span>Intel Core i5</span>
-                                        <span>Nvidia GTX 1650</span>
-                                        <span>Intel B760</span>
-                                        <span>3200 МГц,</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mobile-card-part">
-                                <div class="cont-price list-style">
-                                    <p class="new-price">1256<span>.7 руб</span></p>
-                                    <p class="old-price list-style">7015<span>.30 руб</span></p>
-                                </div>
-                                <div class="mobile-card-info">
-                                    <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details">
-                                        <a href="">
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="cart-actions_mobile">
-                                <div class="change-choice" id="change-choice">
-                                    <button class="btn-delete-modal-item">
-                                        <img src="./assets/images/icons/delete.svg">
-                                        <span>удалить</span>
-                                    </button>
-
-                                    <button class="modal-about-choosen">Выбрано</button>
-                                    <div class="quantity-control">
-                                        <button class="qty-btn minus">−</button>
-                                        <input type="number" value="1" min="1" class="qty-input">
-                                        <button class="qty-btn plus">+</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-container grid-view hidden" data-view-type="grid" data-switcher-id="view2">
-                        <div class="products-container-no-match">К сожалению, по вашему запросу <br />
-                            не найдено ни одного товара</div>
-                        <div class="product-card grid-style">
-                            <div class="card-img-main-product grid-style">
-                                <img src="./assets/images/card-cooler.png" alt="Компьютер">
-                            </div>
-                            <div class="info">
-                                <div class="product-title-rate">
-                                    <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
-                                    <div class="rating">
-
-                                        <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-
-                                        <div class="reviews-statistic-rating-small">4.3</div>
-                                    </div>
-                                </div>
-                                <div class="info-details">
-                                    <div class="details">
-                                        <a href="">
-                                            <span class="full-text">Смотреть подробнее</span>
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-                                    <div class="product-code grid-style">Код товара: 2002850</div>
-                                </div>
-                                <div class="product-characterictic-tags">
-                                    <span>шум 32дБ</span>
-                                    <span>аллюминий</span>
-                                    <span>3 pin</span>
-                                    <span>PWN</span>
-                                    <span>2300 об/мин</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="cont-price grid-style">
-                                        <p class="new-price grid-style">1256<span>.7 руб</span></p>
-                                        <p class="old-price grid-style">7015<span>.30 руб</span></p>
-                                    </div>
-                                    <div class="payment-option green grid-style desktop-only">от &nbsp;<span>42</span> руб/мес</div>
-                                </div>
-                            </div>
-                            <div class="cart-actions_mobile"></div>
-                            <button class="btn-cart" id="buy-item">Добавить</button>
-                            <button class="btn-change" id="change-item">Заменить</button>
-                        </div>
-                        <div class="product-card grid-style">
-                            <div class="card-img-main-product grid-style">
-                                <img src="./assets/images/card-cooler.png" alt="Компьютер">
-                            </div>
-                            <div class="info">
-                                <div class="product-title-rate">
-                                    <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
-                                    <div class="rating">
-
-                                        <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-
-                                        <div class="reviews-statistic-rating-small">4.3</div>
-                                    </div>
-                                </div>
-                                <div class="info-details">
-                                    <div class="details">
-                                        <a href="">
-                                            <span class="full-text">Смотреть подробнее</span>
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-                                    <div class="product-code grid-style">Код товара: 2002850</div>
-                                </div>
-                                <div class="product-characterictic-tags">
-                                    <span>шум 32дБ</span>
-                                    <span>аллюминий</span>
-                                    <span>3 pin</span>
-                                    <span>PWN</span>
-                                    <span>2300 об/мин</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="cont-price grid-style">
-                                        <p class="new-price grid-style">1256<span>.7 руб</span></p>
-                                        <p class="old-price grid-style">7015<span>.30 руб</span></p>
-                                    </div>
-                                    <div class="payment-option green grid-style desktop-only">от &nbsp;<span>42</span> руб/мес</div>
-                                </div>
-                            </div>
-                            <div class="cart-actions_mobile">
-                                <div class="change-choice" id="change-choice">
-                                    <div class="quantity-control">
-                                        <button class="qty-btn grid-style minus">−</button>
-                                        <input type="number" value="1" min="1" class="qty-input grid-style">
-                                        <button class="qty-btn grid-style plus">+</button>
-                                    </div>
-                                    <button class="modal-about-choosen grid-style">Выбрано</button>
-                                    <button class="btn-delete-modal-item">
-                                        <img src="./assets/images/icons/delete.svg">
-                                        <span>удалить</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pagination-container">
-                        <div class="pagination-choice">
-                            <div class="pagination" id="pagination">
-
-                                <a href="#" class="page-link" data-page="1">1</a>
-                                <a href="#" class="page-link" data-page="2">2</a>
-                                <a href="#" class="page-link" data-page="3">3</a>
-                                <a href="#" class="page-link" data-page="3">4</a>
-                                <a href="#" class="page-link" data-page="">...</a>
-                                <a href="#" class="page-link" data-page="">867</a>
-                                <img src="./assets/images/icons/pagination-arrow.svg" />
-                                <p id="page-numbers"> </p>
-                            </div>
-                            <button class="show-more-btn">Показать ещё</button>
-                        </div>
-
-                        <div class="page-choice">
-                            <div class="items-per-page" id="dropdownBtn">Товаров на странице по</div>
-                            <div class="dropdown-btn">9 <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -1551,7 +1110,7 @@
                     </div>
                     <div>вернуться в каталог</div>
                 </div>
-                <button class="close-modal-btn desktop-only">&times;</button>
+                <button class="close-modal-btn">&times;</button>
             </div>
             <div class="modal-content">
                 <div class="modal-item-main-info">
@@ -1559,11 +1118,11 @@
                         <div>
                             Кулер для процессора Cooler Master MasterLiquid PL240 Flux White Edition MLY-D24M-A23PZ-RW
                         </div>
-                        <div class="desktop-only">Код товара: 976013</div>
+                        <div>Код товара: 976013</div>
                     </div>
                     <div class="modal-item-info">
 
-                        <div class="modal-gallery desktop-only">
+                        <div class="modal-gallery">
                             <div class="modal-preview">
                                 <div class="modal-preview-img-wrapper" onclick="changeImage(this)" class="active">
                                     <img src="./assets/images/card-3.png" alt="detail">
@@ -1579,27 +1138,9 @@
                                 <img src="./assets/images/card-cooler.png" alt="main image">
                             </div>
                         </div>
-                        <div id="assemblyMobileSlider" class="mobile-slider-container">
-                            <div class="mobile-slides-container">
-                                <div class="mobile-slides">
-                                    <div class="mobile-slide"><img src="./assets/images/card-5.png" alt="image"></div>
-                                    <div class="mobile-slide"><img src="./assets/images/card-5.png" alt="image"></div>
-                                    <div class="mobile-slide"><img src="./assets/images/card-5.png" alt="image"></div>
-                                    <div class="mobile-slide"><img src="./assets/images/card-5.png" alt="image"></div>
-                                    <div class="mobile-slide"><img src="./assets/images/card-5.png" alt="image"></div>
-                                </div>
-                            </div>
-                            <div class="mobile-slider-dots"></div>
-                        </div>
 
                         <div class="modal-item-about">
-                            <div>
-                                <div class="modal-item-about-header">О товаре</div>
-                                <div class="rating mobile-only">
-                                    <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-                                    <div class="reviews-statistic-rating-small">4.3</div>
-                                </div>
-                            </div>
+                            <div class="modal-item-about-header">О товаре</div>
                             <div class="modal-item-tags">
                                 <span>аллюминий</span>
                                 <span>вентилятор 120 мм</span>
@@ -1617,7 +1158,7 @@
                         </div>
                         <div class="modal-price-block">
                             <div>
-                                <div class="modal-content-price desktop-only">
+                                <div class="modal-content-price">
                                     <p class="new-price">1256<span>.7 руб</span></p>
                                     <p class="old-price">7015<span>.30 руб</span></p>
                                 </div>
@@ -1633,10 +1174,10 @@
                                 <div class="payment-guarant">гарантия</div>
 
                             </div>
-                            <button class="btn-cart desktop-only" id="buy-item">Добавить</button>
-                            <button class="btn-change desktop-only" id="change-item">Заменить</button>
+                            <button class="btn-cart" id="buy-item">Добавить</button>
+                            <button class="btn-change" id="change-item">Заменить</button>
 
-                            <div class="change-choice desktop-only" id="change-choice">
+                            <div class="change-choice" id="change-choice">
                                 <div class="quantity-control">
                                     <button class="qty-btn minus">−</button>
                                     <input type="number" value="1" min="1" class="qty-input">
@@ -1821,159 +1362,12 @@
                 </div>
 
             </div>
-
-            <div class="modal-btns-mobile mobile-only">
-                <div class="modal-content-price">
-                    <p class="new-price">1256<span>.7 руб</span></p>
-                    <p class="old-price">7015<span>.30 руб</span></p>
-                </div>
-
-                <button class="btn-cart" id="buy-item">Добавить</button>
-
-            </div>
         </div>
     </div>
 
-
-    <div id="pdf-popup" class="popup">
-        <div class="close-download-popup">
-            <div id="btn-close-popup-dnld" class="close-download-btn">
-                <img src="./assets/images/icons/config_page/popup_cross.svg" />
-            </div>
-            <button class="product-btn">
-                <img src="./assets/images/icons/download.svg" alt="" />
-                <span>скачать PDF</span>
-            </button>
-        </div>
-        <div class="popup-content">
-            <div class="popup-header">
-                <div class="logo">
-                    <img src="./assets/images/icons/config_page/logo.svg" alt="logo" />
-                </div>
-
-                <div class="phone-nums">
-                    <div class="robot-phone">
-                        <img src="./assets/images/logo-company/mts.png" />
-                        <p>+375 29 <span>778-60-60</span></p>
-                    </div>
-                    <div class="robot-phone">
-                        <img src="./assets/images/logo-company/a1.png" />
-                        <p>+375 44 <span>778-60-60</span></p>
-                    </div>
-                </div>
-
-                <div class="site-link">
-                    <a href="https://algo.by/" style="display: contents;">
-                        <img src="./assets/images/icons/config_page/globe.svg" alt="Algo.by" />
-                        <p>algo.by</p>
-                    </a>
-                </div>
-
-
-            </div>
-            <div class="popup-main-content">
-                <div class="popup-main-content_header">
-                    <div>Сборка ПК</div>
-                    <div>
-                        <p>Общая цена:</p>
-                        <p class="new-price">1256<span>.7 руб</span></p>
-                    </div>
-                </div>
-                <div class="popup-main-content_part-type">
-                    <p>Системный блок</p>
-                    <div class="popup-main-content_part-type_cards">
-                        <div class="popup-item-card">
-                            <div class="popup-item-card_general-info">
-                                <div class="popup-item-card_general-info_img">
-                                    <img src="./assets/images/card-6.png" />
-                                </div>
-                                <div class="popup-item-card_general-info_text">
-                                    <p>Процессор</p>
-                                    <p class="mobile-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                    <p>Код товара: 934841</p>
-                                </div>
-                            </div>
-                            <div class="popup-item-card_main-info">
-                                <p class="desktop-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                <p>mATX, сокет LGA 1700, чипсет Intel H610, 2xDDR4, PCI-E 4.0, M.2, сеть: 1 Гбит/с, HDMI</p>
-                            </div>
-
-                            <div class="cont-price">
-                                <p class="new-price">1256<span>.7 руб</span></p>
-                                <p class="old-price">7015<span>.30 руб</span></p>
-                            </div>
-                        </div>
-                        <div class="popup-item-card">
-                            <div class="popup-item-card_general-info">
-                                <div class="popup-item-card_general-info_img">
-                                    <img src="./assets/images/card-6.png" />
-                                </div>
-                                <div class="popup-item-card_general-info_text">
-                                    <p>Процессор</p>
-                                    <p class="mobile-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                    <p>Код товара: 934841</p>
-                                </div>
-                            </div>
-                            <div class="popup-item-card_main-info">
-                                <p class="desktop-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                <p>mATX, сокет LGA 1700, чипсет Intel H610, 2xDDR4, PCI-E 4.0, M.2, сеть: 1 Гбит/с, HDMI</p>
-                            </div>
-
-                            <div class="cont-price">
-                                <p class="new-price">1256<span>.7 руб</span></p>
-                                <p class="old-price">7015<span>.30 руб</span></p>
-                            </div>
-                        </div>
-                        <div class="popup-item-card">
-                            <div class="popup-item-card_general-info">
-                                <div class="popup-item-card_general-info_img">
-                                    <img src="./assets/images/card-6.png" />
-                                </div>
-                                <div class="popup-item-card_general-info_text">
-                                    <p>Процессор</p>
-                                    <p class="mobile-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                    <p>Код товара: 934841</p>
-                                </div>
-                            </div>
-                            <div class="popup-item-card_main-info">
-                                <p class="desktop-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                <p>mATX, сокет LGA 1700, чипсет Intel H610, 2xDDR4, PCI-E 4.0, M.2, сеть: 1 Гбит/с, HDMI</p>
-                            </div>
-
-                            <div class="cont-price">
-                                <p class="new-price">1256<span>.7 руб</span></p>
-                                <p class="old-price">7015<span>.30 руб</span></p>
-                            </div>
-                        </div>
-                        <div class="popup-item-card">
-                            <div class="popup-item-card_general-info">
-                                <div class="popup-item-card_general-info_img">
-                                    <img src="./assets/images/card-6.png" />
-                                </div>
-                                <div class="popup-item-card_general-info_text">
-                                    <p>Процессор</p>
-                                    <p class="mobile-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                    <p>Код товара: 934841</p>
-                                </div>
-                            </div>
-                            <div class="popup-item-card_main-info">
-                                <p class="desktop-only">Gigabyte GeForce RTX 4070 Super Eagle OC 12G GV-N407SEAGLE OC-12GD</p>
-                                <p>mATX, сокет LGA 1700, чипсет Intel H610, 2xDDR4, PCI-E 4.0, M.2, сеть: 1 Гбит/с, HDMI</p>
-                            </div>
-
-                            <div class="cont-price">
-                                <p class="new-price">1256<span>.7 руб</span></p>
-                                <p class="old-price">7015<span>.30 руб</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 </div>
+
 </body>
 
 </html>
