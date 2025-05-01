@@ -31,6 +31,9 @@ class ProductController extends BaseController
         if ($maxPrice) {
             $builder->where('price <=', $maxPrice);
         }
+        if ($type) {
+            $builder->where('category_ram', $type);
+        }
 
         $products = $builder->paginate(50, 'products');
         $pager = \Config\Services::pager();
