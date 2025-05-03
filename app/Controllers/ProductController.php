@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CoreConfigData;
 use App\Models\Product;
 
 class ProductController extends BaseController
@@ -15,8 +16,19 @@ class ProductController extends BaseController
         $maxPrice = $this->request->getGet('max_price');
 
         $builder = $productModel
-            ->select(['sku', 'name', 'price', 'discount_price'])
-            ->where(['is_in_stock' => 1, 'enabled' => 1]);
+            ->select([
+                'products.sku',
+                'products.name',
+                'products.price',
+                'products.discount_price',
+                'products_images.image',
+            ])
+            ->join('products_images', 'products_images.sku = products.sku')
+            ->where([
+                'products_images.main' => 1,
+                'products.is_in_stock' => 1,
+                'products.enabled' => 1,
+            ]);
 
         if ($search) {
             $builder->groupStart()
@@ -36,6 +48,14 @@ class ProductController extends BaseController
         }
 
         $products = $builder->paginate(50, 'products');
+
+        foreach($products as &$product){
+            $product['price'] = $this->converPrice($product['price']);
+            $product['discount_price'] = $this->converPrice($product['discount_price']);
+            $product['image'] = $this->getImageUrl($product['image']);
+        }
+        unset($product);
+
         $pager = \Config\Services::pager();
 
         return $this->response->setJSON([
@@ -47,5 +67,18 @@ class ProductController extends BaseController
                 'max_price' => $maxPrice
             ]
         ]);
+    }
+
+    public function converPrice($price)
+    {
+        $config = new CoreConfigData();
+        $currencyRate = $config->getCurrencyRate();
+
+        return round($price * $currencyRate / 10000, 2);
+    }
+    
+    public function getImageUrl($image)
+    {
+        return env('IMAGE_BASE_URL') . $image;
     }
 }

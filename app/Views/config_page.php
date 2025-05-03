@@ -430,7 +430,7 @@
                             <img class="highlight-part part-case" src="./assets/images/icons/config_page/case-constructor.svg" />
                             <img class="added-part part-case" src="./assets/images/icons/config_page/case_added.svg" />
 
-                            <button class="add-part-btn case-btn" data-modal="case">Корпус <img
+                            <button class="add-part-btn case-btn" data-modal="53">Корпус <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
@@ -439,7 +439,7 @@
                                  src="./assets/images/icons/config_page/motherboard_noadd.svg" />
                             <img class="added-part part-motherboard"
                                  src="./assets/images/icons/config_page/motherboard_added.svg" />
-                            <button class="add-part-btn motherboard-btn" data-modal="motherboard">Материнская плата <img
+                            <button class="add-part-btn motherboard-btn" data-modal="9">Материнская плата <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
@@ -447,7 +447,7 @@
                             <img class="highlight-part part-videocard"
                                  src="./assets/images/icons/config_page/videocard__noadd.svg" />
                             <img class="added-part part-videocard" src="./assets/images/icons/config_page/videocard__added.svg" />
-                            <button class="add-part-btn videocard-btn" data-modal="videocard">Видеокарта <img
+                            <button class="add-part-btn videocard-btn" data-modal="15">Видеокарта <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
@@ -455,14 +455,14 @@
                             <img class="highlight-part part-cooler" src="./assets/images/icons/config_page/cooler_noadd.svg" />
                             <img class="added-part part-cooler" src="./assets/images/icons/config_page/cooler_added.svg" />
 
-                            <button class="add-part-btn cooler-btn" data-modal="cooler">Кулер <img
+                            <button class="add-part-btn cooler-btn" data-modal="18">Кулер <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
                         <div class="cpu-block">
                             <img class="highlight-part part-cpu" src="./assets/images/icons/config_page/cpu_noadd.svg" />
                             <img class="added-part part-cpu" src="./assets/images/icons/config_page/cpu_added.svg" />
-                            <button class="add-part-btn cpu-btn" data-modal="cpu">Процессор <img
+                            <button class="add-part-btn cpu-btn" data-modal="8">Процессор <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
@@ -470,21 +470,21 @@
                             <img class="highlight-part part-powerunit"
                                  src="./assets/images/icons/config_page/powerunit_noadd.svg" />
                             <img class="added-part part-powerunit" src="./assets/images/icons/config_page/powerunit_added.svg" />
-                            <button class="add-part-btn powerunit-btn" data-modal="powerunit">Блок питания <img
+                            <button class="add-part-btn powerunit-btn" data-modal="54">Блок питания <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
                         <div class="ram-unit">
                             <img class="highlight-part part-ram" src="./assets/images/icons/config_page/ram_noadd.svg" />
                             <img class="added-part part-ram" src="./assets/images/icons/config_page/ram_added.svg" />
-                            <button class="add-part-btn ram-btn" data-modal="ram">Оперативная память <img
+                            <button class="add-part-btn ram-btn" data-modal="17">Оперативная память <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
                         <div class="ssd-block">
                             <img class="highlight-part part-ssd" src="./assets/images/icons/config_page/ssd__noadd.svg" />
                             <img class="added-part part-ssd" src="./assets/images/icons/config_page/ssd_added.svg" />
-                            <button class="add-part-btn ssd-btn" data-modal="ssd">SSD <img
+                            <button class="add-part-btn ssd-btn" data-modal="253">SSD <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
 
@@ -492,7 +492,7 @@
                         <div class="hhd-block">
                             <img class="highlight-part part-hdd" src="./assets/images/icons/config_page/hdd_noadd.svg" />
                             <img class="added-part part-hdd" src="./assets/images/icons/config_page/hdd_added.svg" />
-                            <button class="add-part-btn hdd-btn" data-modal="hdd">Жёский диск<img
+                            <button class="add-part-btn hdd-btn" data-modal="90">Жёский диск<img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
                         </div>
