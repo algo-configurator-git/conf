@@ -15,7 +15,7 @@ class ConfigController extends BaseController
     {
         $session = \Config\Services::session();
 
-        $session = $session->get('config');
-        dd($session);
+        $config = $session->get('config');
+        dd($config);
     }
 }

@@ -75,9 +75,15 @@ class ProductController extends BaseController
 
         $category = $this->getProductCategory($sku);
 
-        $products = $session->get('config' . $category);
-        $products[] = $sku;
-        $session->set('config' . $category, $products);
+        $products = $session->get('config') ?? [];
+
+        if (!isset($products[$category]) || !is_array($products[$category])) {
+            $products[$category] = [];
+        }
+
+        $products[$category][] = $sku;
+
+        $session->set('config', $products);
     }
 
     public function getProductCategory($sku)
