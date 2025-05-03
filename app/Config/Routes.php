@@ -17,6 +17,7 @@ $routes->group('reviews', function ($routes) {
 $routes->group('config', function($routes){
     $routes->get('/', 'ConfigController::index');
     $routes->post('/', 'ConfigController::store');
+    $routes->get('/selectedProducts', 'ConfigController::getConfigProducts');
 
     $routes->group('products', function($routes){
         $routes->get('(:segment)', 'ProductController::index/$1');
