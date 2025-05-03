@@ -69,7 +69,7 @@ class ConfigController extends BaseController
         }
 
 
-        return $this->response->setJSON(['result' => $configWithProducts]);
+        return $this->response->setJSON([$configWithProducts]);
     }
 
     public function converPrice($price): float
