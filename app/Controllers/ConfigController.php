@@ -10,4 +10,12 @@ class ConfigController extends BaseController
 
         return view('config_page');
     }
+
+    public function store()
+    {
+        $session = \Config\Services::session();
+
+        $session = $session->get('config');
+        dd($session);
+    }
 }

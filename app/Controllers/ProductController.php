@@ -69,6 +69,26 @@ class ProductController extends BaseController
         ]);
     }
 
+    public function store($sku)
+    {
+        $session = \Config\Services::session();
+
+        $category = $this->getProductCategory($sku);
+
+        $products = $session->get('config' . $category);
+        $products[] = $sku;
+        $session->set('config' . $category, $products);
+    }
+
+    public function getProductCategory($sku)
+    {
+        $productModel = new Product();
+
+        $product = $productModel->select('category_ram')->find($sku);
+
+        return $product['category_ram'];
+    }
+
     public function converPrice($price)
     {
         $config = new CoreConfigData();
