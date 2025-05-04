@@ -59,7 +59,7 @@
                         комплектующие</span>
                                     </div>
                                 </div>
-                                <div class="component" id="cpu-catalog">
+                                <div class="component" id="b_8">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/cpu_img.svg" alt="cpu-img" />
                                     </div>
@@ -72,7 +72,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_18">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/cooler_img.svg" alt="cooler-img" />
                                     </div>
@@ -85,7 +85,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_9">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/motherboard__img.svg" alt="motherboard-img" />
                                     </div>
@@ -98,7 +98,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_17">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/ram_img.svg" alt="ram-img" />
                                     </div>
@@ -111,7 +111,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_15">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/videocard_img.svg" alt="videocard_img" />
                                     </div>
@@ -124,7 +124,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_90">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/hdd_img.svg" alt="hdd-img" />
                                     </div>
@@ -137,7 +137,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_253">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/ssd_img.svg" alt="ssd-img" />
                                     </div>
@@ -150,7 +150,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_53">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/case_img.svg" alt="case-img" />
                                     </div>
@@ -163,7 +163,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component">
+                                <div class="component" id="b_54">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/powerunit_img.svg" alt="powerunit-img" />
                                     </div>

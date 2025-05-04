@@ -142,7 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
   addPartButtons.forEach((button) => {
     button.addEventListener("click", () => {
       currentType = button.dataset.modal;
-      const data = filterMap[currentType] || { title: currentType.toUpperCase() };
+      const category_name = CATEGORIES[currentType];
+      const data = filterMap[category_name] || { title: currentType.toUpperCase() };
       modalTitle.textContent = data.title;
       modal.style.display = "flex";
       document.body.style.overflow = "hidden";
@@ -201,115 +202,123 @@ document.addEventListener("DOMContentLoaded", () => {
   [productContainerList, productContainerGrid].forEach((container) => {
     container.addEventListener("click", (event) => {
       if (event.target.closest(".buy-btn")) {
-        const productCard = event.target.closest(".product-card");
-        const productCode = productCard.querySelector(".product-code").textContent.split(": ")[1];
-        addProductToComponent(productCode);
+        const encodedData = event.target.getAttribute("data-product");
+        const product = JSON.parse(decodeURIComponent(encodedData));
+        console.log(product)
+        addProductToComponent(product);
       }
     });
   });
 
-  function addProductToComponent(productId) {
+  const CATEGORIES = {
+    8: 'cpu',
+    18: 'cooler',
+    15: 'videocard',
+    9: 'motherboard' ,
+    54: 'powerunit',
+    17: 'ram',
+    253: 'ssd',
+    90: 'hdd',
+    53: 'case',
+  };
+
+  function addProductToComponent(product) {
+    const productId = product.code;
+    const currentType = product.categoty_id;
     console.log("Adding product with ID:", productId);
 
-    fetch(`/config/products/${productId}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "Cache-Control": "no-cache" },
-    })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Ошибка при получении продукта");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Received product data:", data);
-          const component = document.querySelector(`.select-button[data-modal="${currentType}"]`)?.closest(".component");
-          if (!component) {
-            console.error("Компонент не найден для типа:", currentType);
-            return;
-          }
+    const component_id = 'b_' + currentType;
+    const component_name = CATEGORIES[currentType];
 
-          const originalWidth = component.clientWidth;
+    const component = document.getElementById(component_id);
+    //const component = document.querySelector(`.select-button[data-modal="${currentType}"]`)?.closest(".component");
+    if (!component) {
+      console.error("Компонент не найден для типа:", currentType);
+      return;
+    }
 
-          let cardContainer = component.querySelector(".component-cards-container");
-          if (!cardContainer) {
-            component.innerHTML = `
+    const originalWidth = component.clientWidth;
+
+    let cardContainer = component.querySelector(".component-cards-container");
+    if (!cardContainer) {
+      component.innerHTML = `
           <div class="component-list-container">
             <div class="component-list"></div>
           </div>
         `;
-            component.classList.add("component-expanded");
-            component.style.width = `${originalWidth}px`;
+      component.classList.add("component-expanded");
+      component.style.width = `${originalWidth}px`;
 
-            cardContainer = document.createElement("div");
-            cardContainer.classList.add("component-cards-container");
-            component.querySelector(".component-list").appendChild(cardContainer);
+      cardContainer = document.createElement("div");
+      cardContainer.classList.add("component-cards-container");
+      component.querySelector(".component-list").appendChild(cardContainer);
 
-            const scrollBtnContainer = document.createElement("div");
-            scrollBtnContainer.classList.add("scroll-btn-container");
+      const scrollBtnContainer = document.createElement("div");
+      scrollBtnContainer.classList.add("scroll-btn-container");
 
-            const scrollLeftBtn = document.createElement("button");
-            scrollLeftBtn.classList.add("scroll-btn", "disabled");
-            scrollLeftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
+      const scrollLeftBtn = document.createElement("button");
+      scrollLeftBtn.classList.add("scroll-btn", "disabled");
+      scrollLeftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
 
-            const scrollRightBtn = document.createElement("button");
-            scrollRightBtn.classList.add("scroll-btn", "disabled");
-            scrollRightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
+      const scrollRightBtn = document.createElement("button");
+      scrollRightBtn.classList.add("scroll-btn", "disabled");
+      scrollRightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
 
-            scrollBtnContainer.appendChild(scrollRightBtn);
-            scrollBtnContainer.appendChild(scrollLeftBtn);
-            component.appendChild(scrollBtnContainer);
+      scrollBtnContainer.appendChild(scrollRightBtn);
+      scrollBtnContainer.appendChild(scrollLeftBtn);
+      component.appendChild(scrollBtnContainer);
 
-            const actionBtnContainer = document.createElement("div");
-            actionBtnContainer.classList.add("action-btn-container");
+      const actionBtnContainer = document.createElement("div");
+      actionBtnContainer.classList.add("action-btn-container");
 
-            const addButton = document.createElement("button");
-            addButton.classList.add("action-btn", "add-btn");
-            addButton.innerHTML = `
+      const addButton = document.createElement("button");
+      addButton.classList.add("action-btn", "add-btn");
+      addButton.innerHTML = `
           <img src="./assets/images/icons/add.svg" alt="add">
           <span class="btn-label">добавить</span>
         `;
 
-            const removeButton = document.createElement("button");
-            removeButton.classList.add("action-btn", "remove-btn");
-            removeButton.innerHTML = `
+      const removeButton = document.createElement("button");
+      removeButton.classList.add("action-btn", "remove-btn");
+      removeButton.innerHTML = `
           <img src="./assets/images/icons/delete.svg" alt="remove">
           <span class="btn-label">удалить</span>
         `;
 
-            actionBtnContainer.appendChild(addButton);
-            actionBtnContainer.appendChild(removeButton);
-            component.appendChild(actionBtnContainer);
+      actionBtnContainer.appendChild(addButton);
+      actionBtnContainer.appendChild(removeButton);
+      component.appendChild(actionBtnContainer);
 
-            addButton.addEventListener("click", () => {
-              const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
-              if (selectButton) {
-                selectButton.click();
-              }
-            });
+      addButton.addEventListener("click", () => {
+        const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
+        if (selectButton) {
+          selectButton.click();
+        }
+      });
 
-            removeButton.addEventListener("click", () => {
-              cardContainer.innerHTML = "";
-              restoreOriginalComponent(component, currentType);
-            });
-          } else {
-            cardContainer.innerHTML = "";
-          }
+      removeButton.addEventListener("click", () => {
+        cardContainer.innerHTML = "";
+        restoreOriginalComponent(component, component_name);
+      });
+      component.querySelector('.component-list-container').style.display = "block";
+    } else {
+      //cardContainer.innerHTML = "";
+    }
 
-          const card = document.createElement("div");
-          card.classList.add("component-list-card");
-          card.dataset.id = productId;
-          card.innerHTML = `
+    const card = document.createElement("div");
+    card.classList.add("component-list-card");
+    card.dataset.id = productId;
+    card.innerHTML = `
         <div class="component-list-img">
-          <img src="${data.image || './assets/images/card-3.png'}" alt="${data.name || 'Товар'}">
+          <img src="${product.image || './assets/images/card-3.png'}" alt="${product.name || 'Товар'}">
         </div>
         <div class="component-list-info">
           <div>
             <span>${filterMap[currentType]?.title || currentType.toUpperCase()}</span>
             <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
           </div>
-          <div>${data.name || 'Без названия'}</div>
-          <div class="component-list-price">${data.price || 'N/A'} <span>руб</span></div>
+          <div>${product.name || 'Без названия'}</div>
+          <div class="component-list-price">${product.price || 'N/A'} <span>руб</span></div>
         </div>
         <div class="component-list-btns">
           <button class="component-list-btn-change">
@@ -322,46 +331,63 @@ document.addEventListener("DOMContentLoaded", () => {
           </button>
         </div>
       `;
-          cardContainer.appendChild(card);
+    cardContainer.appendChild(card);
 
-          updateScrollButtons(component);
+    updateScrollButtons(component);
 
-          card.querySelector(".component-list-btn-change").addEventListener("click", () => {
-            const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
-            if (selectButton) {
-              selectButton.click();
-            }
-          });
+    card.querySelector(".component-list-btn-change").addEventListener("click", () => {
+      const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
+      if (selectButton) {
+        selectButton.click();
+      }
+    });
 
-          card.querySelector(".component-list-btn-delete").addEventListener("click", () => {
-            card.remove();
-            updateScrollButtons(component);
-            if (cardContainer.querySelectorAll(".component-list-card").length === 0) {
-              restoreOriginalComponent(component, currentType);
-            }
-          });
+    card.querySelector(".component-list-btn-delete").addEventListener("click", () => {
+      card.remove();
+      updateScrollButtons(component);
+      if (cardContainer.querySelectorAll(".component-list-card").length === 0) {
+        restoreOriginalComponent(component, component_name);
+      }
+    });
 
-          modal.style.display = "none";
-          document.body.style.overflow = "";
+    modal.style.display = "none";
+    document.body.style.overflow = "";
 
-          return fetch(`/config/products/${productId}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ productId, type: currentType }),
-          });
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Ошибка при добавлении продукта на сервер");
-          }
-          return response.json();
-        })
-        .then((result) => {
-          console.log("Продукт успешно добавлен на сервер:", result);
-        })
-        .catch((error) => {
-          console.error("Ошибка при добавлении:", error);
-        });
+
+
+
+    // fetch(`/config/products/${productId}`, {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json", "Cache-Control": "no-cache" },
+    // })
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Ошибка при получении продукта");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       console.log("Received product data:", data);
+    //
+    //
+    //       return fetch(`/config/products/${productId}`, {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({ productId, type: currentType }),
+    //       });
+    //     })
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("Ошибка при добавлении продукта на сервер");
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((result) => {
+    //       console.log("Продукт успешно добавлен на сервер:", result);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Ошибка при добавлении:", error);
+    //     });
   }
 
 
@@ -386,6 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function restoreOriginalComponent(component, type) {
+    console.log(type);
     component.innerHTML = `
             <div class="component-part component-img">
                 <img src="./assets/images/icons/config_page/${type}_img.svg" alt="${type}-img" />
@@ -443,7 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const payload = { search, filters, saleOnly, sort, category };
 
-    console.clear();
+    //console.clear();
     console.log("Отправляемые данные на бэк:", payload);
     sendFilters(payload, currentType);
   }
@@ -480,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("Данные от API:", data);
           if (!data || !Array.isArray(data.products)) {
             console.error("Invalid products dta:", data);
-            renderProducts([]);
+            renderProducts([], type);
             return;
           }
           const adaptedProducts = data.products.map(product => ({
@@ -492,15 +519,15 @@ document.addEventListener("DOMContentLoaded", () => {
             tags: product.tags || [],
             oldPrice: product.oldPrice || null
           }));
-          renderProducts(adaptedProducts);
+          renderProducts(adaptedProducts, type);
         })
         .catch((error) => {
           console.error("Ошибка при запросе к API:", error);
-          renderProducts([]);
+          renderProducts([], type);
         });
   }
 
-  function renderProducts(products) {
+  function renderProducts(products, category_id) {
     const productContainerList = document.getElementById("list-view");
     const productContainerGrid = document.getElementById("grid-view");
     const productContainer = currentView === "list" ? productContainerList : productContainerGrid;
@@ -521,6 +548,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     products.forEach((product) => {
+      product.categoty_id = category_id;
+      const json_product_data = encodeURIComponent(JSON.stringify(product));
       const card = document.createElement("div");
       card.className = `product-card ${currentView}-style`;
       card.innerHTML = currentView === "grid" ? `
@@ -554,7 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="payment-option green grid-style desktop-only">от <span>${product.installment || 'N/A'}</span> руб/мес</div>
                     </div>
                     <div class="button-cont">
-                        <button class="buy-btn">Добавить</button>
+                        <button class="buy-btn" data-product="${json_product_data}">Добавить</button>
                     </div>
                 </div>
             ` : `
@@ -591,7 +620,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                     <div class="buttons-for-deal">
-                        <button class="buy-btn">Добавить</button>
+                        <button class="buy-btn" data-product="${json_product_data}">Добавить</button>
                     </div>
                 </div>
             `;
@@ -699,9 +728,11 @@ document.addEventListener('DOMContentLoaded', function() {
 //
 
 document.addEventListener('DOMContentLoaded', function(element) {
-  document.getElementById('mainImg').src = element.src;
-  document.querySelectorAll('.modal-preview-img-wrapper').forEach(img => img.classList.remove('active'));
-  element.classList.add('active');
+  if(element.src) {
+    document.getElementById('mainImg').src = element.src;
+    document.querySelectorAll('.modal-preview-img-wrapper').forEach(img => img.classList.remove('active'));
+    element.classList.add('active');
+  }
 })
 
 //
@@ -822,7 +853,10 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function() {
   const chooseBtn = document.getElementById('choose-more');
   const modalShop = document.getElementById('modal-cooler-catalog');
-  const closeModalBtn = modalShop.querySelector('.close-modal-btn');
+  if (modalShop) {
+    const closeModalBtn = modalShop.querySelector('.close-modal-btn');
+    closeModalBtn.addEventListener('click', closeModal);
+  }
   const changeBtn = document.getElementById('change-btn')
   const body = document.getElementsByTagName('body')
 
@@ -847,13 +881,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   chooseBtn.addEventListener('click', openModal);
   changeBtn.addEventListener('click', openModal);
-  closeModalBtn.addEventListener('click', closeModal);
 
-  modalShop.addEventListener('click', function(e) {
-    if (e.target === modalShop) {
-      closeModal();
-    }
-  });
+  if (modalShop) {
+    modalShop.addEventListener('click', function(e) {
+      if (e.target === modalShop) {
+        closeModal();
+      }
+    });
+  }
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && modalShop.style.display === 'flex') {
