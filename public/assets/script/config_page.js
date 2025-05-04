@@ -224,7 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
     53: 'case',
   };
 
-  function addProductToComponent(product) {
+
+    function addProductToComponent(product) {
     console.log(product);
     const productId = product.code;
     const currentType = product.categoty_id;
@@ -240,180 +241,198 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const originalWidth = component.clientWidth;
-
     let cardContainer = component.querySelector(".component-cards-container");
+
+    // Если контейнер ещё не создан — создаём его один раз
     if (!cardContainer) {
-      component.innerHTML = `
-          <div class="component-list-container">
-            <div class="component-list"></div>
-          </div>
-        `;
-      component.classList.add("component-expanded");
-      component.style.width = `${originalWidth}px`;
-
-      cardContainer = document.createElement("div");
-      cardContainer.classList.add("component-cards-container");
-      component.querySelector(".component-list").appendChild(cardContainer);
-
-      const scrollBtnContainer = document.createElement("div");
-      scrollBtnContainer.classList.add("scroll-btn-container");
-
-      const scrollLeftBtn = document.createElement("button");
-      scrollLeftBtn.classList.add("scroll-btn", "disabled");
-      scrollLeftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
-
-      const scrollRightBtn = document.createElement("button");
-      scrollRightBtn.classList.add("scroll-btn", "disabled");
-      scrollRightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
-
-      scrollBtnContainer.appendChild(scrollRightBtn);
-      scrollBtnContainer.appendChild(scrollLeftBtn);
-      component.appendChild(scrollBtnContainer);
-
-      const actionBtnContainer = document.createElement("div");
-      actionBtnContainer.classList.add("action-btn-container");
-
-      const addButton = document.createElement("button");
-      addButton.classList.add("action-btn", "add-btn");
-      addButton.innerHTML = `
-          <img src="./assets/images/icons/add.svg" alt="add">
-          <span class="btn-label">добавить</span>
-        `;
-      addButton.setAttribute("data-modal", component_id);
-
-      const removeButton = document.createElement("button");
-      removeButton.classList.add("action-btn", "remove-btn");
-      removeButton.innerHTML = `
-          <img src="./assets/images/icons/delete.svg" alt="remove">
-          <span class="btn-label">удалить</span>
-        `;
-
-      actionBtnContainer.appendChild(addButton);
-      actionBtnContainer.appendChild(removeButton);
-      component.appendChild(actionBtnContainer);
-
-      // addButton.addEventListener("click", () => {
-      //   const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
-      //   if (selectButton) {
-      //     selectButton.click();
-      //   }
-      // });
-      setOpenModalEventOnButton(addButton);
-
-      removeButton.addEventListener("click", () => {
-        cardContainer.innerHTML = "";
-        restoreOriginalComponent(component, component_name);
-      });
-      component.querySelector('.component-list-container').style.display = "block";
-    } else {
-      //cardContainer.innerHTML = "";
+      createCardContainerStructure(component, originalWidth, component_name, component_id);
+      cardContainer = component.querySelector(".component-cards-container");
     }
 
-    const card = document.createElement("div");
-    card.classList.add("component-list-card");
-    card.dataset.id = productId;
-    card.innerHTML = `
-        <div class="component-list-img">
-          <img src="${product.image || './assets/images/card-3.png'}" alt="${product.title || 'Товар'}">
-        </div>
-        <div class="component-list-info">
-          <div>
-            <span>${filterMap[component_name]?.title || currentType.toUpperCase()}</span>
-            <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-          </div>
-          <div>${product.title || 'Без названия'}</div>
-          <div class="component-list-price">${product.price || 'N/A'} <span>руб</span></div>
-        </div>
-        <div class="component-list-btns">
-          <button class="component-list-btn-change">
-            <img src="./assets/images/icons/change.svg">
-            <span>заменить</span>
-          </button>
-          <button class="component-list-btn-delete">
-            <img src="./assets/images/icons/delete.svg">
-            <span>удалить</span>
-          </button>
-        </div>
-      `;
+    const card = createProductCard(product, component, component_name);
     cardContainer.appendChild(card);
 
     updateScrollButtons(component);
 
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+
+  function createCardContainerStructure(component, originalWidth, component_name, component_id) {
+    component.innerHTML = `
+    <div class="component-list-container">
+      <div class="component-list"></div>
+    </div>
+  `;
+    component.classList.add("component-expanded");
+    component.style.width = `${originalWidth}px`;
+
+    const listContainer = component.querySelector(".component-list");
+
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("component-cards-container");
+    listContainer.appendChild(cardContainer);
+
+    const scrollBtnContainer = createScrollButtons(component);
+    component.appendChild(scrollBtnContainer);
+
+    const actionBtnContainer = createActionButtons(component, component_name, component_id);
+    component.appendChild(actionBtnContainer);
+
+    component.querySelector('.component-list-container').style.display = "block";
+  }
+
+  function createScrollButtons(component) {
+    const container = document.createElement("div");
+    container.classList.add("scroll-btn-container");
+
+    const leftBtn = document.createElement("button");
+    leftBtn.classList.add("scroll-btn", "scroll-left", "disabled");
+    leftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
+    leftBtn.dataset.bound = false;
+
+    const rightBtn = document.createElement("button");
+    rightBtn.classList.add("scroll-btn", "scroll-right", "disabled");
+    rightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
+    rightBtn.dataset.bound = false;
+
+    container.appendChild(leftBtn);
+    container.appendChild(rightBtn);
+
+    return container;
+  }
+
+  function createActionButtons(component, component_name, component_id) {
+    const container = document.createElement("div");
+    container.classList.add("action-btn-container");
+
+    const addButton = document.createElement("button");
+    addButton.classList.add("action-btn", "add-btn");
+    addButton.innerHTML = `
+    <img src="./assets/images/icons/add.svg" alt="add">
+    <span class="btn-label">добавить</span>
+  `;
+    addButton.setAttribute("data-modal", component_id);
+    setOpenModalEventOnButton(addButton);
+    container.appendChild(addButton);
+
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("action-btn", "remove-btn");
+    removeButton.innerHTML = `
+    <img src="./assets/images/icons/delete.svg" alt="remove">
+    <span class="btn-label">удалить</span>
+  `;
+
+    removeButton.addEventListener("click", () => {
+      const cardContainer = component.querySelector(".component-cards-container");
+      cardContainer.innerHTML = "";
+      restoreOriginalComponent(component, component_name);
+    });
+
+    container.appendChild(removeButton);
+
+    return container;
+  }
+
+  function createProductCard(product, component, component_name) {
+    const card = document.createElement("div");
+    card.classList.add("component-list-card");
+    card.dataset.id = product.code;
+
+    card.innerHTML = `
+    <div class="component-list-img">
+      <img src="${product.image || './assets/images/card-3.png'}" alt="${product.title || 'Товар'}">
+    </div>
+    <div class="component-list-info">
+      <div>
+        <span>${filterMap[component_name]?.title || component_name.toUpperCase()}</span>
+        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
+      </div>
+      <div>${product.title || 'Без названия'}</div>
+      <div class="component-list-price">${product.price || 'N/A'} <span>руб</span></div>
+    </div>
+    <div class="component-list-btns">
+      <button class="component-list-btn-change">
+        <img src="./assets/images/icons/change.svg">
+        <span>заменить</span>
+      </button>
+      <button class="component-list-btn-delete">
+        <img src="./assets/images/icons/delete.svg">
+        <span>удалить</span>
+      </button>
+    </div>
+  `;
+
+
     card.querySelector(".component-list-btn-change").addEventListener("click", () => {
-      const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
-      if (selectButton) {
-        selectButton.click();
-      }
+      const selectButton = document.querySelector(`.select-button[data-modal="${component.dataset.type}"]`);
+      if (selectButton) selectButton.click();
     });
 
     card.querySelector(".component-list-btn-delete").addEventListener("click", () => {
       card.remove();
       updateScrollButtons(component);
-      if (cardContainer.querySelectorAll(".component-list-card").length === 0) {
+      const cardContainer = component.querySelector(".component-cards-container");
+      if (!cardContainer || cardContainer.querySelectorAll(".component-list-card").length === 0) {
         restoreOriginalComponent(component, component_name);
       }
     });
 
-    modal.style.display = "none";
-    document.body.style.overflow = "";
-
-
-
-
-    // fetch(`/config/products/${productId}`, {
-    //   method: "GET",
-    //   headers: { "Content-Type": "application/json", "Cache-Control": "no-cache" },
-    // })
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error("Ошибка при получении продукта");
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log("Received product data:", data);
-    //
-    //
-    //       return fetch(`/config/products/${productId}`, {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({ productId, type: currentType }),
-    //       });
-    //     })
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error("Ошибка при добавлении продукта на сервер");
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((result) => {
-    //       console.log("Продукт успешно добавлен на сервер:", result);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Ошибка при добавлении:", error);
-    //     });
+    return card;
   }
-
 
   function updateScrollButtons(component) {
     const cardContainer = component.querySelector(".component-cards-container");
     const scrollBtnContainer = component.querySelector(".scroll-btn-container");
-    const scrollLeftBtn = component.querySelector(".scroll-btn img[alt='left']")?.parentElement;
-    const scrollRightBtn = component.querySelector(".scroll-btn img[alt='right']")?.parentElement;
+    const scrollLeftBtn = component.querySelector(".scroll-left");
+    const scrollRightBtn = component.querySelector(".scroll-right");
 
-    if (cardContainer && scrollBtnContainer && scrollLeftBtn && scrollRightBtn) {
-      const cardCount = cardContainer.querySelectorAll(".component-list-card").length;
-      if (cardCount < 2) {
-        scrollBtnContainer.style.display = "none";
-        scrollLeftBtn.classList.add("disabled");
-        scrollRightBtn.classList.add("disabled");
-      } else {
-        scrollBtnContainer.style.display = "flex";
-        scrollLeftBtn.classList.remove("disabled");
-        scrollRightBtn.classList.remove("disabled");
-      }
+    if (!cardContainer || !scrollBtnContainer || !scrollLeftBtn || !scrollRightBtn) return;
+
+    const cardCount = cardContainer.querySelectorAll(".component-list-card").length;
+
+    // Скрываем кнопки, если недостаточно карточек
+    if (cardCount < 2) {
+      scrollBtnContainer.style.display = "none";
+      return;
     }
+
+    scrollBtnContainer.style.display = "flex";
+
+    const maxScrollLeft = cardContainer.scrollWidth - cardContainer.clientWidth;
+
+    function updateButtonState() {
+      scrollLeftBtn.classList.toggle("disabled", cardContainer.scrollLeft <= 0);
+      scrollRightBtn.classList.toggle("disabled", cardContainer.scrollLeft >= maxScrollLeft - 1);
+    }
+
+    if (!cardContainer._scrollHandlerBound) {
+      cardContainer.addEventListener("scroll", updateButtonState);
+      cardContainer._scrollHandlerBound = true;
+    }
+
+    if (!scrollLeftBtn._clickHandlerBound) {
+      scrollLeftBtn.addEventListener("click", () => {
+        if (!scrollLeftBtn.classList.contains("disabled")) {
+          cardContainer.scrollBy({ left: -280, behavior: 'smooth' });
+        }
+      });
+      scrollLeftBtn._clickHandlerBound = true;
+    }
+
+    if (!scrollRightBtn._clickHandlerBound) {
+      scrollRightBtn.addEventListener("click", () => {
+        if (!scrollRightBtn.classList.contains("disabled")) {
+          cardContainer.scrollBy({ left: 280, behavior: 'smooth' });
+        }
+      });
+      scrollRightBtn._clickHandlerBound = true;
+    }
+
+    requestAnimationFrame(updateButtonState);
   }
+
 
   function restoreOriginalComponent(component, type) {
     console.log(type);
