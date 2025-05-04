@@ -137,7 +137,7 @@
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="component" id="b_253">
+                                <div class="component" id="b_235">
                                     <div class="component-part component-img">
                                         <img src="./assets/images/icons/config_page/ssd_img.svg" alt="ssd-img" />
                                     </div>
@@ -146,7 +146,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button" data-modal="253">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="235">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -475,7 +475,7 @@
                         <div class="ssd-block">
                             <img class="highlight-part part-ssd" src="./assets/images/icons/config_page/ssd__noadd.svg" />
                             <img class="added-part part-ssd" src="./assets/images/icons/config_page/ssd_added.svg" />
-                            <button class="add-part-btn ssd-btn" data-modal="253">SSD <img
+                            <button class="add-part-btn ssd-btn" data-modal="235">SSD <img
                                         src="./assets/images/icons/config_page/plus.svg" />
                             </button>
 
