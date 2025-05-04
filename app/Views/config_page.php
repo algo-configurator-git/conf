@@ -68,7 +68,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="8">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -81,12 +81,9 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="18">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
-                                </div>
-                                <div class="component-list-container">
-                                    <div class="component-list"></div>
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
@@ -97,12 +94,9 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="9">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
-                                </div>
-                                <div class="component-list-container">
-                                    <div class="component-list"></div>
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
@@ -113,12 +107,9 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="17">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
-                                </div>
-                                <div class="component-list-container">
-                                    <div class="component-list"></div>
                                 </div>
                                 <div class="component">
                                     <div class="component-part component-img">
@@ -129,7 +120,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="15">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -142,7 +133,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="90">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -155,7 +146,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="253">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -168,7 +159,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="53">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
@@ -181,7 +172,7 @@
                                         <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
                                     </div>
                                     <div class="component-part component-product-count">353 товара</div>
-                                    <button class="component-part primary-btn select-button">Выбрать
+                                    <button class="component-part primary-btn select-button" data-modal="54">Выбрать
                                         <img src="./assets/images/buttons/plus-review.svg" alt="">
                                     </button>
                                 </div>
