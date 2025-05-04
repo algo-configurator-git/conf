@@ -140,6 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   addPartButtons.forEach((button) => {
+    setOpenModalEventOnButton(button);
+  });
+  function setOpenModalEventOnButton(button) {
     button.addEventListener("click", () => {
       currentType = button.dataset.modal;
       const category_name = CATEGORIES[currentType];
@@ -171,10 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <button class="show-btn">Показать <span>0</span></button>
           </div>
         `;
-
       logCurrentFilters();
     });
-  });
+  }
 
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
@@ -217,12 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
     9: 'motherboard' ,
     54: 'powerunit',
     17: 'ram',
-    253: 'ssd',
+    235: 'ssd',
     90: 'hdd',
     53: 'case',
   };
 
   function addProductToComponent(product) {
+    console.log(product);
     const productId = product.code;
     const currentType = product.categoty_id;
     console.log("Adding product with ID:", productId);
@@ -231,7 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const component_name = CATEGORIES[currentType];
 
     const component = document.getElementById(component_id);
-    //const component = document.querySelector(`.select-button[data-modal="${currentType}"]`)?.closest(".component");
     if (!component) {
       console.error("Компонент не найден для типа:", currentType);
       return;
@@ -277,6 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="./assets/images/icons/add.svg" alt="add">
           <span class="btn-label">добавить</span>
         `;
+      addButton.setAttribute("data-modal", component_id);
 
       const removeButton = document.createElement("button");
       removeButton.classList.add("action-btn", "remove-btn");
@@ -289,12 +292,13 @@ document.addEventListener("DOMContentLoaded", () => {
       actionBtnContainer.appendChild(removeButton);
       component.appendChild(actionBtnContainer);
 
-      addButton.addEventListener("click", () => {
-        const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
-        if (selectButton) {
-          selectButton.click();
-        }
-      });
+      // addButton.addEventListener("click", () => {
+      //   const selectButton = document.querySelector(`.select-button[data-modal="${currentType}"]`);
+      //   if (selectButton) {
+      //     selectButton.click();
+      //   }
+      // });
+      setOpenModalEventOnButton(addButton);
 
       removeButton.addEventListener("click", () => {
         cardContainer.innerHTML = "";
@@ -310,14 +314,14 @@ document.addEventListener("DOMContentLoaded", () => {
     card.dataset.id = productId;
     card.innerHTML = `
         <div class="component-list-img">
-          <img src="${product.image || './assets/images/card-3.png'}" alt="${product.name || 'Товар'}">
+          <img src="${product.image || './assets/images/card-3.png'}" alt="${product.title || 'Товар'}">
         </div>
         <div class="component-list-info">
           <div>
-            <span>${filterMap[currentType]?.title || currentType.toUpperCase()}</span>
+            <span>${filterMap[component_name]?.title || currentType.toUpperCase()}</span>
             <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
           </div>
-          <div>${product.name || 'Без названия'}</div>
+          <div>${product.title || 'Без названия'}</div>
           <div class="component-list-price">${product.price || 'N/A'} <span>руб</span></div>
         </div>
         <div class="component-list-btns">
@@ -470,6 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const payload = { search, filters, saleOnly, sort, category };
 
+    clearModal('Идут загрузка данных...');
     //console.clear();
     console.log("Отправляемые данные на бэк:", payload);
     sendFilters(payload, currentType);
@@ -527,14 +532,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
   }
 
+  function clearModal(text = '') {
+    const productContainer = currentView === "list" ? productContainerList : productContainerGrid;
+    const otherContainer = currentView === "list" ? productContainerGrid : productContainerList;
+
+    productContainer.innerHTML = text;
+    otherContainer.innerHTML = "";
+  }
+
   function renderProducts(products, category_id) {
     const productContainerList = document.getElementById("list-view");
     const productContainerGrid = document.getElementById("grid-view");
     const productContainer = currentView === "list" ? productContainerList : productContainerGrid;
-    const otherContainer = currentView === "list" ? productContainerGrid : productContainerList;
 
-    productContainer.innerHTML = "";
-    otherContainer.innerHTML = "";
+    clearModal();
 
     if (!Array.isArray(products)) {
       console.error("Invalid required data type:", products);
@@ -548,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     products.forEach((product) => {
-      product.categoty_id = category_id;
+      product.categoty_id = category_id.replace(/\D/g, "");
       const json_product_data = encodeURIComponent(JSON.stringify(product));
       const card = document.createElement("div");
       card.className = `product-card ${currentView}-style`;
@@ -863,20 +874,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function openModal(e) {
     if (e) e.preventDefault();
-    modalShop.style.display = 'flex';
-    setTimeout(() => {
-      modalShop.classList.add('active');
-    }, 10);
-    body.style.overflow = 'hidden';
+    if (modalShop) {
+      modalShop.style.display = 'flex';
+      setTimeout(() => {
+        modalShop.classList.add('active');
+      }, 10);
+    }
+    if (body && body.style) {
+      body.style.overflow = 'hidden';
+    }
   }
 
   function closeModal() {
-    modalShop.classList.remove('active');
-    setTimeout(() => {
-      modalShop.style.display = 'none';
-      body.style.overflow = '';
+    if (modalShop) {
+      modalShop.classList.remove('active');
+      setTimeout(() => {
+        modalShop.style.display = 'none';
+        body.style.overflow = '';
 
-    }, 300);
+      }, 300);
+    }
   }
 
   chooseBtn.addEventListener('click', openModal);
