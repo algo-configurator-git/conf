@@ -11,7 +11,7 @@ $routes->group('catalog', function ($routes) {
     $routes->get('/', 'CatalogController::index');
 });
 $routes->group('reviews', function ($routes) {
-    $routes->get('/', 'ReviewController::index');
+    $routes->get('/', 'ReviewsController::index');
 });
 
 $routes->group('config', function($routes){
