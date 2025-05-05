@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/style/style.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/style/style-landing.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/style/style-adaptive.css') ?>">
-    <script src="<?= base_url('scripts/script.js') ?>"></script>
+    <script src="<?= base_url('assets/script/script.js') ?>"></script>
 </head>
 
 <body>

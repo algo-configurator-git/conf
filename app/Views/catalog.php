@@ -9,25 +9,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style/style.css" />
-    <link rel="stylesheet" href="./assets/style/style-catalog.css">
-    <link rel="stylesheet" href="./assets/style/style-adaptive.css">
-    <script src="./assets/script/script.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets/style/style.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/style/style-catalog.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/style/style-adaptive.css') ?>">
+    <script src="<?= base_url('assets/script/script.js') ?>"></script>
+    <script src="<?= base_url('assets/script/catalog_filter.js') ?>"></script>
 </head>
 
 <body>
 <div class="container catalog">
-
     <section class="product-header">
         <div class="breadcrumb">
-            <a href="#" class="breadcrumb-item">Конфигуратор ПК</a>
+            <a href="<?= base_url('/') ?>" class="breadcrumb-item">Конфигуратор ПК</a>
             <span class="breadcrumb-item">Каталог конфигураций</span>
         </div>
 
         <h1 class="headline-h1">Каталог конфигураций </h1>
         <div class="subtitle">По цене от <span>867.86 руб </span> &nbsp;до <span>14155.61 руб.</span></div>
     </section>
-
 
     <section class="magazine">
         <aside>
@@ -40,13 +39,13 @@
                 <div class="filter">
                     <div class="filter-search">
                         <input type="text" placeholder="Поиск по фильтру" />
-                        <img src="./assets/images/icons/search.svg" class="search-icon" />
+                        <img src="<?= base_url('assets/images/icons/search.svg') ?>" class="search-icon" />
                     </div>
                 </div>
                 <div class="filter-section price dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Цена</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -65,12 +64,12 @@
                 <div class="filter-section processor dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Процессор</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-search inner-search">
                             <input type="text" class="search" placeholder="Поиск" />
-                            <img src="./assets/images/icons/search.svg" class="search-icon" />
+                            <img src="<?= base_url('assets/images/icons/search.svg') ?>" class="search-icon" />
                         </div>
                         <div class="options">
                             <label><input type="checkbox"> Core i5 <span> (234)</span></label>
@@ -87,7 +86,7 @@
                 <div class="filter-section memory-volume dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Объём памяти</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -105,7 +104,7 @@
                 <div class="filter-section memory-type dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Тип памяти</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -119,7 +118,7 @@
                 <div class="filter-section chip-set dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Чипсет</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -137,7 +136,7 @@
                 <div class="filter-section videocard dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Видеокарта</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options extra-long">
@@ -155,7 +154,7 @@
                 <div class="filter-section hhd-type dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Жёсткий диск</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -173,7 +172,7 @@
                 <div class="filter-section ssd dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Твердотельный диск (SSD)</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -192,7 +191,7 @@
                 <div class="filter-section hhd-volume dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Объём HHD (Гб)</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -211,7 +210,7 @@
                 <div class="filter-section power dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Мощность, ВТ</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -230,7 +229,7 @@
                 <div class="filter-section software">
                     <div class="filter-title dropdown-header">
                         <h3>Программное обеспечение</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options extra-long">
@@ -244,7 +243,7 @@
                 <div class="filter-section colour dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Цвет корпуса</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -270,7 +269,7 @@
                 <div class="filter-section height-prod dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Ширина,мм</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -289,7 +288,7 @@
                 <div class="filter-section width-prod dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Высота,мм</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -308,7 +307,7 @@
                 <div class="filter-section depth-prod dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Глубина,мм</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="filter-price-input">
@@ -327,7 +326,7 @@
                 <div class="filter-section screen dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Монитор</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options extra-long">
@@ -343,7 +342,7 @@
                 <div class="filter-section keyboard dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Клавиатура</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -359,7 +358,7 @@
                 <div class="filter-section mouse dropdown">
                     <div class="filter-title dropdown-header">
                         <h3>Мышь</h3>
-                        <img class="arrow" src="./assets/images/icons/arrow-down.svg" />
+                        <img class="arrow" src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" />
                     </div>
                     <div class="dropdown-content">
                         <div class="options">
@@ -384,27 +383,26 @@
             <div class="top-bar desktop-only">
                 <div class="first-line">
 
-                    <div class="categories">
-                        <button class="active">Все</button>
-                        <button>Для дома</button>
-                        <button>Для офиса</button>
-                        <button>Для игр</button>
-                        <button>Разработчику</button>
-                        <button>Дизайнеру</button>
+                    <div class="categories" id="category-buttons">
+                        <button data-category="all" <?= $type === "all" ? 'class="active"' : ''?>>Все</button>
+                        <button data-category="home" <?= $type === "home" ? 'class="active"' : ''?>>Для дома</button>
+                        <button data-category="office" <?= $type === "office" ? 'class="active"' : ''?>>Для офиса</button>
+                        <button data-category="gamer" <?= $type === "gamer" ? 'class="active"' : ''?>>Для игр</button>
+                        <button data-category="developer" <?= $type === "developer" ? 'class="active"' : ''?>>Разработчику</button>
+                        <button data-category="designer" <?= $type === "designer" ? 'class="active"' : ''?>>Дизайнеру</button>
                     </div>
 
-                    <div class="view-switcher" data-switcher-id="view1">
+                    <div class="view-switcher">
                         <span>Вид:</span>
                         <button class="view-btn active" data-view="list">
                             <span></span>
                         </button>
                         <button class="view-btn" data-view="grid">
-                <span>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </span>
+                            <span></span>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </button>
                     </div>
                 </div>
@@ -416,13 +414,14 @@
                         <div class="toggle"></div>
                     </label>
 
-                    <div class="popularity-dropdown">
-                        <select name="" id="">
-                            <option value="">По популярности</option>
-                            <option value="">По новизне</option>
-                            <option value="">По цене</option>
-                        </select> <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
-                    </div>
+                    <form id="sortForm" method="get" class="popularity-dropdown">
+                        <select name="sort" id="sort-select">
+                            <option value="rating" <?= ($sort === 'rating') ? 'selected' : '' ?>>По популярности</option>
+                            <option value="new" <?= ($sort === 'new') ? 'selected' : '' ?>>По новизне</option>
+                            <option value="price" <?= ($sort === 'price') ? 'selected' : '' ?>>По цене</option>
+                        </select>
+                        <img src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" class="toggle-arrow" />
+                    </form>
                     <button class="advice">Посоветуйте сборку</button>
                 </div>
 
@@ -431,7 +430,7 @@
 
             <div class="top-bar mobile-only">
                 <div class="first-line">
-                    <button class="advice">Посоветуйте сборку</button>
+                    <button class="advice ">Посоветуйте сборку</button>
 
                     <select class="categories-dropdown">
                         <option>Все</option>
@@ -444,180 +443,177 @@
                 </div>
                 <div class="second-line">
 
-
-                    <button class="filter-toggle">Фильтр</button>
+                    <button id="filter-toggle" class="filter-toggle">Фильтр</button>
 
                     <div class="popularity-dropdown">
                         <select name="" id="">
                             <option value="">По популярности</option>
                             <option value="">По новизне</option>
                             <option value="">По цене</option>
-                        </select> <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
+                        </select> <img src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" class="toggle-arrow" />
                     </div>
 
-                    <div class="view-switcher mobile-switcher" data-switcher-id="view1">
+                    <div class="view-switcher mobile-switcher">
                         <span>Вид:</span>
                         <button class="view-btn active" data-view="list">
                             <span></span>
                         </button>
                     </div>
                 </div>
-
-
             </div>
-
-            <!-- list of items. list -->
-            <div class="products-container list-view" data-view-type="list" data-switcher-id="view1">
-                <div class="product-card list-style desktop-only">
-                    <div class="product-card-img list-style">
-                        <div class="card-img-main-product list-style">
-                            <img src="assets/images/card-1.png" alt="Компьютер">
-                        </div>
-                        <div class="card-img-sec-product">
-                            <div class="sec-product-wrapper">
-                                <img src="./assets/images/card-2.png" alt="Деталь">
-                            </div>
-                            <div class="sec-product-wrapper">
-                                <img src="./assets/images/card-3.png" alt="Деталь">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="product-title-rate">
-                            <h3 class="product-title list-style">Игровой компьютер серии Prologic [2006326]</h3>
-                            <div class="rating">
-                                <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-                                <div class="reviews-statistic-rating-small">4.3</div>
-                            </div>
-                        </div>
-                        <div class="about-product">
-                            <div class="column">
-                                <div class="column-item"><span class="column-item-header">Процессор</span> <span
-                                        class="item-data">Intel Core i5</span></div>
-                                <div class="column-item"><span class="column-item-header">Материнская плата</span><span
-                                        class="item-data">Intel B760</span></div>
-                                <div class="column-item"><span class="column-item-header">Корпус</span> <span
-                                        class="item-data">1STPLAYER DK-3 White</span></div>
-                                <div class="column-item"><span class="column-item-header">Видеокарта</span> <span
-                                        class="item-data">Nvidia GTX 1650</span></div>
-
-                            </div>
-                            <div class="column">
-                                <div class="column-item"><span class="column-item-header">Кулер</span> <span class="item-data">2300
-                      об/мин</span></div>
-                                <div class="column-item"><span class="column-item-header">SSD</span> <span class="item-data">240
-                      Гб</span> </div>
-                                <div class="column-item"><span class="column-item-header">Блок питания</span> <span
-                                        class="item-data">600 Вт</span></div>
-                                <div class="column-item"><span class="column-item-header">Оперативная память</span> <span
-                                        class="item-data">32 ГБ</span></div>
-
-                            </div>
-                        </div>
-
-                        <div class="more-data">
-                            <div class="details">
-                                <a href="">
-                                    <span class="full-text">Смотреть подробнее</span>
-                                    <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
-                                </a>
-                            </div>
-                            <div class="product-code">Код товара: 2002850</div>
-                        </div>
-                    </div>
-
-                    <div class="cashflow-options list-style">
-                        <div class="buy-options">
-                            <div class="cont-price list-style">
-                                <p class="new-price">1256<span>.7 руб</span></p>
-                                <p class="old-price list-style">7015<span>.30 руб</span></p>
-                            </div>
-                            <div class="payment-options">
-                                <div class="payment-option green">от <span>42</span> руб/мес</div>
-                                <div class="payment-desc">картой рассрочки <br> или в кредит</div>
-                            </div>
-                        </div>
-                        <div class="buttons-for-deal">
-                            <button class="config-btn">В конфигуратор</button>
-                            <button class="buy-btn">В корзину</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card list-style mobile-only">
-                    <div class="mobile-card-part">
+            <?php foreach($assemblies as $assembly): ?>
+                <div class="products-container list-view" id="list-view">
+                    <div class="product-card list-style desktop-only">
                         <div class="product-card-img list-style">
                             <div class="card-img-main-product list-style">
-                                <img src="assets/images/card-1.png" alt="Компьютер">
+                                <img src="<?= $assembly['items']['case'][0]['image'] ?? '' ?>" alt="Компьютер">
                             </div>
                             <div class="card-img-sec-product">
                                 <div class="sec-product-wrapper">
-                                    <img src="./assets/images/card-2.png" alt="Деталь">
+                                    <img src="<?= $assembly['items']['cpu'][0]['image'] ?? '' ?>" alt="Деталь">
                                 </div>
                                 <div class="sec-product-wrapper">
-                                    <img src="./assets/images/card-3.png" alt="Деталь">
+                                    <img src="<?= $assembly['items']['gpu'][0]['image'] ?? '' ?>" alt="Деталь">
                                 </div>
                             </div>
                         </div>
                         <div class="info">
                             <div class="product-title-rate">
-                                <h3 class="product-title list-style">Игровой компьютер серии Prologic [2006326]</h3>
+                                <h3 class="product-title list-style"><?= $assembly['name'] ?></h3>
                                 <div class="rating">
-                                    <img src="./assets/images/stars/star-bg.svg" alt="⭐">
-                                    <div class="reviews-statistic-rating-small">4.3</div>
+                                    <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
+                                    <div class="reviews-statistic-rating-small"><?= $assembly['average_rating'] ?? 0.0 ?></div>
                                 </div>
                             </div>
-                            <div class="product-characterictic-tags">
-                                <span>Intel Core i5</span>
-                                <span>Nvidia GTX 1650</span>
-                                <span>Intel B760</span>
-                                <span>3200 МГц,</span>
-                                <span>1STPLAYER DK-3 White</span>
-                                <span>SSD 240 Гб</span>
-                                <span>600 Вт</span>
-                                <span>Intel Core i5</span>
+                            <div class="about-product">
+                                <div class="column">
+                                    <div class="column-item"><span class="column-item-header">Процессор</span> <span
+                                                class="item-data">Intel Core i5</span></div>
+                                    <div class="column-item"><span class="column-item-header">Материнская плата</span><span
+                                                class="item-data">Intel B760</span></div>
+                                    <div class="column-item"><span class="column-item-header">Корпус</span> <span
+                                                class="item-data">1STPLAYER DK-3 White</span></div>
+                                    <div class="column-item"><span class="column-item-header">Видеокарта</span> <span
+                                                class="item-data">Nvidia GTX 1650</span></div>
+
+                                </div>
+                                <div class="column">
+                                    <div class="column-item"><span class="column-item-header">Кулер</span> <span class="item-data">2300
+                      об/мин</span></div>
+                                    <div class="column-item"><span class="column-item-header">SSD</span> <span class="item-data">240
+                      Гб</span> </div>
+                                    <div class="column-item"><span class="column-item-header">Блок питания</span> <span
+                                                class="item-data">600 Вт</span></div>
+                                    <div class="column-item"><span class="column-item-header">Оперативная память</span> <span
+                                                class="item-data">32 ГБ</span></div>
+
+                                </div>
+                            </div>
+
+                            <div class="more-data">
+                                <div class="details">
+                                    <a href="">
+                                        <span class="full-text">Смотреть подробнее</span>
+                                        <span class="short-text">Подробнее</span>
+                                        <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
+                                    </a>
+                                </div>
+                                <div class="product-code">Код товара: <?= $assembly['id'] ?></div>
+                            </div>
+                        </div>
+
+                        <div class="cashflow-options list-style">
+                            <div class="buy-options">
+                                <div class="cont-price list-style">
+                                    <p class="new-price"><?= number_format($assembly["total_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_price"], 2, '.', '') % 1 ?> руб</span></p>
+                                    <?php if($assembly["total_discount_price"] > $assembly["total_price"]): ?>
+                                        <p class="old-price"><?= number_format($assembly["total_discount_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_discount_price"], 2, '.', '') % 1 ?> руб</span></p>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="payment-options">
+                                    <div class="payment-option green">от <span>42</span> руб/мес</div>
+                                    <div class="payment-desc">картой рассрочки <br> или в кредит</div>
+                                </div>
+                            </div>
+                            <div class="buttons-for-deal">
+                                <button data-assembly-id="<?= $assembly['id'] ?>" data-action="config" class="config-btn">В конфигуратор</button>
+                                <button data-assembly-id="<?= $assembly['id'] ?>" data-action="cart" class="buy-btn">В корзину</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mobile-card-part">
-                        <div class="cont-price list-style">
-                            <p class="new-price">1256<span>.7 руб</span></p>
-                            <p class="old-price list-style">7015<span>.30 руб</span></p>
-                        </div>
-                        <div class="mobile-card-info">
-                            <div class="product-code">Код товара: 2002850</div>
-                            <div class="details">
-                                <a href="">
-                                    <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
-                                </a>
+                    <div class="product-card list-style mobile-only">
+                        <div class="mobile-card-part">
+                            <div class="product-card-img list-style">
+                                <div class="card-img-main-product list-style">
+                                    <img src="<?= base_url('assets/images/card-1.png') ?>" alt="Компьютер">
+                                </div>
+                                <div class="card-img-sec-product">
+                                    <div class="sec-product-wrapper">
+                                        <img src="<?= base_url('assets/images/card-2.png') ?>" alt="Деталь">
+                                    </div>
+                                    <div class="sec-product-wrapper">
+                                        <img src="<?= base_url('assets/images/card-3.png') ?>" alt="Деталь">
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="info">
+                                <div class="product-title-rate">
+                                    <h3 class="product-title list-style">Игровой компьютер серии Prologic [2006326]</h3>
+                                    <div class="rating">
+                                        <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
+                                        <div class="reviews-statistic-rating-small">4.3</div>
+                                    </div>
+                                </div>
+                                <div class="product-characterictic-tags">
+                                    <span>Intel Core i5</span>
+                                    <span>Nvidia GTX 1650</span>
+                                    <span>Intel B760</span>
+                                    <span>3200 МГц,</span>
+                                    <span>1STPLAYER DK-3 White</span>
+                                    <span>SSD 240 Гб</span>
+                                    <span>600 Вт</span>
+                                    <span>Intel Core i5</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mobile-card-part buttons-for-deal">
-                        <button class="config-btn">В конфигуратор</button>
-                        <button class="buy-btn">В корзину</button>
-                    </div>
 
+                        <div class="mobile-card-part">
+                            <div class="cont-price list-style">
+                                <p class="new-price">1256<span>.7 руб</span></p>
+                                <p class="old-price list-style">7015<span>.30 руб</span></p>
+                            </div>
+                            <div class="mobile-card-info">
+                                <div class="product-code">Код товара: 2002850</div>
+                                <div class="details">
+                                    <a href="">
+                                        <span class="short-text">Подробнее</span>
+                                        <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="mobile-card-part buttons-for-deal">
+                            <button class="config-btn">В конфигуратор</button>
+                            <button class="buy-btn">В корзину</button>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-
-            <!--List of items. Grid -->
-            <div class="products-container grid-view hidden" data-view-type="grid" data-switcher-id="view1">
+            <?php endforeach; ?>
+            <div class="products-container grid-view hidden" id="grid-view">
                 <div class="product-card grid-style">
                     <div class="product-card-img grid-style">
                         <div class="card-img-main-product grid-style">
-                            <img src="./assets/images/card-1.png" alt="Компьютер">
+                            <img src="<?= base_url('assets/images/card-1.png') ?>" alt="Компьютер">
                         </div>
                         <div class="card-img-sec-product grid-style">
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-2.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-2.png') ?>" alt="Деталь">
                             </div>
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-3.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-3.png') ?>" alt="Деталь">
                             </div>
                         </div>
                     </div>
@@ -627,7 +623,7 @@
                             <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
                             <div class="rating">
 
-                                <img src="./assets/images/stars/star-bg.svg" alt="⭐">
+                                <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
 
                                 <div class="reviews-statistic-rating-small">4.3</div>
                             </div>
@@ -637,7 +633,7 @@
                                 <a href="">
                                     <span class="full-text">Смотреть подробнее</span>
                                     <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
+                                    <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
                                 </a>
                             </div>
                             <div class="product-code grid-style">Код товара: 2002850</div>
@@ -668,14 +664,14 @@
                 <div class="product-card grid-style">
                     <div class="product-card-img grid-style">
                         <div class="card-img-main-product grid-style">
-                            <img src="./assets/images/card-1.png" alt="Компьютер">
+                            <img src="<?= base_url('assets/images/card-1.png') ?>" alt="Компьютер">
                         </div>
                         <div class="card-img-sec-product grid-style">
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-2.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-2.png') ?>" alt="Деталь">
                             </div>
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-3.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-3.png') ?>" alt="Деталь">
                             </div>
                         </div>
                     </div>
@@ -685,7 +681,7 @@
                             <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
                             <div class="rating">
 
-                                <img src="./assets/images/stars/star-bg.svg" alt="⭐">
+                                <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
 
                                 <div class="reviews-statistic-rating-small">4.3</div>
                             </div>
@@ -695,7 +691,7 @@
                                 <a href="">
                                     <span class="full-text">Смотреть подробнее</span>
                                     <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
+                                    <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
                                 </a>
                             </div>
                             <div class="product-code grid-style">Код товара: 2002850</div>
@@ -726,14 +722,14 @@
                 <div class="product-card grid-style">
                     <div class="product-card-img grid-style">
                         <div class="card-img-main-product grid-style">
-                            <img src="./assets/images/card-1.png" alt="Компьютер">
+                            <img src="<?= base_url('assets/images/card-1.png') ?>" alt="Компьютер">
                         </div>
                         <div class="card-img-sec-product grid-style">
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-2.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-2.png') ?>" alt="Деталь">
                             </div>
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-3.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-3.png') ?>" alt="Деталь">
                             </div>
                         </div>
                     </div>
@@ -743,7 +739,7 @@
                             <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
                             <div class="rating">
 
-                                <img src="./assets/images/stars/star-bg.svg" alt="⭐">
+                                <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
 
                                 <div class="reviews-statistic-rating-small">4.3</div>
                             </div>
@@ -753,7 +749,7 @@
                                 <a href="">
                                     <span class="full-text">Смотреть подробнее</span>
                                     <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
+                                    <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
                                 </a>
                             </div>
                             <div class="product-code grid-style">Код товара: 2002850</div>
@@ -784,14 +780,14 @@
                 <div class="product-card grid-style">
                     <div class="product-card-img grid-style">
                         <div class="card-img-main-product grid-style">
-                            <img src="./assets/images/card-1.png" alt="Компьютер">
+                            <img src="<?= base_url('assets/images/card-1.png') ?>" alt="Компьютер">
                         </div>
                         <div class="card-img-sec-product grid-style">
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-2.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-2.png') ?>" alt="Деталь">
                             </div>
                             <div class="sec-product-wrapper grid-style">
-                                <img src="./assets/images/card-3.png" alt="Деталь">
+                                <img src="<?= base_url('assets/images/card-3.png') ?>" alt="Деталь">
                             </div>
                         </div>
                     </div>
@@ -801,7 +797,7 @@
                             <h3 class="product-title grid-style">Игровой компьютер серии Prologic [2006326]</h3>
                             <div class="rating">
 
-                                <img src="./assets/images/stars/star-bg.svg" alt="⭐">
+                                <img src="<?= base_url('assets/images/stars/star-bg.svg') ?>" alt="⭐">
 
                                 <div class="reviews-statistic-rating-small">4.3</div>
                             </div>
@@ -811,7 +807,7 @@
                                 <a href="">
                                     <span class="full-text">Смотреть подробнее</span>
                                     <span class="short-text">Подробнее</span>
-                                    <img src="./assets/images/icons/view-detaitls.svg" />
+                                    <img src="<?= base_url('assets/images/icons/view-detaitls.svg') ?>" />
                                 </a>
                             </div>
                             <div class="product-code grid-style">Код товара: 2002850</div>
@@ -846,14 +842,13 @@
             <div class="pagination-container">
                 <div class="pagination-choice">
                     <div class="pagination" id="pagination">
-
                         <a href="#" class="page-link" data-page="1">1</a>
                         <a href="#" class="page-link" data-page="2">2</a>
                         <a href="#" class="page-link" data-page="3">3</a>
                         <a href="#" class="page-link" data-page="3">4</a>
                         <a href="#" class="page-link" data-page="">...</a>
                         <a href="#" class="page-link" data-page="">867</a>
-                        <img src="./assets/images/icons/pagination-arrow.svg" />
+                        <img src="<?= base_url('assets/images/icons/pagination-arrow.png') ?>" />
                         <p id="page-numbers"> </p>
                     </div>
                     <button class="show-more-btn">Показать ещё</button>
@@ -861,7 +856,7 @@
 
                 <div class="page-choice">
                     <div class="items-per-page" id="dropdownBtn">Товаров на странице по</div>
-                    <div class="dropdown-btn">9 <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" /></div>
+                    <div class="dropdown-btn">9 <img src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" class="toggle-arrow" /></div>
                 </div>
             </div>
         </div>
@@ -870,16 +865,16 @@
     <section class="ads-info">
         <div class="ads-pictures">
             <div class="ads-slide">
-                <img src="./assets/images/choice-gr.png" alt="" />
+                <img src="<?= base_url('assets/images/choice-gr.png') ?>" alt="" />
             </div>
             <div class="ads-slide">
-                <img src="./assets/images/price-gr.png" alt="" />
+                <img src="<?= base_url('assets/images/price-gr.png') ?>" alt="" />
             </div>
             <div class="ads-slide">
-                <img src="./assets/images/help-gr.png" alt="" />
+                <img src="<?= base_url('assets/images/help-gr.png') ?>" alt="" />
             </div>
             <div class="ads-slide">
-                <img src="./assets/images/delivery-gr.png" alt="" />
+                <img src="<?= base_url('assets/images/delivery-gr.png') ?>" alt="" />
             </div>
         </div>
         <div class="dots-container">
@@ -887,211 +882,79 @@
     </section>
 
     <section class="popular-cards-config">
-        <h2 class="hedline-h2">Популярные сборки</h2>
+        <h2 class="headline-h2">Популярные сборки</h2>
         <div class="slider-arrow prev-btn hidden">
-            <img src="./assets/images/buttons/Button - prev.svg" />
+            <img src="<?= base_url('assets/images/buttons/Button - prev.svg') ?>" alt="prev"/>
         </div>
         <div class="slider-arrow next-btn">
-            <img src="./assets/images/buttons/Button - Next.svg" />
+            <img src="<?= base_url('assets/images/buttons/Button - Next.svg') ?>" alt="next"/>
         </div>
         <div class="popular-list">
-            <div class="popular-card">
-                <div class="card-img">
-                    <div class="card-img-main">
-                        <img src="./assets/images/card-1.png" alt="" />
-                    </div>
-                    <div class="card-img-sec">
-                        <div class="card-img-sec-main">
-                            <img src="./assets/images/card-2.png" alt="" />
+            <?php foreach($popularAssemblies as $assembly): ?>
+                <div class="popular-card">
+                    <div class="card-img">
+                        <div class="card-img-main">
+                            <img src="<?= $assembly['items']['case'][0]['image'] ?? '' ?>" alt="" />
                         </div>
-                        <div class="card-img-btn-cont">
-                            <div class="card-img-btn">
-                                <img src="./assets/images/card-3.png" alt="" />
+                        <div class="card-img-sec">
+                            <div class="card-img-sec-main">
+                                <img src="<?= $assembly['items']['cpu'][0]['image'] ?? '' ?>" alt="" />
                             </div>
-                            <div class="card-img-btn">
-                                <a href="/">
-                                    <img src="./assets/images/icons/svg.svg" alt="" />
-                                    <span>Еще</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-descr">
-                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
-                    <div class="card-tags-cont">
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                    </div>
-                    <div class="cont-price">
-                        <p class="new-price">6100<span>.26 руб</span></p>
-                        <p class="old-price">7015<span>.30 руб</span></p>
-                    </div>
-                    <div class="button-cont">
-                        <button class="primary-btn">В корзину</button>
-                        <button class="secondary-btn">В конфигуратор</button>
-                    </div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <div class="card-img">
-                    <div class="card-img-main">
-                        <img src="./assets/images/card-1.png" alt="" />
-                    </div>
-                    <div class="card-img-sec">
-                        <div class="card-img-sec-main">
-                            <img src="./assets/images/card-2.png" alt="" />
-                        </div>
-                        <div class="card-img-btn-cont">
-                            <div class="card-img-btn">
-                                <img src="./assets/images/card-3.png" alt="" />
-                            </div>
-                            <div class="card-img-btn">
-                                <a href="/">
-                                    <img src="./assets/images/icons/svg.svg" alt="" />
-                                    <span>Еще</span>
-                                </a>
+                            <div class="card-img-btn-cont">
+                                <div class="card-img-btn">
+                                    <img src="<?= $assembly['items']['gpu'][0]['image'] ?? '' ?>" alt="" />
+                                </div>
+                                <div class="card-img-btn">
+                                    <a href="/">
+                                        <img src="<?= base_url('assets/images/icons/svg.svg') ?>" alt="" />
+                                        <span>Еще</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-descr">
-                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
-                    <div class="card-tags-cont">
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                    </div>
-                    <div class="cont-price">
-                        <p class="new-price">6100<span>.26 руб</span></p>
-                        <p class="old-price">7015<span>.30 руб</span></p>
-                    </div>
-                    <div class="button-cont">
-                        <button class="primary-btn">В корзину</button>
-                        <button class="secondary-btn">В конфигуратор</button>
-                    </div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <div class="card-img">
-                    <div class="card-img-main">
-                        <img src="./assets/images/card-1.png" alt="" />
-                    </div>
-                    <div class="card-img-sec">
-                        <div class="card-img-sec-main">
-                            <img src="./assets/images/card-2.png" alt="" />
+                    <div class="card-descr">
+                        <h3 class="card-title"><?= $assembly["name"] ?></h3>
+                        <div class="card-tags-cont">
+                            <div class="card-tag">lorem ipsum</div>
+                            <div class="card-tag">lorem ipsum</div>
+                            <div class="card-tag">lorem ipsum</div>
                         </div>
-                        <div class="card-img-btn-cont">
-                            <div class="card-img-btn">
-                                <img src="./assets/images/card-3.png" alt="" />
-                            </div>
-                            <div class="card-img-btn">
-                                <a href="/">
-                                    <img src="./assets/images/icons/svg.svg" alt="" />
-                                    <span>Еще</span>
-                                </a>
-                            </div>
+                        <div class="cont-price">
+                            <p class="new-price"><?= number_format($assembly["total_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_price"], 2, '.', '') % 1 ?> руб</span></p>
+                            <?php if($assembly["total_discount_price"] > $assembly["total_price"]): ?>
+                                <p class="old-price"><?= number_format($assembly["total_discount_price"], 2, '.', '') / 1 ?><span>.<?= number_format($assembly["total_discount_price"], 2, '.', '') % 1 ?> руб</span></p>
+                            <?php endif; ?>
+                        </div>
+                        <div class="button-cont">
+                            <button class="primary-btn">В корзину</button>
+                            <button class="secondary-btn">В конфигуратор</button>
                         </div>
                     </div>
                 </div>
-                <div class="card-descr">
-                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
-                    <div class="card-tags-cont">
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                    </div>
-                    <div class="cont-price">
-                        <p class="new-price">6100<span>.26 руб</span></p>
-                        <p class="old-price">7015<span>.30 руб</span></p>
-                    </div>
-                    <div class="button-cont">
-                        <button class="primary-btn">В корзину</button>
-                        <button class="secondary-btn">В конфигуратор</button>
-                    </div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <div class="card-img">
-                    <div class="card-img-main">
-                        <img src="./assets/images/card-1.png" alt="" />
-                    </div>
-                    <div class="card-img-sec">
-                        <div class="card-img-sec-main">
-                            <img src="./assets/images/card-2.png" alt="" />
-                        </div>
-                        <div class="card-img-btn-cont">
-                            <div class="card-img-btn">
-                                <img src="./assets/images/card-3.png" alt="" />
-                            </div>
-                            <div class="card-img-btn">
-                                <a href="/">
-                                    <img src="./assets/images/icons/svg.svg" alt="" />
-                                    <span>Еще</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-descr">
-                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
-                    <div class="card-tags-cont">
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                    </div>
-                    <div class="cont-price">
-                        <p class="new-price">6100<span>.26 руб</span></p>
-                        <p class="old-price">7015<span>.30 руб</span></p>
-                    </div>
-                    <div class="button-cont">
-                        <button class="primary-btn">В корзину</button>
-                        <button class="secondary-btn">В конфигуратор</button>
-                    </div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <div class="card-img">
-                    <div class="card-img-main">
-                        <img src="./assets/images/card-1.png" alt="" />
-                    </div>
-                    <div class="card-img-sec">
-                        <div class="card-img-sec-main">
-                            <img src="./assets/images/card-2.png" alt="" />
-                        </div>
-                        <div class="card-img-btn-cont">
-                            <div class="card-img-btn">
-                                <img src="./assets/images/card-3.png" alt="" />
-                            </div>
-                            <div class="card-img-btn">
-                                <a href="/">
-                                    <img src="./assets/images/icons/svg.svg" alt="" />
-                                    <span>Еще</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-descr">
-                    <h3 class="card-title">Игровой компьютер серии Prologic [2006326]</h3>
-                    <div class="card-tags-cont">
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                        <div class="card-tag">lorem ipsum</div>
-                    </div>
-                    <div class="cont-price">
-                        <p class="new-price">6100<span>.26 руб</span></p>
-                        <p class="old-price">7015<span>.30 руб</span></p>
-                    </div>
-                    <div class="button-cont">
-                        <button class="primary-btn">В корзину</button>
-                        <button class="secondary-btn">В конфигуратор</button>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-        <button class="primary-btn">Перейти в каталог</button>
     </section>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('#category-buttons button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                window.location.href = `/catalog/${category}`;
+            });
+        });
+    });
+
+    document.getElementById('sort-select').addEventListener('change', function () {
+        document.getElementById('sortForm').submit();
+    });
+
+</script>
 </body>

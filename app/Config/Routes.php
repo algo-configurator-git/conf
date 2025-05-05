@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'LandingController::index');
 
 $routes->group('catalog', function ($routes) {
-    $routes->get('/', 'CatalogController::index');
+    $routes->get('(:segment)', 'CatalogController::index/$1');
 });
 $routes->group('reviews', function ($routes) {
     $routes->get('/', 'ReviewsController::index');
