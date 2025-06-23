@@ -1,0 +1,50 @@
+services:
+  app:
+    build: .docker/php
+    image: php:8.2-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - CI_ENVIRONMENT=development
+      - XDEBUG_MODE=develop,debug
+    depends_on:
+      - sqlite
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /var/www/html
+
+  sqlite:
+    image: hibitdev/sqlite:latest
+    container_name: sqlite
+    hostname: sqlite.hibit
+    ports:
+      - "8191:8191"
+    volumes:
+      - ./sqlite:/db
+    command: >
+      sh -c "
+      chmod -R 777 /db &&
+      tail -f /dev/null
+      "
+  mariadb:
+    image: mariadb:10.1.48
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  mariadb_data:
