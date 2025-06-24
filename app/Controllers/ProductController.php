@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class ProductController extends BaseController
 {
-    public function index($type = null)
+    public function index($categoryId = null)
     {
         $productModel = new Product();
 
@@ -43,8 +43,9 @@ class ProductController extends BaseController
         if ($maxPrice) {
             $builder->where('price <=', $maxPrice);
         }
-        if ($type) {
-            $builder->where('category_ram', $type);
+        if ($categoryId) {
+            $builder->join('products_categories', 'products_categories.sku = products.sku')
+                ->where('id_category', $categoryId);
         }
 
         $products = $builder->paginate(50, 'products');

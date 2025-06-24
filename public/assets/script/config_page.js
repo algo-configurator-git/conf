@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       currentType = button.dataset.modal;
       const data = filterMap[currentType] || { title: currentType.toUpperCase() };
-      modalTitle.textContent = data.title;
+      modalTitle.textContent = button.dataset.name;
       modal.style.display = "flex";
       document.body.style.overflow = "hidden";
 
@@ -641,6 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const selectButtons = document.querySelectorAll(".select-button");
 
+  return;
   selectButtons.forEach(button => {
     button.addEventListener("click", () => {
       const component = button.closest(".component");
@@ -761,7 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // del cards
       cardContainer.querySelectorAll(".component-list-btn-delete").forEach(deleteBtn => {
         deleteBtn.addEventListener("click", () => {
-          component.innerHTML = originalHTML;
+          component.innerHTML = originalHTML;attachEventListeners
           component.classList.remove("component-expanded");
           attachEventListeners(component);
         });

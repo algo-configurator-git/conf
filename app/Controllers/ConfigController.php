@@ -4,12 +4,36 @@ namespace App\Controllers;
 
 use App\Models\CoreConfigData;
 use App\Models\Product;
+use App\Models\ProductsCategories;
+use Config\Assembly;
+
 
 class ConfigController extends BaseController
 {
     public function index()
     {
-        return view('config_page');
+        $assemblyConfig = new Assembly();
+        $componentListData = $assemblyConfig->componentListData;
+
+        $categoryIds = [];
+        foreach ($componentListData as $group) {
+            foreach ($group['components'] as $component) {
+                $categoryIds[] = $component['id'];
+            }
+        }
+
+        $productsCategoriesModel = new ProductsCategories();
+        $categoryItemsCounts = $productsCategoriesModel
+            ->select('id_category')
+            ->selectCount('*', 'count')
+            ->groupBy('id_category')
+            ->whereIn('id_category', $categoryIds)
+            ->findAll();
+
+        return view('config_page', [
+            'componentListData' => $componentListData,
+            'categoryItemsCounts' => $categoryItemsCounts
+        ]);
     }
 
     public function store()
