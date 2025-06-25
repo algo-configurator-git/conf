@@ -11,6 +11,8 @@ class ProductController extends BaseController
     {
         $productModel = new Product();
 
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 50;
         $search = $this->request->getGet('search');
         $minPrice = $this->request->getGet('min_price');
         $maxPrice = $this->request->getGet('max_price');
@@ -48,7 +50,7 @@ class ProductController extends BaseController
                 ->where('id_category', $categoryId);
         }
 
-        $products = $builder->paginate(50, 'products');
+        $products = $builder->paginate($perPage, 'products', $page);
 
         foreach($products as &$product){
             $product['price'] = $this->converPrice($product['price']);
@@ -57,11 +59,13 @@ class ProductController extends BaseController
         }
         unset($product);
 
-        $pager = \Config\Services::pager();
+        $pager = $productModel->pager;
 
         return $this->response->setJSON([
             'products' => $products,
-            'pager' => $pager,
+            'totalPages' => $pager->getPageCount('products'),
+            'currentPage' => $pager->getCurrentPage('products'),
+            'perPage' => $perPage,
             'filters' => [
                 'search' => $search,
                 'min_price' => $minPrice,

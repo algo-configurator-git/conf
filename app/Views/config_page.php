@@ -721,24 +721,26 @@
                     <div class="pagination-container">
                         <div class="pagination-choice">
                             <div class="pagination" id="pagination">
-
-                                <a href="#" class="page-link" data-page="1">1</a>
-                                <a href="#" class="page-link" data-page="2">2</a>
-                                <a href="#" class="page-link" data-page="3">3</a>
-                                <a href="#" class="page-link" data-page="3">4</a>
-                                <a href="#" class="page-link" data-page="">...</a>
-                                <a href="#" class="page-link" data-page="">867</a>
-                                <img src="./assets/images/icons/pagination-arrow.png" />
-                                <p id="page-numbers"> </p>
                             </div>
                             <button class="show-more-btn">Показать ещё</button>
                         </div>
 
                         <div class="page-choice">
-                            <div class="items-per-page" id="dropdownBtn">Товаров на странице по</div>
-                            <div class="dropdown-btn">9 <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
+                            <span class="items-per-page-label">Товаров на странице по</span>
+                            <div class="dropdown-wrapper">
+                                <div class="dropdown-btn" id="dropdownToggle">
+                                    <span id="dropdownValue">20</span>
+                                    <img src="./assets/images/icons/arrow-down.svg" class="toggle-arrow" />
+                                </div>
+                                <ul class="dropdown-list hidden" id="dropdownList">
+                                    <li onclick="handlePerPageChange(10)">10</li>
+                                    <li onclick="handlePerPageChange(20)">20</li>
+                                    <li onclick="handlePerPageChange(50)">50</li>
+                                    <li onclick="handlePerPageChange(100)">100</li>
+                                </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
