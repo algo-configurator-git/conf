@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  nginx-conf:
+    image: nginx:alpine
+    depends_on:
+      - php-conf
+    networks:
+      - conf
+
+  php-conf:
+    image: php-fpm:8.1
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www
+    networks:
+      - conf
+
+  mysql-conf:
+    image: mysql:8.0
+    container_name: mysql-conf
+    restart: always
+    networks:
+      - conf
+
+networks:
+  conf:

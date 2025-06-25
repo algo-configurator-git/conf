@@ -4,63 +4,36 @@ namespace App\Controllers;
 
 use App\Models\CoreConfigData;
 use App\Models\Product;
+use Config\Services;
 
 class ProductController extends BaseController
 {
-    public function index($type = null)
+    public function index($categoryId = null)
     {
-        $productModel = new Product();
+        $productService = Services::productService();
+        $pager = Services::pager();
 
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 20;
         $search = $this->request->getGet('search');
         $minPrice = $this->request->getGet('min_price');
         $maxPrice = $this->request->getGet('max_price');
 
-        $builder = $productModel
-            ->select([
-                'products.sku',
-                'products.name',
-                'products.price',
-                'products.discount_price',
-                'products_images.image',
-            ])
-            ->join('products_images', 'products_images.sku = products.sku')
-            ->where([
-                'products_images.main' => 1,
-                'products.is_in_stock' => 1,
-                'products.enabled' => 1,
-            ]);
 
-        if ($search) {
-            $builder->groupStart()
-                ->like('name', $search)
-                ->orLike('sku', $search)
-                ->groupEnd();
-        }
-
-        if ($minPrice) {
-            $builder->where('price >=', $minPrice);
-        }
-        if ($maxPrice) {
-            $builder->where('price <=', $maxPrice);
-        }
-        if ($type) {
-            $builder->where('category_ram', $type);
-        }
-
-        $products = $builder->paginate(50, 'products');
-
-        foreach($products as &$product){
-            $product['price'] = $this->converPrice($product['price']);
-            $product['discount_price'] = $this->converPrice($product['discount_price']);
-            $product['image'] = $this->getImageUrl($product['image']);
-        }
-        unset($product);
-
-        $pager = \Config\Services::pager();
+        $products = $productService->getProductsByFilters(
+            search: $search,
+            minPrice: $minPrice,
+            maxPrice: $maxPrice,
+            categoryId: $categoryId,
+            perPage: $perPage,
+            page: $page
+        );
 
         return $this->response->setJSON([
             'products' => $products,
-            'pager' => $pager,
+            'totalPages' => $pager->getPageCount('products'),
+            'currentPage' => $pager->getCurrentPage('products'),
+            'perPage' => $perPage,
             'filters' => [
                 'search' => $search,
                 'min_price' => $minPrice,
@@ -93,18 +66,5 @@ class ProductController extends BaseController
         $product = $productModel->select('category_ram')->find($sku);
 
         return $product['category_ram'];
-    }
-
-    public function converPrice($price)
-    {
-        $config = new CoreConfigData();
-        $currencyRate = $config->getCurrencyRate();
-
-        return round($price * $currencyRate / 10000, 2);
-    }
-    
-    public function getImageUrl($image)
-    {
-        return env('IMAGE_BASE_URL') . $image;
     }
 }
