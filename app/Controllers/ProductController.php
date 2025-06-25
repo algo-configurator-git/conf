@@ -12,7 +12,7 @@ class ProductController extends BaseController
         $productModel = new Product();
 
         $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('perPage') ?? 50;
+        $perPage = $this->request->getGet('perPage') ?? 20;
         $search = $this->request->getGet('search');
         $minPrice = $this->request->getGet('min_price');
         $maxPrice = $this->request->getGet('max_price');
