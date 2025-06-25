@@ -16,8 +16,7 @@ class AssemblyItemsService
         $this->assemblyItemsRepository = service('assemblyItemsRepository');
         $this->productService = service('productService');
         $coreConfigData = new CoreConfigData();
-        // TODO move back
-        $this->currencyRate = 1;
+        $this->currencyRate = $coreConfigData->getCurrencyRate();
     }
 
     public function getAssemblyItems($assembly_id)

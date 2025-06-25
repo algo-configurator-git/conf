@@ -19,12 +19,12 @@ class AssemblyService
         $this->productService = service('productService');
     }
 
-    public function getAssembliesByType(string $type, string $orderBy)
+    public function getAssembliesByType(string $type, string $orderBy, int $page, int $perPage): array
     {
         if ($type === 'all') {
-            $assemblies = $this->assemblyRepository->getAssemblies($orderBy);
+            [$assemblies, $total] = $this->assemblyRepository->getAssemblies($orderBy, $page, $perPage);
         } else {
-            $assemblies = $this->assemblyRepository->getAssembliesByType($type, $orderBy);
+            [$assemblies, $total] = $this->assemblyRepository->getAssembliesByType($type, $orderBy, $page, $perPage);
         }
 
         $assemblyIds = array_column($assemblies, 'id');
@@ -36,15 +36,15 @@ class AssemblyService
                 continue;
             }
             $assemblyData["items"] = $this->assemblyItemsService->getAssemblyItemsWithProductsGrouped($assemblyId);
-            $assemblyData["total_price"] = $this->calculateTotalPrice($assemblyData["items"]);
-            $assemblyData["total_discount_price"] = $this->calculateTotalDiscountPrice($assemblyData["items"]);
+            $assemblyData["total_price"] = $assemblies[$key]["total_price"];
+            $assemblyData["total_discount_price"] = $assemblies[$key]["total_discount_price"];
             $assemblyData["average_rating"] = $assemblies[$key]["average_rating"];
             $assemblyData["created_at"] = $assemblies[$key]["created_at"];
 
             $assemblies[$key] = $assemblyData;
         }
 
-        return $assemblies;
+        return [$assemblies, $total];
     }
 
 

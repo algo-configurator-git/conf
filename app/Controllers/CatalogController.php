@@ -7,14 +7,10 @@ use App\Services\AssemblyService;
 class CatalogController extends BaseController
 {
     protected AssemblyService $assemblyService;
-    protected int $paginate;
-    protected string $orderBy;
 
     public function __construct()
     {
         $this->assemblyService = service('assemblyService');
-        $this->paginate = 9;
-        $this->orderBy = "rating";
     }
     public function index($type)
     {
@@ -26,24 +22,28 @@ class CatalogController extends BaseController
 
         $sort = $this->request->getGet('sort');
 
-        $this->orderBy = match ($sort) {
+        $orderBy = match ($sort) {
             'rating' => 'average_rating DESC',
-            'new'     => 'created_at DESC',
-            'price'   => 'price ASC',
-            default   => 'average_rating DESC',
+            'new' => 'created_at DESC',
+            'price' => 'total_price ASC',
+            default => 'average_rating DESC',
         };
 
-        $assemblies = $this->assemblyService
-            ->getAssembliesByType($type, $this->orderBy) ?? [];
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('per_page') ?? 10;
 
-        $popularAssemblies = $this->assemblyService
-            ->getTop6PopularAssemblies();
+        [$assemblies, $total] = $this->assemblyService->getAssembliesByType($type, $orderBy, $page, $perPage) ?? [];
+
+        $popularAssemblies = $this->assemblyService->getTop6PopularAssemblies();
 
         return view('catalog', [
             'assemblies' => $assemblies,
             'popularAssemblies' => $popularAssemblies,
             'type' => $type,
             'sort' => $sort,
+            'page' => (int)$page,
+            'per_page' => (int)$perPage,
+            'total_pages' => ceil($total /  $perPage),
         ]);
     }
 }
