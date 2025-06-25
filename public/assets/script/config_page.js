@@ -775,6 +775,8 @@ function logCurrentFilters() {
   sendFilters(payload, getCategoryId());
 }
 
+let currentProducts = [];
+
 function sendFilters(payload, type) {
   if (!type) {
     console.error("Type of product is not defined");
@@ -809,6 +811,7 @@ function sendFilters(payload, type) {
         console.log("Данные от API:", data);
         if (!data || !Array.isArray(data.products)) {
           console.error("Invalid products dta:", data);
+          currentProducts = [];
           renderProducts([]);
           return;
         }
@@ -821,18 +824,29 @@ function sendFilters(payload, type) {
           tags: product.tags || [],
           oldPrice: product.oldPrice || null
         }));
+        currentProducts = adaptedProducts;
         renderProducts(adaptedProducts);
         renderPagination(data.totalPages, data.currentPage)
       })
       .catch((error) => {
         console.error("Ошибка при запросе к API:", error);
+        currentProducts = [];
         renderProducts([]);
       });
 }
 
 function renderPagination(totalPages, currentPage) {
   const paginationContainer = document.getElementById("pagination");
+  const paginationBlock = document.getElementById("pagination-container");
   paginationContainer.innerHTML = ""; // очистить старую пагинацию
+
+  if (totalPages === 0) {
+    paginationBlock.classList.add("hidden");
+
+    return;
+  } else {
+    paginationBlock.classList.remove("hidden");
+  }
 
   const createPageLink = (page, label = null, isActive = false, isDisabled = false) => {
     const a = document.createElement("a");
@@ -928,8 +942,8 @@ function addProductToComparison(productId) {
       });
 }
 
-function renderProducts(products) {
-  let currentView = "list";
+function renderProducts(products, view = null) {
+  const currentView = view ?? getCurrentView();
   const productContainerList = document.getElementById("list-view");
   const productContainerGrid = document.getElementById("grid-view");
 
@@ -1107,4 +1121,14 @@ function handlePerPageChange(value) {
   const payload = getPayload();
   payload.page = 1;
   sendFilters(payload, getCategoryId());
+}
+
+function handleViewSwitch(button) {
+  renderProducts(currentProducts, button.dataset.view);
+}
+
+function getCurrentView() {
+  const activeView = document.querySelector('.view-btn.active')?.dataset.view;
+
+  return activeView ?? 'list';
 }

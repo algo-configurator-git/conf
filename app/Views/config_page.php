@@ -571,154 +571,27 @@
 
                         <div class="view-switcher">
                             <span>Вид:</span>
-                            <button class="view-btn active" data-view="list">
+                            <button class="view-btn active" data-view="list" onclick="handleViewSwitch(this)">
                                 <span></span>
                             </button>
-                            <button class="view-btn" data-view="grid">
-                  <span>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </span>
+                            <button class="view-btn" data-view="grid" onclick="handleViewSwitch(this)">
+                            <span>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </span>
                             </button>
                         </div>
 
                     </div>
 
                     <div class="products-container list-view" id="list-view">
-                        <div class="products-container-no-match">К сожалению, по вашему запросу <br />
-                            не найдено ни одного товара</div>
-                        <div class="product-card list-style desktop-only">
-                            <div class="product-card-img list-style">
-                                <div class="card-img-main-product list-style">
-                                    <img src="assets/images/card-3.png" alt="Компьютер">
-                                </div>
-
-                            </div>
-                            <div class="info">
-                                <h3 class="product-title list-style">Cooler Master MasterLiquid PL240 Flux White Edition
-                                    MLY-D24M-A23PZ-RW</h3>
-                                <div class="more-data">
-                                    <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details" id="details-btn">
-                                        <a href="">
-                                            <span class="full-text">Смотреть подробнее</span>
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-characterictic-tags">
-                                    <span>алюминий</span>
-                                    <span>шум 32 дБ</span>
-                                    <span>2300 об/мин</span>
-                                    <span>PWM</span>
-                                </div>
-                            </div>
-                            <div class="cashflow-options list-style">
-                                <div class="buy-options">
-                                    <div class="cont-price list-style">
-                                        <p class="new-price">1256<span>.7 руб</span></p>
-                                        <p class="old-price list-style">7015<span>.30 руб</span></p>
-                                    </div>
-                                    <div class="payment-options">
-                                        <div class="payment-option green">от <span>42</span> руб/мес</div>
-                                        <div class="payment-desc">картой рассрочки <br> или в кредит</div>
-                                    </div>
-                                </div>
-                                <div class="buttons-for-deal">
-                                    <button class="buy-btn">Добавить</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card list-style desktop-only">
-                            <div class="product-card-img list-style">
-                                <div class="card-img-main-product list-style">
-                                    <img src="assets/images/card-3.png" alt="Компьютер">
-                                </div>
-
-                            </div>
-                            <div class="info">
-                                <h3 class="product-title list-style">Cooler Master MasterLiquid PL240 Flux White Edition
-                                    MLY-D24M-A23PZ-RW</h3>
-                                <div class="more-data">
-                                    <div class="product-code">Код товара: 2002850</div>
-                                    <div class="details" id="details-btn">
-                                        <a href="">
-                                            <span class="full-text">Смотреть подробнее</span>
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-characterictic-tags">
-                                    <span>алюминий</span>
-                                    <span>шум 32 дБ</span>
-                                    <span>2300 об/мин</span>
-                                    <span>PWM</span>
-                                </div>
-                            </div>
-                            <div class="cashflow-options list-style">
-                                <div class="buy-options">
-                                    <div class="cont-price list-style">
-                                        <p class="new-price">1256<span>.7 руб</span></p>
-                                        <p class="old-price list-style">7015<span>.30 руб</span></p>
-                                    </div>
-                                    <div class="payment-options">
-                                        <div class="payment-option green">от <span>42</span> руб/мес</div>
-                                        <div class="payment-desc">картой рассрочки <br> или в кредит</div>
-                                    </div>
-                                </div>
-                                <button class="btn-change">Заменить</button>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="products-container grid-view" id="grid-view">
                     </div>
 
-                    <div class="products-container grid-view hidden" id="grid-view">
-                        <div class="products-container-no-match">К сожалению, по вашему запросу <br />
-                            не найдено ни одного товара</div>
-                        <div class="product-card grid-style">
-                            <div class="product-card-img grid-style">
-                                <div class="card-img-main-product grid-style">
-                                    <img src="./assets/images/card-3.png" alt="Компьютер">
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="product-title-rate">
-                                    <h3 class="product-title grid-style">Cooler Master MasterLiquid PL240 Flux White Edition
-                                        MLY-D24M-A23PZ-RW</h3>
-                                </div>
-                                <div class="info-details">
-                                    <div class="product-code grid-style">Код товара: 2002850</div>
-                                    <div class="details">
-                                        <a href="">
-                                            <span class="full-text">Смотреть подробнее</span>
-                                            <span class="short-text">Подробнее</span>
-                                            <img src="./assets/images/icons/view-detaitls.svg" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-characterictic-tags">
-                                    <span>алюминий</span>
-                                    <span>шум 32 дБ</span>
-                                    <span>2300 об/мин</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="cont-price grid-style">
-                                        <p class="new-price grid-style">1256<span>.7 руб</span></p>
-                                        <p class="old-price grid-style">7015<span>.30 руб</span></p>
-                                    </div>
-                                    <div class="payment-option green grid-style desktop-only">от &nbsp;<span>42</span> руб/мес</div>
-                                </div>
-                                <div class="button-cont">
-                                    <button class="buy-btn">Добавить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pagination-container">
+                    <div class="pagination-container" id="pagination-container">
                         <div class="pagination-choice">
                             <div class="pagination" id="pagination">
                             </div>

@@ -1214,12 +1214,11 @@ h3 {
 /* cards */
 
 .products-container-no-match {
-  display: none;
   color: #D9D9DA;
   font-size: 40px;
   font-weight: 800;
   text-align: center;
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
