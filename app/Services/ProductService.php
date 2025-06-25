@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\CoreConfigData;
 use App\Repositories\ProductRepository;
 use App\Repositories\ReviewRepository;
 
@@ -60,5 +61,46 @@ class ProductService
         }
 
         return $products;
+    }
+
+    public function getProductsByFilters(
+        ?string $search,
+        ?float $minPrice,
+        ?float $maxPrice,
+        ?int $categoryId,
+        int $perPage,
+        int $page
+    ): array
+    {
+        $products = $this->productRepository->getProductsByFilters(
+            search: $search,
+            minPrice: $minPrice,
+            maxPrice: $maxPrice,
+            categoryId: $categoryId,
+            perPage: $perPage,
+            page: $page
+        );
+
+
+        foreach($products as &$product){
+            $product['price'] = $this->converPrice($product['price']);
+            $product['discount_price'] = $this->converPrice($product['discount_price']);
+            $product['image'] = $this->getImageUrl($product['image']);
+        }
+
+        return $products;
+    }
+
+    public function converPrice($price)
+    {
+        $config = new CoreConfigData();
+        $currencyRate = $config->getCurrencyRate();
+
+        return round($price * $currencyRate / 10000, 2);
+    }
+
+    public function getImageUrl($image)
+    {
+        return env('IMAGE_BASE_URL') . $image;
     }
 }

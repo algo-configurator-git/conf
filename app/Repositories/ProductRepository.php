@@ -16,6 +16,51 @@ class ProductRepository
         $this->productImageModel = new ProductImage();
     }
 
+    public function getProductsByFilters(
+        ?string $search,
+        ?float $minPrice,
+        ?float $maxPrice,
+        ?int $categoryId,
+        int $perPage,
+        int $page
+    ): array
+    {
+        $builder = $this->productModel
+            ->select([
+                'products.sku',
+                'products.name',
+                'products.price',
+                'products.discount_price',
+                'products_images.image',
+            ])
+            ->join('products_images', 'products_images.sku = products.sku')
+            ->where([
+                'products_images.main' => 1,
+                'products.is_in_stock' => 1,
+                'products.enabled' => 1,
+            ]);
+
+        if ($search) {
+            $builder->groupStart()
+                ->like('name', $search)
+                ->orLike('sku', $search)
+                ->groupEnd();
+        }
+
+        if ($minPrice) {
+            $builder->where('price >=', $minPrice);
+        }
+        if ($maxPrice) {
+            $builder->where('price <=', $maxPrice);
+        }
+        if ($categoryId) {
+            $builder->join('products_categories', 'products_categories.sku = products.sku')
+                ->where('id_category', $categoryId);
+        }
+
+        return $builder->paginate($perPage, 'products', $page);
+    }
+
     public function getProductsByCategory($categoryId)
     {
         return $this->productModel
