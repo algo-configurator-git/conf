@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\CoreConfigData;
 use App\Repositories\ProductRepository;
 use App\Repositories\ReviewRepository;
 
@@ -60,5 +61,59 @@ class ProductService
         }
 
         return $products;
+    }
+
+    public function getProductsByFilters(
+        ?string $search,
+        ?int $categoryId,
+        int $perPage,
+        int $page,
+        int $sort,
+        bool $saleOnly,
+        array $filters
+    ): array
+    {
+        $filters['minPrice'] = isset($filters['minPrice']) ? $this->basePrice((float)$filters['minPrice']) : null;
+        $filters['maxPrice'] = isset($filters['maxPrice']) ? $this->basePrice((float)$filters['maxPrice']) : null;
+
+        $products = $this->productRepository->getProductsByFilters(
+            search: $search,
+            categoryId: $categoryId,
+            perPage: $perPage,
+            page: $page,
+            sort: $sort,
+            saleOnly: $saleOnly,
+            filters : $filters
+        );
+
+
+        foreach($products as &$product){
+            $product['price'] = $this->converPrice($product['price']);
+            $product['discount_price'] = $this->converPrice($product['discount_price']);
+            $product['image'] = $this->getImageUrl($product['image']);
+        }
+
+        return $products;
+    }
+
+    public function converPrice(float $price): float
+    {
+        $config = new CoreConfigData();
+        $currencyRate = $config->getCurrencyRate();
+
+        return round($price * $currencyRate / 10000, 2);
+    }
+
+    public function basePrice(float $price): float
+    {
+        $config = new CoreConfigData();
+        $currencyRate = $config->getCurrencyRate();
+
+        return round($price / $currencyRate * 10000, 2);
+    }
+
+    public function getImageUrl(string $image): string
+    {
+        return env('IMAGE_BASE_URL') . $image;
     }
 }

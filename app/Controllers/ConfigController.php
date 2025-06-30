@@ -4,12 +4,41 @@ namespace App\Controllers;
 
 use App\Models\CoreConfigData;
 use App\Models\Product;
+use App\Models\ProductsCategories;
+use Config\Assembly;
+use Config\Services;
+
 
 class ConfigController extends BaseController
 {
     public function index()
     {
-        return view('config_page');
+        $assemblyConfig = new Assembly();
+        $componentListData = $assemblyConfig->componentListData;
+
+        $categoryIds = [];
+        foreach ($componentListData as $group) {
+            foreach ($group['components'] as $component) {
+                $categoryIds[] = $component['id'];
+            }
+        }
+
+        $productRepository = Services::productRepository();
+        $categoryItemsCounts = $productRepository->getProductsCountByCategoryIds($categoryIds);
+
+        return view('config_page', [
+            'componentListData' => $componentListData,
+            'categoryItemsCounts' => $categoryItemsCounts
+        ]);
+    }
+
+    public function filters($categoryId = null)
+    {
+        $categoryService = Services::categoryService();
+
+        $filters = $categoryService->getCategoryFilters($categoryId);
+
+        return $this->response->setJSON($filters);
     }
 
     public function store()
