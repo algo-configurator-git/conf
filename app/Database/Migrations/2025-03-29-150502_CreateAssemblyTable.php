@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class CreateAssemblyTable extends Migration
 {
@@ -41,10 +42,12 @@ class CreateAssemblyTable extends Migration
                 'created_at' => [
                     'type' => 'DATETIME',
                     'null' => false,
+                    'default' => new RawSql('CURRENT_TIMESTAMP'), // текущее время при создании
                 ],
                 'updated_at' => [
                     'type' => 'DATETIME',
                     'null' => false,
+                    'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'), // автообновление
                 ]
             ]);
 

@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/style/style.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/style/style-catalog.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/style/style-adaptive.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/style/paginator.css') ?>">
     <script src="<?= base_url('assets/script/script.js') ?>"></script>
     <script src="<?= base_url('assets/script/catalog_filter.js') ?>"></script>
+    <script src="<?= base_url('assets/script/catalog.js') ?>"></script>
 </head>
 
 <body>
@@ -839,26 +841,7 @@
 
 
             </div>
-            <div class="pagination-container">
-                <div class="pagination-choice">
-                    <div class="pagination" id="pagination">
-                        <a href="#" class="page-link" data-page="1">1</a>
-                        <a href="#" class="page-link" data-page="2">2</a>
-                        <a href="#" class="page-link" data-page="3">3</a>
-                        <a href="#" class="page-link" data-page="3">4</a>
-                        <a href="#" class="page-link" data-page="">...</a>
-                        <a href="#" class="page-link" data-page="">867</a>
-                        <img src="<?= base_url('assets/images/icons/pagination-arrow.png') ?>" />
-                        <p id="page-numbers"> </p>
-                    </div>
-                    <button class="show-more-btn">Показать ещё</button>
-                </div>
-
-                <div class="page-choice">
-                    <div class="items-per-page" id="dropdownBtn">Товаров на странице по</div>
-                    <div class="dropdown-btn">9 <img src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" class="toggle-arrow" /></div>
-                </div>
-            </div>
+            <?= view('components/pagination/pagination') ?>
         </div>
     </section>
 

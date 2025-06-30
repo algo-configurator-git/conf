@@ -1,0 +1,50 @@
+/* Основной контейнер */
+.page-choice {
+    position: relative;
+    display: inline-block;
+}
+
+/* Кнопка с текущим значением */
+.dropdown-btn {
+    padding: 6px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Стрелочка */
+.toggle-arrow {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Выпадающий список */
+.dropdown-content-per-page {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    min-width: 80px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Пункты меню */
+.dropdown-content-per-page a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content-per-page a:hover {
+    background-color: #f0f0f0;
+}

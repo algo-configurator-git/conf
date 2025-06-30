@@ -3,19 +3,10 @@
 namespace App\Controllers;
 
 use App\Services\AssemblyService;
+use Config\Services;
 
 class CatalogController extends BaseController
 {
-    protected AssemblyService $assemblyService;
-    protected int $paginate;
-    protected string $orderBy;
-
-    public function __construct()
-    {
-        $this->assemblyService = service('assemblyService');
-        $this->paginate = 9;
-        $this->orderBy = "rating";
-    }
     public function index($type)
     {
         $validTypes = ['all', 'home', 'office', 'gamer', 'developer', 'designer'];
@@ -24,26 +15,26 @@ class CatalogController extends BaseController
             return redirect()->to('/catalog/all'); // Редирект, если тип неверный
         }
 
+        $assemblyService = service('assemblyService');
+        $pager = Services::pager();
+
         $sort = $this->request->getGet('sort');
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 10;
 
-        $this->orderBy = match ($sort) {
-            'rating' => 'average_rating DESC',
-            'new'     => 'created_at DESC',
-            'price'   => 'price ASC',
-            default   => 'average_rating DESC',
-        };
+        $assemblies = $assemblyService->getAssembliesByType($type, $sort, $page, $perPage) ?? [];
 
-        $assemblies = $this->assemblyService
-            ->getAssembliesByType($type, $this->orderBy) ?? [];
-
-        $popularAssemblies = $this->assemblyService
-            ->getTop6PopularAssemblies();
+        $popularAssemblies = $assemblyService->getTop6PopularAssemblies();
 
         return view('catalog', [
             'assemblies' => $assemblies,
             'popularAssemblies' => $popularAssemblies,
             'type' => $type,
             'sort' => $sort,
+            'page' => $pager->getCurrentPage('assemblies'),
+            'perPage' => $pager->getPerPage('assemblies'),
+            'total' => $pager->getTotal('assemblies'),
+            'totalPages' => $pager->getPageCount('assemblies'),
         ]);
     }
 }
