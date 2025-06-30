@@ -65,20 +65,25 @@ class ProductService
 
     public function getProductsByFilters(
         ?string $search,
-        ?float $minPrice,
-        ?float $maxPrice,
         ?int $categoryId,
         int $perPage,
-        int $page
+        int $page,
+        int $sort,
+        bool $saleOnly,
+        array $filters
     ): array
     {
+        $filters['minPrice'] = isset($filters['minPrice']) ? $this->basePrice((float)$filters['minPrice']) : null;
+        $filters['maxPrice'] = isset($filters['maxPrice']) ? $this->basePrice((float)$filters['maxPrice']) : null;
+
         $products = $this->productRepository->getProductsByFilters(
             search: $search,
-            minPrice: $minPrice,
-            maxPrice: $maxPrice,
             categoryId: $categoryId,
             perPage: $perPage,
-            page: $page
+            page: $page,
+            sort: $sort,
+            saleOnly: $saleOnly,
+            filters : $filters
         );
 
 
@@ -91,7 +96,7 @@ class ProductService
         return $products;
     }
 
-    public function converPrice($price)
+    public function converPrice(float $price): float
     {
         $config = new CoreConfigData();
         $currencyRate = $config->getCurrencyRate();
@@ -99,7 +104,15 @@ class ProductService
         return round($price * $currencyRate / 10000, 2);
     }
 
-    public function getImageUrl($image)
+    public function basePrice(float $price): float
+    {
+        $config = new CoreConfigData();
+        $currencyRate = $config->getCurrencyRate();
+
+        return round($price / $currencyRate * 10000, 2);
+    }
+
+    public function getImageUrl(string $image): string
     {
         return env('IMAGE_BASE_URL') . $image;
     }

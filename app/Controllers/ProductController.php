@@ -16,29 +16,27 @@ class ProductController extends BaseController
         $page = $this->request->getGet('page') ?? 1;
         $perPage = $this->request->getGet('perPage') ?? 20;
         $search = $this->request->getGet('search');
-        $minPrice = $this->request->getGet('min_price');
-        $maxPrice = $this->request->getGet('max_price');
-
+        $sort = $this->request->getGet('sort');
+        $saleOnly = $this->request->getGet('saleOnly') === 'true';
+        $filters = json_decode($this->request->getGet('filters'), true);
 
         $products = $productService->getProductsByFilters(
             search: $search,
-            minPrice: $minPrice,
-            maxPrice: $maxPrice,
             categoryId: $categoryId,
             perPage: $perPage,
-            page: $page
+            page: $page,
+            sort: $sort,
+            saleOnly: $saleOnly,
+            filters: $filters
         );
 
         return $this->response->setJSON([
             'products' => $products,
+            'count' => $pager->getTotal('products'),
             'totalPages' => $pager->getPageCount('products'),
             'currentPage' => $pager->getCurrentPage('products'),
             'perPage' => $perPage,
-            'filters' => [
-                'search' => $search,
-                'min_price' => $minPrice,
-                'max_price' => $maxPrice
-            ]
+            'filters' => $filters
         ]);
     }
 

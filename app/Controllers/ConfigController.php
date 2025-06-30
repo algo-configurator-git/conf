@@ -6,6 +6,7 @@ use App\Models\CoreConfigData;
 use App\Models\Product;
 use App\Models\ProductsCategories;
 use Config\Assembly;
+use Config\Services;
 
 
 class ConfigController extends BaseController
@@ -22,18 +23,22 @@ class ConfigController extends BaseController
             }
         }
 
-        $productsCategoriesModel = new ProductsCategories();
-        $categoryItemsCounts = $productsCategoriesModel
-            ->select('id_category')
-            ->selectCount('*', 'count')
-            ->groupBy('id_category')
-            ->whereIn('id_category', $categoryIds)
-            ->findAll();
+        $productRepository = Services::productRepository();
+        $categoryItemsCounts = $productRepository->getProductsCountByCategoryIds($categoryIds);
 
         return view('config_page', [
             'componentListData' => $componentListData,
             'categoryItemsCounts' => $categoryItemsCounts
         ]);
+    }
+
+    public function filters($categoryId = null)
+    {
+        $categoryService = Services::categoryService();
+
+        $filters = $categoryService->getCategoryFilters($categoryId);
+
+        return $this->response->setJSON($filters);
     }
 
     public function store()
