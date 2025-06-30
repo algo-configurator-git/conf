@@ -23,4 +23,8 @@ $routes->group('config', function($routes){
         $routes->get('(:segment)', 'ProductController::index/$1');
         $routes->post('(:segment)', 'ProductController::store/$1');
     });
+
+    $routes->group('category', function($routes){
+        $routes->get('(:num)/filters/', 'ConfigController::filters/$1');
+    });
 });
