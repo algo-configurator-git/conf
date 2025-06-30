@@ -3,15 +3,10 @@
 namespace App\Controllers;
 
 use App\Services\AssemblyService;
+use Config\Services;
 
 class CatalogController extends BaseController
 {
-    protected AssemblyService $assemblyService;
-
-    public function __construct()
-    {
-        $this->assemblyService = service('assemblyService');
-    }
     public function index($type)
     {
         $validTypes = ['all', 'home', 'office', 'gamer', 'developer', 'designer'];
@@ -19,6 +14,8 @@ class CatalogController extends BaseController
         if (!in_array($type, $validTypes)) {
             return redirect()->to('/catalog/all'); // Редирект, если тип неверный
         }
+
+        $assemblyService = service('assemblyService');
 
         $sort = $this->request->getGet('sort');
 
@@ -30,11 +27,11 @@ class CatalogController extends BaseController
         };
 
         $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('per_page') ?? 10;
+        $perPage = $this->request->getGet('perPage') ?? 10;
 
-        [$assemblies, $total] = $this->assemblyService->getAssembliesByType($type, $orderBy, $page, $perPage) ?? [];
+        [$assemblies, $total] = $assemblyService->getAssembliesByType($type, $orderBy, $page, $perPage) ?? [];
 
-        $popularAssemblies = $this->assemblyService->getTop6PopularAssemblies();
+        $popularAssemblies = $assemblyService->getTop6PopularAssemblies();
 
         return view('catalog', [
             'assemblies' => $assemblies,
@@ -42,8 +39,9 @@ class CatalogController extends BaseController
             'type' => $type,
             'sort' => $sort,
             'page' => (int)$page,
-            'per_page' => (int)$perPage,
-            'total_pages' => ceil($total /  $perPage),
+            'perPage' => (int)$perPage,
+            'total' => $total,
+            'totalPages' => ceil($total /  $perPage),
         ]);
     }
 }

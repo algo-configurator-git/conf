@@ -18,9 +18,6 @@
     <script src="<?= base_url('assets/script/catalog.js') ?>"></script>
 </head>
 
-<?php
-$request = \Config\Services::request();
-?>
 <body>
 <div class="container catalog">
     <section class="product-header">
@@ -844,77 +841,7 @@ $request = \Config\Services::request();
 
 
             </div>
-            <?php
-            $pageParams = $request->getGet();
-            unset($pageParams['page']);
-            ?>
-
-            <div class="pagination-container">
-                <div class="pagination-choice">
-                    <div class="pagination" id="pagination">
-
-                        <!-- Первая страница -->
-                        <?php
-                        $firstQuery = $pageParams;
-                        $firstQuery['page'] = 1;
-                        ?>
-                        <a href="<?= current_url() . '?' . http_build_query($firstQuery) ?>" class="page-link<?= ($page == 1) ? ' active' : '' ?>" data-page="1">1</a>
-
-                        <?php if ($page > 3): ?>
-                            <a href="#" class="page-link" data-page="">...</a>
-                        <?php endif; ?>
-
-                        <!-- Динамические страницы вокруг текущей -->
-                        <?php
-                        $start = max(2, $page - 1);
-                        $end = min($total_pages - 1, $page + 1);
-
-                        for ($i = $start; $i <= $end; $i++):
-                            $pageQuery = $pageParams;
-                            $pageQuery['page'] = $i;
-                            ?>
-                            <a href="<?= base_url() . '?' . http_build_query($pageQuery) ?>"
-                               class="page-link<?= ($page == $i) ? ' active' : '' ?>"
-                               data-page="<?= $i ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-
-                        <?php if ($page < $total_pages - 2): ?>
-                            <a href="#" class="page-link" data-page="">...</a>
-                        <?php endif; ?>
-
-                        <!-- Последняя страница -->
-                        <?php if ($total_pages > 1): ?>
-                            <?php
-                            $lastQuery = $pageParams;
-                            $lastQuery['page'] = $total_pages;
-                            ?>
-                            <a href="<?= current_url() . '?' . http_build_query($lastQuery) ?>"
-                               class="page-link<?= ($page == $total_pages) ? ' active' : '' ?>"
-                               data-page="<?= $total_pages ?>"><?= $total_pages ?></a>
-                        <?php endif; ?>
-                    </div>
-
-                    <!-- Кнопка "Показать ещё" -->
-                    <button class="show-more-btn" id="loadMoreBtn">Показать ещё</button>
-                </div>
-
-                <div class="page-choice">
-                    <div class="items-per-page">Товаров на странице по</div>
-                    <div id="dropdownBtn" class="dropdown-btn">
-                        <?= esc($per_page) ?>
-                        <img src="<?= base_url('assets/images/icons/arrow-down.svg') ?>" class="toggle-arrow" />
-                    </div>
-                    <div class="dropdown-content-per-page" id="dropdownMenu">
-                        <?php foreach ([5, 10, 25] as $pp): ?>
-                            <?php
-                            $perPageQuery = $request->getGet();
-                            $perPageQuery['per_page'] = $pp;
-                            ?>
-                            <a href="<?= current_url() . '?' . http_build_query($perPageQuery) ?>"><?= $pp ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
+            <?= view('components/pagination/pagination') ?>
         </div>
     </section>
 
