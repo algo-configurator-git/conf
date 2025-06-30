@@ -19,12 +19,12 @@ class AssemblyService
         $this->productService = service('productService');
     }
 
-    public function getAssembliesByType(string $type, string $orderBy, int $page, int $perPage): array
+    public function getAssembliesByType(string $type, ?string $sort, int $page, int $perPage): array
     {
         if ($type === 'all') {
-            [$assemblies, $total] = $this->assemblyRepository->getAssemblies($orderBy, $page, $perPage);
+            $assemblies = $this->assemblyRepository->getAssemblies($sort, $page, $perPage);
         } else {
-            [$assemblies, $total] = $this->assemblyRepository->getAssembliesByType($type, $orderBy, $page, $perPage);
+            $assemblies = $this->assemblyRepository->getAssembliesByType($type, $sort, $page, $perPage);
         }
 
         $assemblyIds = array_column($assemblies, 'id');
@@ -44,7 +44,7 @@ class AssemblyService
             $assemblies[$key] = $assemblyData;
         }
 
-        return [$assemblies, $total];
+        return $assemblies;
     }
 
 

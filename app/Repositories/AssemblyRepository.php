@@ -12,23 +12,21 @@ class AssemblyRepository
         $this->assemblyModel = new Assembly();
     }
 
-    public function getAssemblies(string $orderBy, int $page, int $perPage): array
+    public function getAssemblies(?string $sort, int $page, int $perPage): array
     {
-        $query = $this->assemblyModel
-            ->select('assemblies.id')
-            ->orderBy($orderBy)
-            ->groupBy('assemblies.id');
+        $orderBy = match ($sort) {
+            'rating' => 'average_rating DESC',
+            'new' => 'created_at DESC',
+            'price' => 'total_price ASC',
+            default => 'average_rating DESC',
+        };
 
-        $total = $query->countAllResults();
-
-        $items = $query
+        return $this->assemblyModel
             ->select('assemblies.*, ROUND(AVG(reviews.rating), 1) as average_rating')
             ->join('reviews', 'reviews.assembly_id = assemblies.id AND reviews.status = \'approved\'', 'left')
             ->orderBy($orderBy)
             ->groupBy('assemblies.id')
-            ->findAll($perPage, ($page - 1) * $perPage);
-
-        return [$items, $total];
+            ->paginate($perPage, 'assemblies', $page);
     }
 
     public function getAssemblyById($assemblyId)
@@ -40,25 +38,22 @@ class AssemblyRepository
             ->find($assemblyId);
     }
 
-    public function getAssembliesByType(string $type, string $orderBy, int $page, int $perPage): array
+    public function getAssembliesByType(string $type, ?string $sort, int $page, int $perPage): array
     {
-        $query = $this->assemblyModel
-            ->select('assemblies.id')
+        $orderBy = match ($sort) {
+            'rating' => 'average_rating DESC',
+            'new' => 'created_at DESC',
+            'price' => 'total_price ASC',
+            default => 'average_rating DESC',
+        };
+
+        return $this->assemblyModel
+            ->select('assemblies.*, ROUND(AVG(reviews.rating), 1) as average_rating')
+            ->join('reviews', 'reviews.assembly_id = assemblies.id AND reviews.status = \'approved\'', 'left')
             ->where('assemblies.type', $type)
             ->orderBy($orderBy)
-            ->groupBy('assemblies.id');
-
-            $total = $query->countAllResults();
-
-            $items = $query
-                ->select('assemblies.*, ROUND(AVG(reviews.rating), 1) as average_rating')
-                ->join('reviews', 'reviews.assembly_id = assemblies.id AND reviews.status = \'approved\'', 'left')
-                ->where('assemblies.type', $type)
-                ->orderBy($orderBy)
-                ->groupBy('assemblies.id')
-                ->findAll($perPage, ($page - 1) * $perPage);
-
-            return [$items, $total];
+            ->groupBy('assemblies.id')
+            ->paginate($perPage, 'assemblies', $page);
     }
 
     public function getPopularAssembliesIds($count): array
@@ -90,15 +85,5 @@ class AssemblyRepository
             ->limit($count)
             ->asArray()
             ->findAll();
-    }
-
-    /**
-     * @param int $page
-     * @param int $perPage
-     * @return float|int
-     */
-    public function getF(int $page, int $perPage): int|float
-    {
-        return ($page - 1) * $perPage;
     }
 }

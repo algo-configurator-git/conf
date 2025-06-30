@@ -27,7 +27,7 @@ unset($pageParams['page']);
                 $pageQuery = $pageParams;
                 $pageQuery['page'] = $i;
                 ?>
-                <a href="<?= base_url() . '?' . http_build_query($pageQuery) ?>"
+                <a href="<?= current_url() . '?' . http_build_query($pageQuery) ?>"
                    class="page-link<?= ($page == $i) ? ' active' : '' ?>"
                    data-page="<?= $i ?>"><?= $i ?></a>
             <?php endfor; ?>

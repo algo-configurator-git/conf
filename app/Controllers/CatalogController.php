@@ -16,20 +16,13 @@ class CatalogController extends BaseController
         }
 
         $assemblyService = service('assemblyService');
+        $pager = Services::pager();
 
         $sort = $this->request->getGet('sort');
-
-        $orderBy = match ($sort) {
-            'rating' => 'average_rating DESC',
-            'new' => 'created_at DESC',
-            'price' => 'total_price ASC',
-            default => 'average_rating DESC',
-        };
-
         $page = $this->request->getGet('page') ?? 1;
         $perPage = $this->request->getGet('perPage') ?? 10;
 
-        [$assemblies, $total] = $assemblyService->getAssembliesByType($type, $orderBy, $page, $perPage) ?? [];
+        $assemblies = $assemblyService->getAssembliesByType($type, $sort, $page, $perPage) ?? [];
 
         $popularAssemblies = $assemblyService->getTop6PopularAssemblies();
 
@@ -38,10 +31,10 @@ class CatalogController extends BaseController
             'popularAssemblies' => $popularAssemblies,
             'type' => $type,
             'sort' => $sort,
-            'page' => (int)$page,
-            'perPage' => (int)$perPage,
-            'total' => $total,
-            'totalPages' => ceil($total /  $perPage),
+            'page' => $pager->getCurrentPage('assemblies'),
+            'perPage' => $pager->getPerPage('assemblies'),
+            'total' => $pager->getTotal('assemblies'),
+            'totalPages' => $pager->getPageCount('assemblies'),
         ]);
     }
 }
