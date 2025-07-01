@@ -93,5 +93,9 @@ define('EVENT_PRIORITY_NORMAL', 100);
  */
 define('EVENT_PRIORITY_HIGH', 10);
 
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST']."".str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-defined('BASEURL') || define('BASEURL',$protocol);
+if(env('BASE_URL')) {
+    $baseUrl = env('BASE_URL');
+} else {
+    $baseUrl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST']."".str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+}
+defined('BASEURL') || define('BASEURL', $baseUrl);
