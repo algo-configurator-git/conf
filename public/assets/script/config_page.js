@@ -48,37 +48,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Modals for pc parts
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("modal-catalog");
-  const modalTitle = document.getElementById("modal-title");
+  const modal = getCatalogModalElement();
   const filtersContainer = document.getElementById("filter-container");
   const searchInput = document.querySelector('.modal-header .filter-search input[type="text"]');
   const toggleSale = document.getElementById("saleOnly");
   const sortDropdown = document.querySelector(".categories-dropdown");
-  const productContainerList = document.getElementById("list-view");
-  const productContainerGrid = document.getElementById("grid-view");
   const closeBtn = document.querySelector(".close-modal-btn");
-  const addPartButtons = document.querySelectorAll("[data-modal]");
   const categoryButtons = document.querySelectorAll(".categories button");
   const dropdownToggle = document.getElementById("dropdownToggle");
   const dropdownList = document.getElementById("dropdownList");
   const showMoreButton = document.getElementById("show-more-btn");
-
-  addPartButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      modalTitle.textContent = button.dataset.name;
-      modalTitle.dataset.categoryId = button.dataset.modal;
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-
-      Promise.all([
-        loadFilters(),
-        loadProductData({}, getCategoryId())
-      ]).then(() => {
-          renderShowButton(newProductData.count)
-          renderProductView(newProductData.products, newProductData.currentPage, newProductData.totalPages);
-        })
-      });
-  });
 
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
@@ -105,18 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.add("active");
       // currentCategory = button.textContent;
     });
-  });
-
-  document.addEventListener("click", (event) => {
-    if (event.target.closest(".show-btn")) {
-      renderProductView(newProductData.products, newProductData.currentPage, newProductData.totalPages)
-    }
-    if (event.target.closest(".clear-btn")) {
-      clearAllFilters();
-      loadProductData(getPayload(), getCategoryId()).then(() => {
-        renderShowButton(newProductData.count)
-      })
-    }
   });
 
   if (searchInput) {
@@ -172,162 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProductView(newProductData.products, newProductData.currentPage, newProductData.totalPages)
       });
     });
-  }
-
-
-  [productContainerList, productContainerGrid].forEach((container) => {
-    container.addEventListener("click", (event) => {
-      if (event.target.closest(".buy-btn")) {
-        const productCard = event.target.closest(".product-card");
-        const productCode = productCard.querySelector(".product-code").textContent.split(": ")[1];
-        addProductToComparison(productCode);
-      }
-    });
-  });
-});
-
-
-// Open parts variants
-
-document.addEventListener("DOMContentLoaded", () => {
-  const selectButtons = document.querySelectorAll(".select-button");
-
-  return;
-  selectButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      const component = button.closest(".component");
-
-      if (!component) return;
-
-      const originalWidth = component.clientWidth;
-
-      const originalHTML = component.innerHTML;
-      component.innerHTML = "";
-      component.classList.add("component-expanded");
-
-      const cardContainer = document.createElement("div");
-      cardContainer.classList.add("component-cards-container");
-
-      function createCard() {
-        const card = document.createElement("div");
-        card.classList.add("component-list-card");
-        card.innerHTML = `
-          <div class="component-list-img">
-            <img src="./assets/images/card-3.png">
-          </div>
-          <div class="component-list-info">
-            <div>
-              <span>Материнская плата</span>
-              <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-            </div>
-            <div>ASUS Prime B760M-K D4</div>
-            <div class="component-list-price">1256. <span>7 руб</span></div>
-          </div>
-          <div class="component-list-btns">
-            <button class="component-list-btn-change">
-              <img src="./assets/images/icons/change.svg">
-              <span>заменить</span>
-            </button>
-            <button class="component-list-btn-delete">
-              <img src="./assets/images/icons/delete.svg">
-              <span>удалить</span>
-            </button>
-          </div>
-        `;
-        return card;
-      }
-
-      for (let i = 0; i < 3; i++) {
-        cardContainer.appendChild(createCard());
-      }
-
-      const scrollBtnContainer = document.createElement("div");
-      scrollBtnContainer.classList.add("scroll-btn-container");
-
-      const scrollLeftBtn = document.createElement("button");
-      scrollLeftBtn.classList.add("scroll-btn", "disabled");
-      scrollLeftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
-
-      const scrollRightBtn = document.createElement("button");
-      scrollRightBtn.classList.add("scroll-btn");
-      scrollRightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
-
-      scrollBtnContainer.appendChild(scrollRightBtn);
-      scrollBtnContainer.appendChild(scrollLeftBtn);
-
-      let scrollAmount = 0;
-      const scrollStep = 280;
-
-      function updateScrollButtons() {
-        const maxScroll = cardContainer.scrollWidth - cardContainer.clientWidth;
-        scrollLeftBtn.classList.toggle("disabled", scrollAmount <= 0);
-        scrollRightBtn.classList.toggle("disabled", scrollAmount >= maxScroll);
-      }
-
-      scrollRightBtn.addEventListener("click", () => {
-        const maxScroll = cardContainer.scrollWidth - cardContainer.clientWidth;
-        scrollAmount = Math.min(scrollAmount + scrollStep, maxScroll);
-        cardContainer.scrollTo({ left: scrollAmount, behavior: "smooth" });
-        updateScrollButtons();
-      });
-
-      scrollLeftBtn.addEventListener("click", () => {
-        scrollAmount = Math.max(scrollAmount - scrollStep, 0);
-        cardContainer.scrollTo({ left: scrollAmount, behavior: "smooth" });
-        updateScrollButtons();
-      });
-
-      cardContainer.addEventListener('scroll', () => {
-        scrollAmount = cardContainer.scrollLeft;
-        updateScrollButtons();
-      });
-
-      component.appendChild(cardContainer);
-      component.appendChild(scrollBtnContainer);
-
-      const actionBtnContainer = document.createElement("div");
-      actionBtnContainer.classList.add("action-btn-container");
-
-      const addButton = document.createElement("button");
-      addButton.classList.add("action-btn", "add-btn");
-      addButton.innerHTML = `
-                              <img src="./assets/images/icons/add.svg" alt="add">
-                              <span class="btn-label">добавить</span>
-                            `;;
-
-      const removeButton = document.createElement("button");
-      removeButton.classList.add("action-btn", "remove-btn");
-      removeButton.innerHTML = `<img src="./assets/images/icons/delete.svg" alt="remove">
-                                <span class="btn-label">удалить</span>
-                              `;
-
-      actionBtnContainer.appendChild(addButton);
-      actionBtnContainer.appendChild(removeButton);
-
-      component.appendChild(actionBtnContainer);
-
-      setTimeout(updateScrollButtons, 0);
-
-      component.style.width = `${originalWidth}px`;
-
-      // del cards
-      cardContainer.querySelectorAll(".component-list-btn-delete").forEach(deleteBtn => {
-        deleteBtn.addEventListener("click", () => {
-          component.innerHTML = originalHTML;attachEventListeners
-          component.classList.remove("component-expanded");
-          attachEventListeners(component);
-        });
-      });
-    });
-  });
-
-  function attachEventListeners(component) {
-    const button = component.querySelector(".select-button");
-    if (button) {
-      button.addEventListener("click", () => {
-        button.click();
-      });
-    }
   }
 });
 
@@ -555,6 +366,9 @@ function getPayload() {
 
 let newProductData = {};
 let displayedProductData = {};
+let chooseProductMode = 'add';
+let editProductCard = null;
+let currentAssembly = [];
 
 async function loadProductData(payload, categoryId) {
   if (!categoryId) {
@@ -701,25 +515,23 @@ function handlePaginationClick(page) {
   });
 }
 
-function addProductToComparison(productId) {
-  fetch(`/config/products/${productId}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Ошибка при добавлении продукта");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Продукт добавлен в сборку:", data);
-        modal.style.display = "none";
-        document.body.style.overflow = "";
-      })
-      .catch((error) => {
-        console.error("Ошибка при добавлении:", error);
-      });
+function addProductToComparison(productCode, productTitle, productPrice, productImage) {
+  const modal = getCatalogModalElement();
+  const product = {
+    title: productTitle,
+    code: productCode,
+    price: productPrice,
+    image: productImage,
+    categoryId: getCategoryId(),
+    categoryName: getCategoryName()
+  };
+  modal.style.display = "none";
+  document.body.style.overflow = "";
+  renderAddedProductToComponentList(product)
+}
+
+function getCatalogModalElement() {
+  return document.getElementById("modal-catalog");
 }
 
 function renderProducts(products, view = null, clearPrevProducts = true) {
@@ -788,7 +600,7 @@ function renderProducts(products, view = null, clearPrevProducts = true) {
                 <div class="payment-option green ${currentView}-style desktop-only">от <span>${product.installment || 'N/A'}</span> руб/мес</div>
               </div>
               <div class="button-cont">
-                <button class="buy-btn">Добавить</button>
+                <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}')">Добавить</button>
               </div>`
             : ""
     }
@@ -808,7 +620,7 @@ function renderProducts(products, view = null, clearPrevProducts = true) {
                 </div>
               </div>
               <div class="buttons-for-deal">
-                <button class="buy-btn">Добавить</button>
+                  <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}')">Добавить</button>
               </div>
             </div>`
             : ""
@@ -890,9 +702,17 @@ function getSelectedFilters() {
 }
 
 function getCategoryId() {
-  const modalTitle = document.getElementById("modal-title");
+  const modal = getCatalogModalElement()
+  const modalTitle = modal.querySelector('.modal-title')
 
   return modalTitle.dataset.categoryId
+}
+
+function getCategoryName() {
+  const modal = getCatalogModalElement()
+  const modalTitle = modal.querySelector('.modal-title')
+
+  return modalTitle.textContent
 }
 
 function handlePerPageChange(value) {
@@ -1001,13 +821,9 @@ function renderFilters(filters) {
       }
     });
   }
-  filtersContainer.innerHTML = `
-          ${html.join("\n")}
-          <div class="filter-buttons">
-            <button class="clear-btn">Очистить</button>
-            <button class="show-btn">Показать <span>0</span></button>
-          </div>
-        `;
+
+  filtersContainer.querySelectorAll('.filter-section').forEach((filterSection) => filterSection.remove())
+  filtersContainer.innerHTML = html.join("\n") + filtersContainer.innerHTML;
 }
 
 async function loadFilters() {
@@ -1056,4 +872,329 @@ function filterOptionsInSearchCheckbox(inputElement) {
     const text = label.textContent.toLowerCase();
     label.style.display = text.includes(query) ? '' : 'none';
   });
+}
+
+function hasAddedProducts(component) {
+  return component.querySelector('.component-list-card');
+}
+
+function renderAddedProductToComponentList(product) {
+  const categoryId = product.categoryId;
+  const component = document.querySelector(`.component[data-category-id="${categoryId}"]`);
+
+  if (!component) return;
+
+  const originalWidth = component.clientWidth;
+  const originalHTML = component.innerHTML;
+  const newProductCard = createProductCard(product);
+
+  if (chooseProductMode === 'edit') {
+    replaceAddedProduct(product, newProductCard)
+
+    return;
+  }
+
+  setProductToAssembly(product)
+
+  if (hasAddedProducts(component)) {
+    const cardContainer = component.querySelector('.component-cards-container');
+    cardContainer.appendChild(newProductCard);
+    const scrollBtnContainer = cardContainer.nextSibling;
+    updateComponentScrollButtons(cardContainer, scrollBtnContainer);
+
+    return;
+  }
+  component.innerHTML = "";
+  component.classList.add("component-expanded");
+  component.style.width = `${originalWidth}px`;
+
+  const cardContainer = createProductCardsContainer(newProductCard);
+  const scrollBtnContainer = createComponentScrollButtons(cardContainer);
+  const actionBtnContainer = createComponentActionButtons(component, originalHTML, product);
+  addComponentToIllustrativeBlock(categoryId);
+
+  component.appendChild(cardContainer);
+  component.appendChild(scrollBtnContainer);
+  component.appendChild(actionBtnContainer);
+
+  setTimeout(() => updateComponentScrollButtons(cardContainer, scrollBtnContainer), 0);
+}
+
+function createProductCardsContainer(newProductCard) {
+  const container = document.createElement("div");
+  container.classList.add("component-cards-container");
+
+  container.appendChild(newProductCard);
+
+  container.addEventListener('scroll', () => {
+    const scrollBtnContainer = container.nextSibling;
+    updateComponentScrollButtons(container, scrollBtnContainer);
+  });
+
+  return container;
+}
+
+function createProductCard(product) {
+  const card = document.createElement("div");
+  card.classList.add("component-list-card");
+  card.setAttribute('data-product-code', product.code);
+  const categoryId = product.categoryId;
+  const categoryName = product.categoryName;
+  const [intStr, decStr] = product.price.toFixed(2).split('.');
+
+  card.innerHTML = `
+    <div class="component-list-img">
+        <img src="${product.image || './assets/images/placeholder.png'}" alt="${product.title || 'Без названия'}">
+    </div>
+    <div class="component-list-info">
+      <div>
+        <span>${categoryName}</span>
+        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
+      </div>
+      <div>${product.title}</div>
+      <div class="component-list-price">${intStr}. <span>${decStr} руб</span></div>
+    </div>
+    <div class="component-list-btns">
+      <button class="component-list-btn-change" onclick="handleAddedProductChange(this, ${categoryId}, '${categoryName}')">
+        <img src="./assets/images/icons/change.svg">
+        <span>заменить</span>
+      </button>
+      <button class="component-list-btn-delete" onclick="handleAddedProductDelete(this)">
+        <img src="./assets/images/icons/delete.svg">
+        <span>удалить</span>
+      </button>
+    </div>
+  `;
+
+  return card;
+}
+
+function createComponentScrollButtons(cardContainer) {
+  const container = document.createElement("div");
+  container.classList.add("scroll-btn-container");
+
+  const scrollLeftBtn = document.createElement("button");
+  scrollLeftBtn.classList.add("scroll-btn", "disabled");
+  scrollLeftBtn.innerHTML = `<img src="./assets/images/icons/arrow-left.svg" alt="left">`;
+  scrollLeftBtn.onclick = () => scrollAddedComponentsContainer(cardContainer, -280, container);
+
+  const scrollRightBtn = document.createElement("button");
+  scrollRightBtn.classList.add("scroll-btn");
+  scrollRightBtn.innerHTML = `<img src="./assets/images/icons/arrow-right.svg" alt="right">`;
+  scrollRightBtn.onclick = () => scrollAddedComponentsContainer(cardContainer, 280, container);
+
+  container.appendChild(scrollRightBtn);
+  container.appendChild(scrollLeftBtn);
+
+  return container;
+}
+
+function scrollAddedComponentsContainer(container, step, scrollBtnContainer) {
+  const maxScroll = container.scrollWidth - container.clientWidth;
+  let newScroll = container.scrollLeft + step;
+  newScroll = Math.max(0, Math.min(newScroll, maxScroll));
+
+  container.scrollTo({ left: newScroll, behavior: "smooth" });
+  setTimeout(() => updateComponentScrollButtons(container, scrollBtnContainer), 300);
+}
+
+function updateComponentScrollButtons(container, btnContainer) {
+  const scrollLeftBtn = btnContainer.querySelector(".scroll-btn:nth-child(2)");
+  const scrollRightBtn = btnContainer.querySelector(".scroll-btn:nth-child(1)");
+
+  const maxScroll = container.scrollWidth - container.clientWidth;
+  const scrollLeft = container.scrollLeft;
+
+  scrollLeftBtn.classList.toggle("disabled", scrollLeft <= 0);
+  scrollRightBtn.classList.toggle("disabled", scrollLeft >= maxScroll);
+}
+
+function createComponentActionButtons(component, originalHTML, product) {
+  const container = document.createElement("div");
+  component.setAttribute("data-original-html", originalHTML);
+
+  container.classList.add("action-btn-container");
+
+  const addBtn = document.createElement("button");
+  const categoryId = product.categoryId;
+  const categoryName = product.categoryName;
+  addBtn.classList.add("action-btn", "add-btn");
+  addBtn.innerHTML = `<img src="./assets/images/icons/add.svg" alt="add"><span class="btn-label">добавить</span>`;
+  addBtn.onclick = () => chooseProductForAssembly(categoryId, categoryName);
+
+  const removeBtn = document.createElement("button");
+  removeBtn.classList.add("action-btn", "remove-btn");
+  removeBtn.innerHTML = `<img src="./assets/images/icons/delete.svg" alt="remove"><span class="btn-label">удалить</span>`;
+  removeBtn.onclick = () => resetComponentSection(component);
+
+  container.appendChild(addBtn);
+  container.appendChild(removeBtn);
+
+  return container;
+}
+
+function handleAddedProductDelete(element) {
+  const component = element.closest(".component");
+  const addedComponent = element.closest('.component-list-card');
+  const oldProductCode = addedComponent.dataset.productCode
+
+  addedComponent.remove();
+
+  if (!hasAddedProducts(component)) {
+    resetComponentSection(component);
+  } else {
+    deleteProductFromAssembly(component.dataset.categoryId, oldProductCode);
+  }
+}
+
+function resetComponentSection(component) {
+  component.innerHTML = component.getAttribute("data-original-html");
+  component.classList.remove("component-expanded");
+  removeComponentToIllustrativeBlock(component.dataset.categoryId);
+  deleteProductFromAssembly(component.dataset.categoryId);
+}
+
+function chooseProductForAssembly(categoryId, categoryName) {
+  const modal = getCatalogModalElement()
+  const modalTitle = modal.querySelector('.modal-title')
+
+  modalTitle.textContent = categoryName;
+  modalTitle.dataset.categoryId = categoryId;
+  chooseProductMode = 'add'
+
+  Promise.all([
+    loadFilters(),
+    loadProductData({}, getCategoryId())
+  ]).then(() => {
+    renderShowButton(newProductData.count)
+    renderProductView(newProductData.products, newProductData.currentPage, newProductData.totalPages);
+  }).then(() => {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  })
+}
+
+function handleAddedProductChange(button, categoryId, categoryName) {
+  chooseProductForAssembly(categoryId, categoryName);
+  chooseProductMode = 'edit';
+  editProductCard = button.closest('.component-list-card');
+}
+
+function addComponentToIllustrativeBlock(categoryId) {
+  const component = document.querySelector(`.illustative-block [data-category-id="${categoryId}"]`);
+
+  if (!component) {
+    return;
+  }
+
+  component.querySelector('.added-part').classList.remove('hidden')
+}
+
+function removeComponentToIllustrativeBlock(categoryId) {
+  const component = document.querySelector(`.illustative-block [data-category-id="${categoryId}"]`);
+
+  if (!component) {
+    return;
+  }
+
+  component.querySelector('.added-part').classList.add('hidden')
+}
+
+function handleClearFilters() {
+  clearAllFilters();
+  loadProductData(getPayload(), getCategoryId()).then(() => {
+    renderShowButton(newProductData.count)
+  })
+}
+
+function handleShowProductsByFilters() {
+  renderProductView(newProductData.products, newProductData.currentPage, newProductData.totalPages)
+}
+
+function handleClearComponentList() {
+  document.querySelectorAll('#component-list-content .component').forEach((component) => {
+      if (hasAddedProducts(component)) {
+        resetComponentSection(component);
+      }
+  })
+}
+
+function replaceAddedProduct(newProduct, newProductCard) {
+  const oldProductCode = editProductCard.dataset.productCode;
+  deleteProductFromAssembly(newProduct.categoryId, oldProductCode);
+  setProductToAssembly(newProduct)
+  editProductCard.innerHTML = newProductCard.innerHTML
+}
+
+function setProductToAssembly(product) {
+  currentAssembly.push(product);
+  saveAssembly(currentAssembly);
+}
+
+function deleteProductFromAssembly(categoryId, productCode = null) {
+
+  if (productCode) {
+    const index = currentAssembly.findIndex(product => product.code === productCode);
+    if (index !== -1) {
+      currentAssembly.splice(index, 1);
+    }
+  } else {
+    currentAssembly = currentAssembly.filter((product) => product.categoryId != categoryId)
+  }
+
+  saveAssembly(currentAssembly)
+}
+
+function saveAssembly(assembly) {
+  fetch(`/config/session`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(assembly)
+  })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Ошибка при добавлении продукта");
+        }
+        updateAssemblyPrice()
+      })
+      .catch((error) => {
+        console.error("Ошибка при добавлении:", error);
+      });
+}
+
+async function loadAssembly() {
+  return fetch(`/config/session`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  })
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  loadAssembly()
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Ошибка при добавлении продукта");
+      }
+      return response.json();
+    })
+      .then((data) => {
+      if (Array.isArray(data)) {
+        data.forEach((product) => {
+          renderAddedProductToComponentList(product)
+        })
+      }
+    })
+    .catch((error) => {
+      console.error("Ошибка при добавлении:", error);
+    });
+})
+
+function updateAssemblyPrice() {
+  const totalPrice = currentAssembly.reduce((sum, product) => sum + product.price, 0);
+  const buyBtn = document.querySelector('.illustative-block_btns .price');
+
+  const [intStr, decStr] = totalPrice.toFixed(2).split('.');
+
+  buyBtn.innerHTML = `${intStr}.<span class="price-cents">${decStr} руб</span>`;
 }

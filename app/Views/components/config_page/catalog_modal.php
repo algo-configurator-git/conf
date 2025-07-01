@@ -15,8 +15,8 @@
             <aside>
                 <div class="filter-container" id="filter-container">
                     <div class="filter-buttons">
-                        <button class="clear-btn">Очистить</button>
-                        <button class="show-btn">Показать <span></span></button>
+                        <button class="clear-btn" onclick="handleClearFilters()">Очистить</button>
+                        <button class="show-btn" onclick="handleShowProductsByFilters()">Показать <span>0</span></button>
                     </div>
                 </div>
             </aside>

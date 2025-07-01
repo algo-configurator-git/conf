@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\CoreConfigData;
 use App\Models\Product;
 use App\Models\ProductsCategories;
+use CodeIgniter\HTTP\ResponseInterface;
 use Config\Assembly;
 use Config\Services;
 
@@ -41,12 +42,19 @@ class ConfigController extends BaseController
         return $this->response->setJSON($filters);
     }
 
-    public function store()
+    public function saveConfig(): void
     {
         $session = \Config\Services::session();
+        $assembly = $this->request->getBody();
+        $session->set('config', $assembly);
+    }
 
-        $config = $session->get('config');
-        dd($config);
+    public function getConfig(): ResponseInterface
+    {
+        $session = \Config\Services::session();
+        $assembly = $session->get('config');
+
+        return $assembly ? $this->response->setBody($assembly) : $this->response->setJSON([]);
     }
 
     public function getConfigProducts()

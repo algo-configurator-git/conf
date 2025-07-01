@@ -44,13 +44,13 @@ class Assembly extends BaseConfig
                 [
                     'icon' => '/assets/images/icons/config_page/hdd_img.svg',
                     'name' => 'Жёсткий диск',
-                    'id' => 16,
+                    'id' => 90,
                     'required' => true,
                 ],
                 [
                     'icon' => '/assets/images/icons/config_page/ssd_img.svg',
                     'name' => 'SSD',
-                    'id' => 235,
+                    'id' => 253,
                     'required' => true,
                 ],
                 [

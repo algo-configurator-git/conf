@@ -17,6 +17,8 @@ $routes->group('reviews', function ($routes) {
 $routes->group('config', function($routes){
     $routes->get('/', 'ConfigController::index');
     $routes->post('/', 'ConfigController::store');
+    $routes->post('session', 'ConfigController::saveConfig');
+    $routes->get('session', 'ConfigController::getConfig');
     $routes->get('selected-products', 'ConfigController::getConfigProducts');
 
     $routes->group('products', function($routes){

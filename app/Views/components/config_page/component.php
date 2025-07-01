@@ -1,4 +1,4 @@
-<div class="component">
+<div class="component" data-category-id="<?= esc($id) ?>" data-category-name="<?= esc($name) ?>">
     <div class="component-part component-img">
         <img src="<?= esc($icon) ?>" alt="<?= esc($name) ?>"/>
     </div>
@@ -12,7 +12,7 @@
 
     <div class="component-part component-product-count"><?=  esc(print_r($count, true));  ?> товаров</div>
 
-    <button class="component-part primary-btn select-button" data-modal="<?= esc($id) ?>" data-name="<?= esc($name) ?>">
+    <button onclick="chooseProductForAssembly(<?= esc($id) ?>, '<?= esc($name) ?>')" class="component-part primary-btn select-button">
         Выбрать <img src="/assets/images/buttons/plus-review.svg" alt="">
     </button>
 </div>
