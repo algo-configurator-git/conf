@@ -50,83 +50,14 @@
 
 
                 <div class="content-container">
-                    <div id="component-list-content">
+                    <div id="component-list-content" class="active">
                         <div class="categories-wrapper">
-                            <?php foreach ($componentListData as $category): ?>
-                                <?= view('components/config_page/category', [
-                                        ...$category,
+                            <?php foreach ($componentListData as $section): ?>
+                                <?= view('components/config_page/section', [
+                                        ...$section,
                                     'categoryItemsCounts' => $categoryItemsCounts
                                 ]) ?>
                             <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <div id="selected-content">
-                        <div class="categories-wrapper">
-                            <div class="category choosen">
-                                <div class="part-category">
-                                    <h3>Системный блок</h3>
-                                    <div>
-                                        <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-                                        <span>Обязательные
-                        комплектующие</span>
-                                    </div>
-                                </div>
-                                <div class="component-choosen">
-                                    <div class="component-choosen-part info-choosen">
-                                        <div class="choosen-img">
-                                            <img src="./assets/images/card-4.png" alt="cpu-img" />
-                                        </div>
-                                        <div class="choosen-info">
-                                            <div>
-                                                <span>Материнская плата</span>
-                                                <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
-                                            </div>
-                                            <div>ASUS Prime B760M-K D4</div>
-                                            <div>Код товара: 934841</div>
-                                        </div>
-                                    </div>
-                                    <div class="component-choosen-part categories-tags">
-                                        <span> 4xDDR5</span>
-                                        <span>Intel B760</span>
-                                    </div>
-                                    <div class="component-choosen-part choosen-price">
-                                        <div class="new-price">1256.<span>7 руб</span></div>
-                                        <div class="old-price">7015.<span>30 руб</span></div>
-                                    </div>
-                                    <div class="component-choosen-part choosen-btns">
-                                        <button class="component-list-btn-change" id="change-btn">
-                                            <img src="./assets/images/icons/change.svg">
-                                            <span>заменить</span>
-                                        </button>
-                                        <button class="component-list-btn-delete">
-                                            <img src="./assets/images/icons/delete.svg">
-                                            <span>удалить</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="component-choose-item">
-                                    <div>Выбрать ещё</div>
-                                    <button class="component-part primary-btn select-button" id="choose-more">Выбрать</button>
-                                </div>
-                            </div>
-                            <div class="category choosen">
-                                <div class="part-category">
-                                    <h3>Периферийные устройства</h3>
-                                </div>
-                                <div class="component-choose-item">
-                                    <div>Ничего не выбрано</div>
-                                    <button class="component-part primary-btn select-button">Выбрать</button>
-                                </div>
-                            </div>
-                            <div class="category choosen">
-                                <div class="part-category">
-                                    <h3>Дополнительно</h3>
-                                </div>
-                                <div class="component-choose-item">
-                                    <div>Ничего не выбрано</div>
-                                    <button class="component-part primary-btn select-button">Выбрать</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

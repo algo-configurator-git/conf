@@ -19,15 +19,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Функция для обновления отображаемого контента
   function updateContent(activeBtn) {
-    const componentListContent = document.getElementById("component-list-content");
-    const selectedContent = document.getElementById("selected-content");
-
+    const componentChooseItem = document.querySelectorAll('.component-choose-item');
+    const componentHideBtn = document.querySelectorAll('.component-hide-btn');
+    const components = document.querySelectorAll('.component');
+    console.log(componentChooseItem)
+    console.log(components)
     if (activeBtn.dataset.value === "list") {
-      componentListContent.classList.add("active");
-      selectedContent.classList.remove("active");
+      componentChooseItem.forEach((e) => {
+        e.classList.add("hidden")
+      })
+      componentHideBtn.forEach((e) => {
+        e.classList.remove("hidden")
+      })
+      components.forEach((e) => {
+        e.classList.remove('hidden')
+      })
     } else if (activeBtn.dataset.value === "selected") {
-      selectedContent.classList.add("active");
-      componentListContent.classList.remove("active");
+      componentChooseItem.forEach((e) => {
+        e.classList.remove("hidden")
+      })
+      componentHideBtn.forEach((e) => {
+        e.classList.add("hidden")
+      })
+      components.forEach((e) => {
+        if (!e.classList.contains('component-expanded')) {
+          e.classList.add('hidden')
+        }
+      })
     }
   }
 
