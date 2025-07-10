@@ -22,8 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const componentChooseItem = document.querySelectorAll('.component-choose-item');
     const componentHideBtn = document.querySelectorAll('.component-hide-btn');
     const components = document.querySelectorAll('.component');
-    console.log(componentChooseItem)
-    console.log(components)
+
     if (activeBtn.dataset.value === "list") {
       componentChooseItem.forEach((e) => {
         e.classList.add("hidden")
@@ -36,7 +35,13 @@ document.addEventListener("DOMContentLoaded", function() {
       })
     } else if (activeBtn.dataset.value === "selected") {
       componentChooseItem.forEach((e) => {
-        e.classList.remove("hidden")
+        const category = e.closest('.category');
+
+        const components = category.querySelectorAll('.component');
+        const emptyComponents = Array.from(components).filter(el => !el.classList.contains("component-expanded"));
+        if (emptyComponents.length !== 0) {
+          e.classList.remove("hidden")
+        }
       })
       componentHideBtn.forEach((e) => {
         e.classList.add("hidden")
@@ -63,6 +68,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+function getSelectedSection() {
+  return document.querySelector('.toggle-btn .toggle-option.active')?.dataset.value ?? 'list';
+}
 
 // Modals for pc parts
 document.addEventListener("DOMContentLoaded", () => {
@@ -893,7 +902,11 @@ function filterOptionsInSearchCheckbox(inputElement) {
 }
 
 function hasAddedProducts(component) {
-  return component.querySelector('.component-list-card');
+  return countAddedProducts(component) >= 1;
+}
+
+function countAddedProducts(component) {
+  return component.querySelectorAll('.component-list-card, .component-choosen').length;
 }
 
 function renderAddedProductToComponentList(product) {
@@ -902,40 +915,65 @@ function renderAddedProductToComponentList(product) {
 
   if (!component) return;
 
-  const originalWidth = component.clientWidth;
-  const originalHTML = component.innerHTML;
-  const newProductCard = createProductCard(product);
 
   if (chooseProductMode === 'edit') {
-    replaceAddedProduct(product, newProductCard)
+    const newProductCard = countAddedProducts(component) > 1
+        ? createProductCard(product)
+        : createProductChosenCard(product);
+    replaceAddedProduct(product, newProductCard);
 
     return;
   }
 
   setProductToAssembly(product)
 
-  if (hasAddedProducts(component)) {
-    const cardContainer = component.querySelector('.component-cards-container');
-    cardContainer.appendChild(newProductCard);
-    const scrollBtnContainer = cardContainer.nextSibling;
-    updateComponentScrollButtons(cardContainer, scrollBtnContainer);
+  if (countAddedProducts(component) === 0) {
+    const newProductChosenCard = createProductChosenCard(product);
+    const cardContainer = createProductCardsContainer(newProductChosenCard);
+    hideComponentInfo(component)
+    component.appendChild(cardContainer);
+    component.classList.add("component-expanded");
+    if (getSelectedSection() === 'selected') {
+      component.classList.remove('hidden');
+    }
+    addComponentToIllustrativeBlock(categoryId);
 
     return;
   }
-  component.innerHTML = "";
-  component.classList.add("component-expanded");
-  component.style.width = `${originalWidth}px`;
 
-  const cardContainer = createProductCardsContainer(newProductCard);
-  const scrollBtnContainer = createComponentScrollButtons(cardContainer);
-  const actionBtnContainer = createComponentActionButtons(component, originalHTML, product);
-  addComponentToIllustrativeBlock(categoryId);
+  const cardContainer = component.querySelector('.component-cards-container');
 
-  component.appendChild(cardContainer);
-  component.appendChild(scrollBtnContainer);
-  component.appendChild(actionBtnContainer);
+  if (countAddedProducts(component) === 1) {
+    const chosenProductCard = getChosenProductCard(component);
+    const chosenProduct = JSON.parse(chosenProductCard.dataset.product);
+    chosenProductCard.remove();
+    cardContainer.appendChild(createProductCard(chosenProduct));
+    const scrollBtnContainer = createComponentScrollButtons(cardContainer);
+    const actionBtnContainer = createComponentActionButtons(component, product);
 
-  setTimeout(() => updateComponentScrollButtons(cardContainer, scrollBtnContainer), 0);
+    component.appendChild(cardContainer);
+    component.appendChild(scrollBtnContainer);
+    component.appendChild(actionBtnContainer);
+
+    setTimeout(() => updateComponentScrollButtons(cardContainer, scrollBtnContainer), 0);
+  }
+
+  const newProductCard = createProductCard(product);
+  cardContainer.appendChild(newProductCard);
+  const scrollBtnContainer = cardContainer.nextSibling;
+  updateComponentScrollButtons(cardContainer, scrollBtnContainer);
+}
+
+function hideComponentInfo(component) {
+  component.querySelectorAll('div, button').forEach((el) => el.classList.add('hidden'))
+}
+
+function viewComponentInfo(component) {
+  component.querySelectorAll('div, button').forEach((el) => el.classList.remove('hidden'))
+}
+
+function getChosenProductCard(component) {
+  return component.querySelector('.component-choosen')
 }
 
 function createProductCardsContainer(newProductCard) {
@@ -959,6 +997,7 @@ function createProductCard(product) {
   const categoryId = product.categoryId;
   const categoryName = product.categoryName;
   const [intStr, decStr] = product.price.toFixed(2).split('.');
+  card.dataset.product = JSON.stringify(product);
 
   card.innerHTML = `
     <div class="component-list-img">
@@ -983,6 +1022,54 @@ function createProductCard(product) {
       </button>
     </div>
   `;
+
+  return card;
+}
+
+function createProductChosenCard(product) {
+  const card = document.createElement('div');
+  card.dataset.product = JSON.stringify(product);
+  card.classList.add("component-choosen");
+  card.setAttribute('data-product-code', product.code);
+  const categoryName = product.categoryName;
+  const [intPriceStr, decPriceStr] = product.price.toFixed(2).split('.');
+  // const [intOldPriceStr, decOldPriceStr] = product.oldPrice.toFixed(2).split('.');
+  const categoryId = product.categoryId;
+
+  card.innerHTML = `
+    <div class="component-choosen-part info-choosen">
+        <div class="choosen-img">
+            <img src="${product.image || './assets/images/placeholder.png'}" alt="${product.title || 'Без названия'}">
+        </div>
+        <div class="choosen-info">
+            <div>
+                <span>${categoryName}</span>
+                <img src="./assets/images/icons/config_page/warning_img.svg" alt="obligatory" />
+            </div>
+            <div>${product.title}</div>
+            <div>Код товара: ${product.code}</div>
+        </div>
+    </div>
+    <div class="component-choosen-part categories-tags">
+<!--        <span> 4xDDR5</span>-->
+<!--        <span>Intel B760</span>-->
+    </div>
+    <div class="component-choosen-part choosen-price">
+        <div class="new-price">${intPriceStr}.<span>${decPriceStr} руб</span></div>
+        <div class="old-price">${intPriceStr}.<span>${decPriceStr} руб</span></div>
+    </div>
+    <div class="component-choosen-part choosen-btns">
+        <button class="component-list-btn-change" id="change-btn" onclick="handleAddedProductChange(this, ${categoryId}, '${categoryName}')">
+            <img src="./assets/images/icons/change.svg">
+            <span>заменить</span>
+        </button>
+        <button class="component-list-btn-delete" onclick="handleAddedProductDelete(this)">
+            <img src="./assets/images/icons/delete.svg">
+            <span>удалить</span>
+        </button>
+    </div>
+  `;
+
 
   return card;
 }
@@ -1027,9 +1114,8 @@ function updateComponentScrollButtons(container, btnContainer) {
   scrollRightBtn.classList.toggle("disabled", scrollLeft >= maxScroll);
 }
 
-function createComponentActionButtons(component, originalHTML, product) {
+function createComponentActionButtons(component, product) {
   const container = document.createElement("div");
-  component.setAttribute("data-original-html", originalHTML);
 
   container.classList.add("action-btn-container");
 
@@ -1053,10 +1139,19 @@ function createComponentActionButtons(component, originalHTML, product) {
 
 function handleAddedProductDelete(element) {
   const component = element.closest(".component");
-  const addedComponent = element.closest('.component-list-card');
+  const addedComponent = element.closest('.component-list-card, .component-choosen');
   const oldProductCode = addedComponent.dataset.productCode
 
   addedComponent.remove();
+  console.log(countAddedProducts(component));
+  if (countAddedProducts(component) === 1) {
+    const productCard = component.querySelector('.component-list-card');
+    const newProductCard = createProductChosenCard(JSON.parse(productCard.dataset.product));
+    productCard.remove();
+    component.querySelector('.scroll-btn-container')?.remove()
+    component.querySelector('.action-btn-container')?.remove()
+    component.querySelector('.component-cards-container').append(newProductCard);
+  }
 
   if (!hasAddedProducts(component)) {
     resetComponentSection(component);
@@ -1066,10 +1161,17 @@ function handleAddedProductDelete(element) {
 }
 
 function resetComponentSection(component) {
-  component.innerHTML = component.getAttribute("data-original-html");
+  viewComponentInfo(component);
+  component.querySelector('.component-cards-container')?.remove()
+  component.querySelector('.scroll-btn-container')?.remove()
+  component.querySelector('.action-btn-container')?.remove()
   component.classList.remove("component-expanded");
   removeComponentToIllustrativeBlock(component.dataset.categoryId);
   deleteProductFromAssembly(component.dataset.categoryId);
+
+  if (getSelectedSection() === 'selected') {
+    component.classList.add('hidden');
+  }
 }
 
 function chooseProductForAssembly(categoryId, categoryName) {
@@ -1095,7 +1197,7 @@ function chooseProductForAssembly(categoryId, categoryName) {
 function handleAddedProductChange(button, categoryId, categoryName) {
   chooseProductForAssembly(categoryId, categoryName);
   chooseProductMode = 'edit';
-  editProductCard = button.closest('.component-list-card');
+  editProductCard = button.closest('.component-list-card, .component-choosen');
 }
 
 function addComponentToIllustrativeBlock(categoryId) {
@@ -1140,8 +1242,10 @@ function handleClearComponentList() {
 function replaceAddedProduct(newProduct, newProductCard) {
   const oldProductCode = editProductCard.dataset.productCode;
   deleteProductFromAssembly(newProduct.categoryId, oldProductCode);
-  setProductToAssembly(newProduct)
-  editProductCard.innerHTML = newProductCard.innerHTML
+  setProductToAssembly(newProduct);
+  editProductCard.innerHTML = newProductCard.innerHTML;
+  editProductCard.dataset.productCode = newProduct.code;
+  editProductCard.dataset.product = JSON.stringify(newProduct);
 }
 
 function setProductToAssembly(product) {
@@ -1215,4 +1319,12 @@ function updateAssemblyPrice() {
   const [intStr, decStr] = totalPrice.toFixed(2).split('.');
 
   buyBtn.innerHTML = `${intStr}.<span class="price-cents">${decStr} руб</span>`;
+}
+
+function handleChooseMoreButton(btn) {
+  const category = btn.closest('.category');
+  const componentToChoose = category.querySelector('.component:not(.component-expanded)');
+
+  if (!componentToChoose) return;
+  chooseProductForAssembly(componentToChoose.dataset.categoryId, componentToChoose.dataset.categoryName);
 }

@@ -63,7 +63,6 @@
                 </div>
             </div>
 
-
             <?= view('components/config_page/illustrative_block') ?>
 
         </section>
