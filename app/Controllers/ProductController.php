@@ -39,30 +39,4 @@ class ProductController extends BaseController
             'filters' => $filters
         ]);
     }
-
-    public function store($sku)
-    {
-        $session = \Config\Services::session();
-
-        $category = $this->getProductCategory($sku);
-
-        $products = $session->get('config') ?? [];
-
-        if (!isset($products[$category]) || !is_array($products[$category])) {
-            $products[$category] = [];
-        }
-
-        $products[$category][] = $sku;
-
-        $session->set('config', $products);
-    }
-
-    public function getProductCategory($sku)
-    {
-        $productModel = new Product();
-
-        $product = $productModel->select('category_ram')->find($sku);
-
-        return $product['category_ram'];
-    }
 }

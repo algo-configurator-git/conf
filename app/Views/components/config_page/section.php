@@ -20,6 +20,10 @@
             'count' => $count,
         ]) ?>
     <?php endforeach; ?>
-
+    <div class="component-choose-item hidden">
+        <div>Выбрать ещё</div>
+        <button class="component-part primary-btn select-button" id="choose-more" onclick="handleChooseMoreButton(this)">Выбрать</button>
+    </div>
     <button class="component-hide-btn">Скрыть всё</button>
+
 </div>

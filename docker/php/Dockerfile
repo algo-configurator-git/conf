@@ -22,6 +22,7 @@ RUN echo "appuser:x:1000:1000:App User:/home/appuser:/bin/sh" >> /etc/passwd && 
     chown 1000:1000 /home/appuser
 
 RUN chown -R 1000:1000 /var/www
+RUN chown -R www-data:www-data /var/www/writable
 
 USER 1000
 

@@ -47,12 +47,14 @@
                     <button class="help-btn open-form">Помочь со сборкой</button>
                 </div>
 
+
+
                 <div class="content-container">
-                    <div id="component-list-content">
+                    <div id="component-list-content" class="active">
                         <div class="categories-wrapper">
-                            <?php foreach ($componentListData as $category): ?>
-                                <?= view('components/config_page/category', [
-                                        ...$category,
+                            <?php foreach ($componentListData as $section): ?>
+                                <?= view('components/config_page/section', [
+                                        ...$section,
                                     'categoryItemsCounts' => $categoryItemsCounts
                                 ]) ?>
                             <?php endforeach; ?>
@@ -61,109 +63,8 @@
                 </div>
             </div>
 
+            <?= view('components/config_page/illustrative_block') ?>
 
-
-            <div class="configurator-illustative-block">
-                <div class="hint-text">
-                    <span>Нажмите +, чтобы выбрать комплектующую</span>
-                    <img src="./assets/images/icons/config_page/question.svg" />
-                </div>
-                <div class="illustative-block">
-                    <div class="base-img">
-                        <div class="case-block">
-                            <img class="highlight-part part-case" src="./assets/images/icons/config_page/case-constructor.svg" />
-                            <img class="added-part part-case" src="./assets/images/icons/config_page/case_added.svg" />
-
-                            <button class="add-part-btn case-btn" data-modal="53">Корпус <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="motherboard-block">
-                            <img class="highlight-part part-motherboard"
-                                 src="./assets/images/icons/config_page/motherboard_noadd.svg" />
-                            <img class="added-part part-motherboard"
-                                 src="./assets/images/icons/config_page/motherboard_added.svg" />
-                            <button class="add-part-btn motherboard-btn" data-modal="9">Материнская плата <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="videocard-block">
-                            <img class="highlight-part part-videocard"
-                                 src="./assets/images/icons/config_page/videocard__noadd.svg" />
-                            <img class="added-part part-videocard" src="./assets/images/icons/config_page/videocard__added.svg" />
-                            <button class="add-part-btn videocard-btn" data-modal="15">Видеокарта <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="cooler-block">
-                            <img class="highlight-part part-cooler" src="./assets/images/icons/config_page/cooler_noadd.svg" />
-                            <img class="added-part part-cooler" src="./assets/images/icons/config_page/cooler_added.svg" />
-
-                            <button class="add-part-btn cooler-btn" data-modal="18">Кулер <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="cpu-block">
-                            <img class="highlight-part part-cpu" src="./assets/images/icons/config_page/cpu_noadd.svg" />
-                            <img class="added-part part-cpu" src="./assets/images/icons/config_page/cpu_added.svg" />
-                            <button class="add-part-btn cpu-btn" data-modal="8">Процессор <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="powerunit-block">
-                            <img class="highlight-part part-powerunit"
-                                 src="./assets/images/icons/config_page/powerunit_noadd.svg" />
-                            <img class="added-part part-powerunit" src="./assets/images/icons/config_page/powerunit_added.svg" />
-                            <button class="add-part-btn powerunit-btn" data-modal="54">Блок питания <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="ram-unit">
-                            <img class="highlight-part part-ram" src="./assets/images/icons/config_page/ram_noadd.svg" />
-                            <img class="added-part part-ram" src="./assets/images/icons/config_page/ram_added.svg" />
-                            <button class="add-part-btn ram-btn" data-modal="17">Оперативная память <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                        <div class="ssd-block">
-                            <img class="highlight-part part-ssd" src="./assets/images/icons/config_page/ssd__noadd.svg" />
-                            <img class="added-part part-ssd" src="./assets/images/icons/config_page/ssd_added.svg" />
-                            <button class="add-part-btn ssd-btn" data-modal="253">SSD <img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-
-                        </div>
-                        <div class="hhd-block">
-                            <img class="highlight-part part-hdd" src="./assets/images/icons/config_page/hdd_noadd.svg" />
-                            <img class="added-part part-hdd" src="./assets/images/icons/config_page/hdd_added.svg" />
-                            <button class="add-part-btn hdd-btn" data-modal="90">Жёский диск<img
-                                        src="./assets/images/icons/config_page/plus.svg" />
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="illustative-block_btns">
-                        <button class="clear-btn">Очистить</button>
-                        <button class="in-cart-btn">
-                            <span class="price">14256.<span class="price-cents">7 руб</span></span>
-                            <span class="cart-text">В корзину</span></button>
-                    </div>
-                </div>
-                <div class="btn-row">
-                    <button id="print" class="product-btn">
-                        <img src="./assets/images/icons/print.svg" alt="" />
-                        <span>печать</span>
-                    </button>
-                    <button id="download" class="product-btn">
-                        <img src="./assets/images/icons/download.svg" alt="" />
-                        <span>скачать</span>
-                    </button>
-                    <button id="link" class="product-btn">
-                        <img src="./assets/images/icons/link.svg" alt="" />
-                        <span>ссылка</span>
-                    </button>
-                </div>
-            </div>
         </section>
 
         <section class="categories-page">
@@ -385,7 +286,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main>e
 
     <div class="cont-modal">
         <div class="modal form-modal wider-modal">
