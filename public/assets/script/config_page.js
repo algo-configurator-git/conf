@@ -413,7 +413,7 @@ async function loadProductData(payload, categoryId) {
 
   const url = `/config/products/${categoryId}?${queryParams.toString()}`;
 
-  await fetch(url, {
+  return await fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
@@ -421,6 +421,7 @@ async function loadProductData(payload, categoryId) {
         if (!response.ok) {
           throw new Error(`Ошибка при загрузке продуктов для ${categoryId}: ${response.status}`);
         }
+
         return response.json();
       })
       .then((data) => {
@@ -437,7 +438,7 @@ async function loadProductData(payload, categoryId) {
           image: product.image || './assets/images/placeholder.png',
           installment: product.installment || 'N/A',
           tags: product.tags || [],
-          oldPrice: product.oldPrice || null
+          oldPrice: product.discount_price || null
         }));
         newProductData = data;
       })
@@ -542,7 +543,7 @@ function handlePaginationClick(page) {
   });
 }
 
-function addProductToComparison(productCode, productTitle, productPrice, productImage) {
+function addProductToComparison(productCode, productTitle, productPrice, productImage, productOldPrice) {
   const modal = getCatalogModalElement();
   const product = {
     title: productTitle,
@@ -550,7 +551,8 @@ function addProductToComparison(productCode, productTitle, productPrice, product
     price: productPrice,
     image: productImage,
     categoryId: getCategoryId(),
-    categoryName: getCategoryName()
+    categoryName: getCategoryName(),
+    oldPrice: productOldPrice,
   };
   modal.style.display = "none";
   document.body.style.overflow = "";
@@ -627,7 +629,7 @@ function renderProducts(products, view = null, clearPrevProducts = true) {
                 <div class="payment-option green ${currentView}-style desktop-only">от <span>${product.installment || 'N/A'}</span> руб/мес</div>
               </div>
               <div class="button-cont">
-                <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}')">Добавить</button>
+                <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}', ${product.oldPrice})">Добавить</button>
               </div>`
             : ""
     }
@@ -647,7 +649,7 @@ function renderProducts(products, view = null, clearPrevProducts = true) {
                 </div>
               </div>
               <div class="buttons-for-deal">
-                  <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}')">Добавить</button>
+                  <button class="buy-btn" onclick="addProductToComparison('${product.code}', '${product.title}', ${product.price}, '${product.image}', ${product.oldPrice})">Добавить</button>
               </div>
             </div>`
             : ""
@@ -857,7 +859,7 @@ async function loadFilters() {
   const categoryId = getCategoryId();
   const url = `/config/category/${categoryId}/filters`;
 
-  fetch(url, {
+  return await fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
@@ -1033,7 +1035,11 @@ function createProductChosenCard(product) {
   card.setAttribute('data-product-code', product.code);
   const categoryName = product.categoryName;
   const [intPriceStr, decPriceStr] = product.price.toFixed(2).split('.');
-  // const [intOldPriceStr, decOldPriceStr] = product.oldPrice.toFixed(2).split('.');
+  let oldPriceElem = '';
+  if (product.oldPrice) {
+    const [intOldPriceStr, decOldPriceStr] = product.oldPrice.toFixed(2).split('.');
+    oldPriceElem = product.oldPrice ? `<div class="old-price">${intOldPriceStr}.<span>${decOldPriceStr} руб</span></div> ` : '';
+  }
   const categoryId = product.categoryId;
 
   card.innerHTML = `
@@ -1056,7 +1062,7 @@ function createProductChosenCard(product) {
     </div>
     <div class="component-choosen-part choosen-price">
         <div class="new-price">${intPriceStr}.<span>${decPriceStr} руб</span></div>
-        <div class="old-price">${intPriceStr}.<span>${decPriceStr} руб</span></div>
+        ${oldPriceElem}
     </div>
     <div class="component-choosen-part choosen-btns">
         <button class="component-list-btn-change" id="change-btn" onclick="handleAddedProductChange(this, ${categoryId}, '${categoryName}')">
